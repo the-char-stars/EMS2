@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7472F550-F659-407E-A471-F995FE5502EC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>EMS_Client</RootNamespace>
+    <AssemblyName>Wolf_EMS</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>56584_200_LcU_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlXml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Functionality\DatePicker.cs" />
+    <Compile Include="Functionality\GetPatient.cs" />
+    <Compile Include="Functionality\Input.cs" />
+    <Compile Include="Functionality\SelectAppointmentSlot.cs" />
+    <Compile Include="Interfaces\IOption.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuSpecificOptions\AddPatientCommand.cs" />
+    <Compile Include="MenuOptions\BillingCommand.cs" />
+    <Compile Include="MenuOptions\ExitCommand.cs" />
+    <Compile Include="MenuOptions\PatientsCommand.cs" />
+    <Compile Include="MenuOptions\SchedulingCommand.cs" />
+    <Compile Include="Collections\Pair.cs" />
+    <Compile Include="MenuSpecificOptions\GenerateMonthlyReportCommand.cs" />
+    <Compile Include="MenuSpecificOptions\ScheduleApptCommand.cs" />
+    <Compile Include="MenuSpecificOptions\ScheduleRecallCommand.cs" />
+    <Compile Include="MenuSpecificOptions\SearchPatientListCommand.cs" />
+    <Compile Include="MenuSpecificOptions\UpdatePatientCommand.cs" />
+    <Compile Include="MenuSpecificOptions\ReconcileMonthlyCommand.cs" />
+    <Compile Include="MenuSpecificOptions\ViewReconcileSummaryCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EMS_Billing\EMS_Billing.csproj">
+      <Project>{6b283719-c43b-4191-b3d0-fa8db08cd6f9}</Project>
+      <Name>EMS_Billing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_Demographics\EMS_Demographics.csproj">
+      <Project>{b983fb36-444b-40a2-b11c-73e383d82402}</Project>
+      <Name>EMS_Demographics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_SchedulingUI\EMS_Scheduling.csproj">
+      <Project>{9e514018-5dee-4fe1-84db-dca7f7ecc6ed}</Project>
+      <Name>EMS_Scheduling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_Support\EMS_Support.csproj">
+      <Project>{5553bd4f-01c9-4ac9-b5a3-9dd662dd6260}</Project>
+      <Name>EMS_Support</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="56584_200_LcU_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
