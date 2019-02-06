@@ -18,11 +18,27 @@ namespace EMS_ClientUI_V2
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class MainPage : Page
     {
-        public Page1()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void PatientsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsFrame.Content = new PatientOptionPage();
+
+        }
+
+        private void SchedulingBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BillingBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

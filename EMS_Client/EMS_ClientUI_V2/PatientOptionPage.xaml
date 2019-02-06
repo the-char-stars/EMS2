@@ -1,0 +1,42 @@
+﻿<Page x:Class="EMS_ClientUI_V2.PatientOptionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EMS_ClientUI_V2"
+      mc:Ignorable="d" 
+      d:DesignHeight="382" d:DesignWidth="195"
+      Title="PatientOptionPage"
+      Background="MediumPurple">
+
+    <materialDesign:TransitioningContent>
+        <materialDesign:TransitioningContent.OpeningEffects>
+            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.150" />
+            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.150" />
+        </materialDesign:TransitioningContent.OpeningEffects>
+        <Grid>
+            <Button x:Name="addPatienBtn"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Width="150"
+                        Margin="0,10,13.2,308.4"
+                        ToolTip="Resource name: MaterialDesignRaisedAccentButton"
+                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Add Patient"
+                        />
+            <Button x:Name="editPatientBtn"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Width="150"
+                            Margin="0,47,13.2,271.4"
+                        ToolTip="Resource name: MaterialDesignRaisedAccentButton"
+                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Edit Patient"
+                        />
+        </Grid>
+    </materialDesign:TransitioningContent>
+</Page>

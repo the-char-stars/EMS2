@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace EMS_ClientUI_V2
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for PatientOptionPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class PatientOptionPage : Page
     {
-        public LoginPage()
+        public PatientOptionPage()
         {
             InitializeComponent();
-        }
-
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            if (mainWindow != null)
-            {
-                mainWindow.ContentFrame.Content = new MainPage();
-            }
         }
     }
 }
