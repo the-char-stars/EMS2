@@ -12,12 +12,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EMS_ClientUI_V2"
-      mc:Ignorable="d" 
-      d:DesignHeight="382" d:DesignWidth="195"
       Title="PatientOptionPage"
-      Background="MediumPurple">
-
-    <materialDesign:TransitioningContent>
+      VerticalAlignment="Stretch">
+    
+<materialDesign:ColorZone
+  Mode="PrimaryMid"
+  Padding="16"
+    VerticalAlignment="Stretch">
+        <materialDesign:TransitioningContent>
         <materialDesign:TransitioningContent.OpeningEffects>
             <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.150" />
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.150" />
@@ -28,7 +30,7 @@
                         Width="150"
                         Margin="0,10,13.2,308.4"
                         ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Add Patient"
+                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Add Patient" Click="AddPatienBtn_Click"
                         />
             <Button x:Name="editPatientBtn"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
@@ -39,4 +41,5 @@
                         />
         </Grid>
     </materialDesign:TransitioningContent>
+        </materialDesign:ColorZone>
 </Page>

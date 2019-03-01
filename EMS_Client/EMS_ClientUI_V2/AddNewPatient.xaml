@@ -1,0 +1,50 @@
+﻿<Page x:Class="EMS_ClientUI_V2.AddNewPatient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EMS_ClientUI_V2"
+      Title="AddNewPatient">
+    <materialDesign:TransitioningContent>
+        <materialDesign:TransitioningContent.OpeningEffects>
+            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.150" />
+            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.150" />
+        </materialDesign:TransitioningContent.OpeningEffects>
+        <Grid Background="White">
+            <TextBox x:Name="firstNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="First Name:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="lastNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,71,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Last Name:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="healthCardTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,102,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Healthcard Number:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="middleInitialTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Middle Initial:" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="dobTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Date of Birth (DDMMYYYY):" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="genderTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,195,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Gender:" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="headHouseTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Head of House:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="addy1TxtBox" HorizontalAlignment="Left" Height="23" Margin="201,256,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Address Line 1:" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="addy2TxtBox" HorizontalAlignment="Left" Height="23" Margin="201,287,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Address Line 2:" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="cityTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,318,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="City:" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="provinceTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,348,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Province:" HorizontalAlignment="Left" Margin="10,347,0,0" VerticalAlignment="Top" Width="186"/>
+            <TextBox x:Name="phoneNumTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Phone Number (XXX-XXX-XXXX):" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="186"/>
+            <Button x:Name="addNewPatientBtn" Content="Add Patient" HorizontalAlignment="Left" Margin="678,408,0,0" VerticalAlignment="Top" Width="112"/>
+
+        </Grid>
+    </materialDesign:TransitioningContent>
+</Page>

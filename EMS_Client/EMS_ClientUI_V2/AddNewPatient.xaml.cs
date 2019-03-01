@@ -16,29 +16,13 @@ using System.Windows.Shapes;
 namespace EMS_ClientUI_V2
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for AddNewPatient.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class AddNewPatient : Page
     {
-        public MainPage()
+        public AddNewPatient()
         {
             InitializeComponent();
-        }
-
-        private void PatientsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            OptionsFrame.Content = new PatientOptionPage();
-
-        }
-
-        private void SchedulingBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BillingBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

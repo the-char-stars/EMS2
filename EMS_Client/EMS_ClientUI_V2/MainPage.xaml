@@ -16,13 +16,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
 
-    <Grid>
+    <Grid x:Name="MainPageGrid">
         <materialDesign:ColorZone
   Mode="PrimaryMid"
   Padding="16">
             <DockPanel>
                 <StackPanel
                       Orientation="Horizontal"
+                      HorizontalAlignment="Center"
+             
                       materialDesign:RippleAssist.IsCentered="True">
                     <Button x:Name="patientsBtn"
                         Style="{StaticResource MaterialDesignRaisedAccentButton}"
@@ -48,7 +50,8 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <Frame x:Name="OptionsFrame" Content="" HorizontalAlignment="Left" Height="382" Margin="0,68,0,-0.4" VerticalAlignment="Top" Width="195"/>
+        <Frame x:Name="OptionsFrame" Content="" HorizontalAlignment="Left" Margin="0,68,0,-0.4" VerticalAlignment="Stretch" Width="195"/>
+        <Frame x:Name="MainFrame" Content="" HorizontalAlignment="Stretch" Margin="195,68,0,-0.4" VerticalAlignment="Stretch" />
 
     </Grid>
 </Page>

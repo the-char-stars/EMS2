@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace EMS_ClientUI_V2
 {
     /// <summary>
@@ -23,6 +24,11 @@ namespace EMS_ClientUI_V2
         public PatientOptionPage()
         {
             InitializeComponent();
+        }
+
+        private void AddPatienBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
