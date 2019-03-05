@@ -18,7 +18,7 @@
             <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.150" />
             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.150" />
         </materialDesign:TransitioningContent.OpeningEffects>
-        <Grid Background="White">
+        <Grid>
             <TextBox x:Name="firstNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label Content="First Name:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="186"/>
             <TextBox x:Name="lastNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,71,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>

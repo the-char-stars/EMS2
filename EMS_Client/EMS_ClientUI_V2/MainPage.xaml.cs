@@ -20,14 +20,16 @@ namespace EMS_ClientUI_V2
     /// </summary>
     public partial class MainPage : Page
     {
+        PatientOptionPage pot;
         public MainPage()
         {
             InitializeComponent();
+            pot = new PatientOptionPage(this.MainFrame);
         }
 
         private void PatientsBtn_Click(object sender, RoutedEventArgs e)
         {
-            OptionsFrame.Content = new PatientOptionPage();
+            OptionsFrame.Content = pot;
 
         }
 

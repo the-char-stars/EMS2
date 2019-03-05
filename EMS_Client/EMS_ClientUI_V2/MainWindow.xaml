@@ -15,7 +15,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowState="Maximized">
-    <Frame Name="ContentFrame">
+    <Frame Name="ContentFrame" NavigationUIVisibility="Hidden">
         
 
     </Frame>
