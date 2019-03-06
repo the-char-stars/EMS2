@@ -23,7 +23,6 @@ namespace EMS_ClientUI_V2
         public MainWindow()
         {
             InitializeComponent();
-            ContentFrame.Content = new LoginPage();
         }
         public void changeMainFrame(Page page)
         {

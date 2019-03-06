@@ -13,7 +13,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMS_ClientUI_V2"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="EMS System 2.0"
         WindowState="Maximized">
     <Frame Name="ContentFrame" NavigationUIVisibility="Hidden">
         

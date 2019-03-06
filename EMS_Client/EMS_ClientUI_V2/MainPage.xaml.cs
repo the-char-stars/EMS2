@@ -20,27 +20,13 @@ namespace EMS_ClientUI_V2
     /// </summary>
     public partial class MainPage : Page
     {
-        PatientOptionPage pot;
         public MainPage()
         {
             InitializeComponent();
-            pot = new PatientOptionPage(this.MainFrame);
-        }
 
-        private void PatientsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            OptionsFrame.Content = pot;
-
-        }
-
-        private void SchedulingBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BillingBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            // display the main menu with the three main buttons
+            MainMenuFrame.Content = new MainMenuPage(
+                this.ContentFrame, this.ExtraOptionMenuFrame);
         }
     }
 }

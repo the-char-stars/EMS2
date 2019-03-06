@@ -10,28 +10,64 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EMS_ClientUI_V2
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for LogInPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class LogInPage : Window
     {
-        public LoginPage()
+        #region PUBLIC
+        public bool wasClosed { get; set; }
+        #endregion
+
+        #region PRIVATE
+        private bool isValidPass { get; set; }
+        private MainWindow mainWindow { get; set; }
+        #endregion
+
+        public LogInPage(MainWindow main)
         {
             InitializeComponent();
+            wasClosed = false;
+            isValidPass = false;
+            mainWindow = main;
         }
 
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            if (mainWindow != null)
+            wasClosed = (isValidPass) ? false : true;
+        }
+
+        private void SignIn_Click(object sender, RoutedEventArgs e)
+        {
+            // check if user is valid -----> PLACEHOLDER VALUES. MUST BE CHANGED
+            if (userName.Text == "admin" && userPassword.Password.ToString() == "123")
             {
-                mainWindow.ContentFrame.Content = new MainPage();
+                isValidPass = true;
+                mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                if (mainWindow != null)
+                {
+                    // display the main page on the main window
+                    mainWindow.ContentFrame.Content = new MainPage();
+
+                    // close the log in window
+                    this.Close();
+                }
+
+                loginErrorMessage.Text = "Error encountered while logging you in. Please try again!";
             }
+            else
+            {
+                loginErrorMessage.Text = "Username/Password invalid. Try again!";
+            }
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

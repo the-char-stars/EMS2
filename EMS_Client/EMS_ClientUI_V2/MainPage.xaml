@@ -17,41 +17,31 @@
       Title="Page1">
 
     <Grid x:Name="MainPageGrid">
+        <!--grid settings-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
         <materialDesign:ColorZone
-  Mode="PrimaryMid"
-  Padding="16">
-            <DockPanel>
-                <StackPanel
-                      Orientation="Horizontal"
-                      HorizontalAlignment="Center"
-             
-                      materialDesign:RippleAssist.IsCentered="True">
-                    <Button x:Name="patientsBtn"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        Width="150"
-                        Margin="2"
-                        ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Patients"
-                        Click="PatientsBtn_Click"    />
-                    <Button x:Name="schedulingBtn"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        Width="150"
-                            Margin="2"
-                        ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Scheduling"
-                            Click="SchedulingBtn_Click"/>
-                    <Button x:Name="billingBtn"
-                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                        Width="150"
-                            Margin="2"
-                        ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                        materialDesign:RippleAssist.Feedback="#DD000000" Content="Billing"
-                            Click="BillingBtn_Click"/>
-                </StackPanel>
-            </DockPanel>
+            Grid.Row="0"
+            Mode="PrimaryDark"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" Margin="26,30,0,0" TextWrapping="Wrap" Text="LOGO" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="110,30,0,0" TextWrapping="Wrap" Text="THE NAME OF THE PROJECT" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="511,30,0,0" TextWrapping="Wrap" Text="USER LOGGED IN + OTHER INFORMATION" VerticalAlignment="Top" Width="279"/>
+            </Grid>
         </materialDesign:ColorZone>
-        <Frame x:Name="OptionsFrame" Content="" HorizontalAlignment="Left" Margin="0,68,0,-0.4" VerticalAlignment="Stretch" Width="195"/>
-        <Frame x:Name="MainFrame" Content="" HorizontalAlignment="Stretch" Margin="195,68,0,-0.4" VerticalAlignment="Stretch" />
+        <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
+        <Frame x:Name="ExtraOptionMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
+        <Frame x:Name="ContentFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
+
 
     </Grid>
 </Page>

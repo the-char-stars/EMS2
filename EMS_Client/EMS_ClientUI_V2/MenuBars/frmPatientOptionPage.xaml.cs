@@ -9,18 +9,21 @@ namespace EMS_ClientUI_V2
     /// </summary>
     public partial class PatientOptionPage : Page
     {
-        Frame contentFrame;
+        #region PRIVATE
+        Frame ContentFrame { get; set; }
+        AddNewPatient AddNewPatientPage { get; set; }
+        #endregion
 
-        AddNewPatient anp = new AddNewPatient();
-        public PatientOptionPage(Frame frm)
+        public PatientOptionPage(Frame frame)
         {
             InitializeComponent();
-            contentFrame = frm;
+            AddNewPatientPage = new AddNewPatient();
+            ContentFrame = frame;
         }
 
         private void AddPatienBtn_Click(object sender, RoutedEventArgs e)
         {
-            contentFrame.Content = anp;
+            ContentFrame.Content = AddNewPatientPage;
         }
     }
 }

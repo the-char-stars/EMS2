@@ -1,25 +1,88 @@
-﻿<Page x:Class="EMS_ClientUI_V2.LoginPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+﻿<Window x:Class="EMS_ClientUI_V2.LogInPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EMS_ClientUI_V2"
+        mc:Ignorable="d"
+        Title="Log In - EMS System 2.0" Height="300" Width="400"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:EMS_ClientUI_V2"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginPage">
-
+        Closing="Window_Closing">
     <Grid>
-        <TextBlock Margin="307,54,0,0" TextWrapping="Wrap" Text="EMS II Version 2" RenderTransformOrigin="-9.533,0.695" Height="56" Width="160" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="userNameTxtBox" materialDesign:HintAssist.Hint="Username" HorizontalAlignment="Left" Height="23" Margin="319,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <PasswordBox HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Password" Margin="319,204,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-        <Button x:Name="loginBtn" Content="Login" HorizontalAlignment="Left" Margin="364,232,0,0" VerticalAlignment="Top" Width="75" Click="LoginBtn_Click"/>
+        <!--GRID LAYOUT-->
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--TITLE OF WINDOW-->
+        <TextBlock
+            Grid.Row="0" Grid.ColumnSpan="2"
+            TextAlignment="Center" Padding="0,25,0,0"
+            Style="{StaticResource MaterialDesignDisplay2TextBlock}">
+            EMS 2.0
+        </TextBlock>
+
+        <!--USERNAME INPUT-->
+        <TextBox
+            Grid.Row="1" Grid.ColumnSpan="2"
+            materialDesign:HintAssist.Hint="Username"
+            Name="userName"
+            Width="300"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+        <!--PASSWORD INPUT-->
+        <PasswordBox
+            Grid.Row="2" Grid.ColumnSpan="2"
+            Width="300"
+            x:Name="userPassword"
+            materialDesign:HintAssist.Hint="Password"
+            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+
+        <!--ERROR MESSAGE-->
+        <TextBlock
+            Grid.Row="3" Grid.ColumnSpan="2"
+            TextAlignment="Center"
+            Padding="10" Name="loginErrorMessage"
+            Foreground="Red"
+            Style="{StaticResource MaterialDesignButtonTextBlock}">
+        </TextBlock>
+
+        <!--LOG IN BUTTON-->
+        <Button
+            Grid.Row="4" Grid.Column="1"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Width="100"
+            Click="SignIn_Click"
+            ToolTip="Resource name: MaterialDesignRaisedButton">
+            _LOG IN
+        </Button>
+
+        <!--QUIT BUTTON-->
+        <Button
+            Grid.Row="4" Grid.Column="0"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Width="100"
+            Click="Quit_Click"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton">
+            _QUIT
+        </Button>
+
     </Grid>
-</Page>
+</Window>
