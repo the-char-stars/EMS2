@@ -28,8 +28,7 @@
             <TextBox x:Name="middleInitialTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label Content="Middle Initial:" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Width="186"/>
             <TextBox x:Name="dobTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Date of Birth (DDMMYYYY):" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="genderTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,195,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <Label Content="Date of Birth (DD/MM/YYYY):" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="186"/>
             <Label Content="Gender:" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="186"/>
             <TextBox x:Name="headHouseTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label Content="Head of House:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="186"/>
@@ -39,11 +38,21 @@
             <Label Content="Address Line 2:" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="186"/>
             <TextBox x:Name="cityTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,318,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label Content="City:" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="provinceTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,348,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Province:" HorizontalAlignment="Left" Margin="10,347,0,0" VerticalAlignment="Top" Width="186"/>
             <TextBox x:Name="phoneNumTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Phone Number (XXX-XXX-XXXX):" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="186"/>
-            <Button x:Name="addNewPatientBtn" Content="Add Patient" HorizontalAlignment="Left" Margin="678,408,0,0" VerticalAlignment="Top" Width="112"/>
+            <Button x:Name="addNewPatientBtn" Content="Add Patient" HorizontalAlignment="Left" Margin="678,408,0,0" Width="112" Height="50" Click="AddNewPatientBtn_Click"/>
+            <Label x:Name="fNameValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,40,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
+            <Label x:Name="lNameValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,71,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
+            <Label x:Name="healthCardValid"  Content="ERROR Invalid Health Card Number!" HorizontalAlignment="Left" Margin="321,102,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
+            <Label x:Name="initialValid"  Content="ERROR Must contain ONE character ONLY!" HorizontalAlignment="Left" Margin="321,133,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
+            <Label x:Name="dobValid"  Content="ERROR Must be in DD/MM/YYYY format!" HorizontalAlignment="Left" Margin="321,163,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
+            <ComboBox x:Name="genderBox" HorizontalAlignment="Left" Margin="201,191,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="genderValid"  Content="ERROR Must pick a gender!" HorizontalAlignment="Left" Margin="321,193,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
+            <Label x:Name="hhValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,222,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
+            <Label x:Name="cityValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,317,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
+            <ComboBox x:Name="provinceBox" HorizontalAlignment="Left" Margin="201,345,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="phoneValid"  Content="ERROR Must be a valid phone number and in XXX-XXX-XXXX format!" HorizontalAlignment="Left" Margin="321,378,0,0" VerticalAlignment="Top" Width="410" Foreground="Red"/>
 
         </Grid>
     </materialDesign:TransitioningContent>
