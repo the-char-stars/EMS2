@@ -69,5 +69,14 @@ namespace EMS_ClientUI_V2
         {
             this.Close();
         }
+
+        private void UserPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            // attempt to sign if the user presses enter
+            if(e.Key == System.Windows.Input.Key.Enter)
+            {
+                SignIn_Click(sender, e);
+            }
+        }
     }
 }

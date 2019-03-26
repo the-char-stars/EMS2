@@ -29,12 +29,14 @@
                     <Button x:Name="addPatienBtn"
                                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                                 Width="150"
+                                Margin="2"
                                 ToolTip="Resource name: MaterialDesignRaisedAccentButton"
                                 materialDesign:RippleAssist.Feedback="#DD000000" Content="Add Patient" Click="AddPatienBtn_Click"
                                 />
                 <Button x:Name="editPatientBtn"
                                 Style="{StaticResource MaterialDesignRaisedAccentButton}"
                                 Width="150"
+                                Margin="2"
                                 ToolTip="Resource name: MaterialDesignRaisedAccentButton"
                                 materialDesign:RippleAssist.Feedback="#DD000000" Content="Edit Patient"
                                 />

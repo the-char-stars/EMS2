@@ -53,7 +53,7 @@
             Width="300"
             x:Name="userPassword"
             materialDesign:HintAssist.Hint="Password"
-            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" KeyUp="UserPassword_KeyUp" />
 
         <!--ERROR MESSAGE-->
         <TextBlock

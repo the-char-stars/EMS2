@@ -32,11 +32,27 @@
             Grid.Row="0"
             Mode="PrimaryDark"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid>
-                <TextBlock HorizontalAlignment="Left" Margin="26,30,0,0" TextWrapping="Wrap" Text="LOGO" VerticalAlignment="Top"/>
-                <TextBlock HorizontalAlignment="Left" Margin="110,30,0,0" TextWrapping="Wrap" Text="THE NAME OF THE PROJECT" VerticalAlignment="Top"/>
-                <TextBlock HorizontalAlignment="Left" Margin="511,30,0,0" TextWrapping="Wrap" Text="USER LOGGED IN + OTHER INFORMATION" VerticalAlignment="Top" Width="279"/>
-            </Grid>
+            <DockPanel LastChildFill="False">
+                <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Text="EMS 2.0 - " VerticalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="A secure medical application" VerticalAlignment="Center"/>
+                <materialDesign:Chip DockPanel.Dock="Right" Content="Admin" Icon="A" VerticalAlignment="Center"/>
+                <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
+                    <ListBox Width="100">
+                        <ListBoxItem>
+                            <DockPanel LastChildFill="False">
+                                <materialDesign:PackIcon Kind="Build" DockPanel.Dock="Left"/>
+                                <TextBlock DockPanel.Dock="Right">Settings</TextBlock>
+                            </DockPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <DockPanel LastChildFill="False">
+                                <materialDesign:PackIcon Kind="Logout" DockPanel.Dock="Left"/>
+                                <TextBlock DockPanel.Dock="Right">Log Out</TextBlock>
+                            </DockPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </materialDesign:PopupBox>
+            </DockPanel>
         </materialDesign:ColorZone>
         <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
         <Frame x:Name="ExtraOptionMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
