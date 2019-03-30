@@ -20,7 +20,7 @@ namespace EMS_ClientUI_V2
     /// <summary>
     /// Interaction logic for AddNewPatient.xaml
     /// </summary>
-    public partial class AddNewPatient : Page
+    public partial class AddPatient : Page
     {
         Regex nameValidator;
         Regex healthCardValidator;
@@ -28,7 +28,7 @@ namespace EMS_ClientUI_V2
         Regex dobValidator;
         Regex phoneNumValidator;
 
-        public AddNewPatient()
+        public AddPatient()
         {
             InitializeComponent();
 

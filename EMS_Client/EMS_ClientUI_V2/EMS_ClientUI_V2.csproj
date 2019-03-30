@@ -62,9 +62,50 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Billing\MonthlyReportPage.xaml.cs">
+      <DependentUpon>MonthlyReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\ReconcileMonthlyPage.xaml.cs">
+      <DependentUpon>ReconcileMonthlyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\ReconcileSummaryPage.xaml.cs">
+      <DependentUpon>ReconcileSummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuBars\BillingMenuPage.xaml.cs">
+      <DependentUpon>BillingMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Patient\SearchPatientPage.xaml.cs">
+      <DependentUpon>SearchPatientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scheduling\ScheduleRecallPage.xaml.cs">
+      <DependentUpon>ScheduleRecallPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scheduling\ViewAppointmentsPage.xaml.cs">
+      <DependentUpon>ViewAppointmentsPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Billing\MonthlyReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Billing\ReconcileMonthlyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Billing\ReconcileSummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuBars\BillingMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MenuBars\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="MenuBars\SchedulingMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiscPages\LogInPage.xaml">
       <SubType>Designer</SubType>
@@ -74,7 +115,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Patient\frmAddNewPatient.xaml">
+    <Page Include="Patient\AddPatientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,14 +127,17 @@
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MenuBars\SchedulingMenuPage.xaml.cs">
+      <DependentUpon>SchedulingMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiscPages\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Patient\EditPatientPage.xaml.cs">
       <DependentUpon>EditPatientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Patient\frmAddNewPatient.xaml.cs">
-      <DependentUpon>frmAddNewPatient.xaml</DependentUpon>
+    <Compile Include="Patient\AddPatientPage.xaml.cs">
+      <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -107,7 +151,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MenuBars\frmPatientOptionPage.xaml">
+    <Page Include="MenuBars\PatientMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Patient\SearchPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scheduling\ScheduleRecallPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scheduling\ViewAppointmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,8 +172,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuBars\frmPatientOptionPage.xaml.cs">
-      <DependentUpon>frmPatientOptionPage.xaml</DependentUpon>
+    <Compile Include="MenuBars\PatientMenuPage.xaml.cs">
+      <DependentUpon>PatientMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -145,9 +201,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Billing\" />
-    <Folder Include="Scheduling\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace EMS_ClientUI_V2
 {
     /// <summary>
-    /// Interaction logic for EditPatientPage.xaml
+    /// Interaction logic for ReconcileSummaryPage.xaml
     /// </summary>
-    public partial class EditPatient : Page
+    public partial class ReconcileSummary : Page
     {
-        public EditPatient()
+        public ReconcileSummary()
         {
             InitializeComponent();
         }

@@ -26,7 +26,9 @@ namespace EMS_ClientUI_V2
         Frame ExtraOptionMenuFrame { get; set; }
 
         // PAGES
-        PatientOptionPage PatientsMenu { get; set; }
+        PatientMenuPage PatientsMenu { get; set; }
+        SchedulingMenuPage SchedulingMenu { get; set; }
+        BillingMenuPage BillingMenu { get; set; }
         #endregion
 
         public MainMenuPage(Frame content, Frame extraMenu)
@@ -35,23 +37,27 @@ namespace EMS_ClientUI_V2
             ContentFrame = content;
             ExtraOptionMenuFrame = extraMenu;
 
-            PatientsMenu = new PatientOptionPage(ContentFrame);
+            PatientsMenu = new PatientMenuPage(ContentFrame);
+            SchedulingMenu = new SchedulingMenuPage(ContentFrame);
+            BillingMenu = new BillingMenuPage(ContentFrame);
         }
 
         private void PatientsBtn_Click(object sender, RoutedEventArgs e)
         {
-            // sets the menu on the left to the menu of the patients subsystem
+            // show the submenu of the patients main menu
             ExtraOptionMenuFrame.Content = PatientsMenu;
         }
 
         private void SchedulingBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            // show the submenu of scheduling main menu
+            ExtraOptionMenuFrame.Content = SchedulingMenu;
         }
 
         private void BillingBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            // show the submenu of the billing main menu
+            ExtraOptionMenuFrame.Content = BillingMenu;
         }
     }
 }
