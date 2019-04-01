@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EMS_Library;
+using MaterialDesignThemes.Wpf;
 
 namespace EMS_ClientUI_V2
 {
@@ -29,35 +31,35 @@ namespace EMS_ClientUI_V2
         PatientMenuPage PatientsMenu { get; set; }
         SchedulingMenuPage SchedulingMenu { get; set; }
         BillingMenuPage BillingMenu { get; set; }
+        PatientView pv;
         #endregion
 
-        public MainMenuPage(Frame content, Frame extraMenu)
+        public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics d)
         {
             InitializeComponent();
             ContentFrame = content;
             ExtraOptionMenuFrame = extraMenu;
 
-            PatientsMenu = new PatientMenuPage(ContentFrame);
-            SchedulingMenu = new SchedulingMenuPage(ContentFrame);
-            BillingMenu = new BillingMenuPage(ContentFrame);
+            pv = new PatientView(d, dialogHost);
+            PatientsMenu = new PatientMenuPage(ContentFrame, dialogHost, d);
+            SchedulingMenu = new SchedulingMenuPage(ContentFrame, dialogHost);
+            BillingMenu = new BillingMenuPage(ContentFrame, dialogHost);
         }
 
-        private void PatientsBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnBilling_Checked(object sender, RoutedEventArgs e)
         {
-            // show the submenu of the patients main menu
-            ExtraOptionMenuFrame.Content = PatientsMenu;
+            ExtraOptionMenuFrame.Content = BillingMenu;
         }
 
-        private void SchedulingBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnScheduling_Checked(object sender, RoutedEventArgs e)
         {
-            // show the submenu of scheduling main menu
             ExtraOptionMenuFrame.Content = SchedulingMenu;
         }
 
-        private void BillingBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnPatients_Checked(object sender, RoutedEventArgs e)
         {
-            // show the submenu of the billing main menu
-            ExtraOptionMenuFrame.Content = BillingMenu;
+            ContentFrame.Content = pv;
+            ExtraOptionMenuFrame.Content = null;
         }
     }
 }

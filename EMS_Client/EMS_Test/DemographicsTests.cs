@@ -1249,9 +1249,9 @@ namespace EMS_Test_Demographics
                 string testString = "9999999999";
 
                 testString = testString.ToUpper();
-                p.PhoneNum = testString;
+                p.PhoneNumber = testString;
 
-                if (!(p.PhoneNum == testString))
+                if (!(p.PhoneNumber == testString))
                 {
 
                     Assert.Fail();
@@ -1279,9 +1279,9 @@ namespace EMS_Test_Demographics
                 string testString = "asdasdasdfa98027408927345";
 
                 testString = testString.ToUpper();
-                p.PhoneNum = testString;
+                p.PhoneNumber = testString;
 
-                if (p.PhoneNum == testString)
+                if (p.PhoneNumber == testString)
                 {
                     Assert.Fail();
                 }

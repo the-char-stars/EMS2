@@ -318,8 +318,8 @@ namespace EMS_Client.MenuOptions
 
                             // PHONE NUMBER
                             lineOffset++;
-                            newPatient.PhoneNum = headOfHouse.PhoneNum;
-                            _content[lineOffset].Second = newPatient.PhoneNum;
+                            newPatient.PhoneNumber = headOfHouse.PhoneNumber;
+                            _content[lineOffset].Second = newPatient.PhoneNumber;
 
                             Container.DisplayContent(_content, 0, _selectedInputField, MenuCodes.PATIENTS, "Patients", Description);
 
@@ -361,8 +361,8 @@ namespace EMS_Client.MenuOptions
 
                             // PHONE NUMBER
                             lineOffset++;
-                            if (newPatient.PhoneNum == null) { newPatient.PhoneNum = _content[lineOffset].Second; }
-                            if (newPatient.PhoneNum != _content[lineOffset].Second || newPatient.PhoneNum == "")
+                            if (newPatient.PhoneNumber == null) { newPatient.PhoneNumber = _content[lineOffset].Second; }
+                            if (newPatient.PhoneNumber != _content[lineOffset].Second || newPatient.PhoneNumber == "")
                             {
                                 validInfo = PrintErrorOnLine(pInitialPosition, "Phone number error", lineOffset, errorOffset);
                             }

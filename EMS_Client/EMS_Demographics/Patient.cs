@@ -38,7 +38,7 @@ namespace EMS_Library
         private string _lastName = null;
         private string _hcn = null;
         private string _mInitial = null;
-        private string _dateOfBirth = null;
+        private DateTime _dateOfBirth = DateTime.Now.Date;
         private string _sex = null;
         private string _headOfHouse = null;
         private string _addressLine1 = null;
@@ -46,13 +46,9 @@ namespace EMS_Library
         private string _city = null;
         private string _province = null;
         private string _phoneNum = null;
+        private string _postalCode = null;
 
         private Demographics demographics;
-
-
-
-
-
 
         /**
         * \brief <b>Brief Description</b> Patient - ToString <b><i>class method</i></b> - This is the class ToStirng method which will returns class 
@@ -67,9 +63,8 @@ namespace EMS_Library
         */
         public override string ToString()
         {
-            return string.Format("{0}, {1} - {2} - {3} - {4}", LastName, FirstName, HCN, AddressLine1, PhoneNum);
+            return string.Format("{0}, {1} - {2} - {3} - {4}", LastName, FirstName, HCN, AddressLine1, PhoneNumber);
         }
-
 
         /**
         * \brief <b>Brief Description</b> Patient - Constructor <b><i>class method</i></b> - This method is used to instantiate a new Patient object with given a set of attribute values.
@@ -86,12 +81,11 @@ namespace EMS_Library
         {
             if (d == null) d = new Demographics();
             Logging.Log("Patient", "Patient",  "Initializing New the Patient object with default constructor");
+            this.DateOfBirth = DateTime.Now.AddDays(-1);
             demographics = d;
             // default constructor
             _patientID = -1;
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> Patient - Constructor <b><i>class method</i></b> - This method is used to instantiate a new Patient object with given a set of attribute values.
@@ -120,19 +114,16 @@ namespace EMS_Library
             LastName = patientRecord[i++];
             HCN = patientRecord[i++];
             MInitial = patientRecord[i++];
-            DateOfBirth = patientRecord[i++];
+            DateOfBirth = DateTime.Parse(patientRecord[i++]);
             Sex = patientRecord[i++];
             HeadOfHouse = patientRecord[i++];
             AddressLine1 = patientRecord[i++];
             AddressLine2 = patientRecord[i++];
             City = patientRecord[i++];
             Province = patientRecord[i++];
-            PhoneNum = patientRecord[i++];
+            PhoneNumber = patientRecord[i++];
+            PostalCode = patientRecord[i++];
         }
-
-
-
-
 
         /**
         * \brief <b>Brief Description</b> Patient - Constructor <b><i>class method</i></b> - This method is used to instantiate a new Patient object with given a set of attribute values.
@@ -160,17 +151,16 @@ namespace EMS_Library
             LastName = patientRecord[i++];
             HCN = patientRecord[i++];
             MInitial = patientRecord[i++];
-            DateOfBirth = patientRecord[i++];
+            DateOfBirth = DateTime.Parse(patientRecord[i++]);
             Sex = patientRecord[i++];
             HeadOfHouse = patientRecord[i++];
             AddressLine1 = patientRecord[i++];
             AddressLine2 = patientRecord[i++];
             City = patientRecord[i++];
             Province = patientRecord[i++];
-            PhoneNum = patientRecord[i++];
+            PhoneNumber = patientRecord[i++];
+            PostalCode = patientRecord[i++];
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> Patient - Constructor <b><i>class method</i></b> - This method used to return all the data member as string array.
@@ -183,10 +173,8 @@ namespace EMS_Library
         */
         public string[] ToStringArray()
         {
-            return new string[] { this._patientID.ToString(), this._firstName, this._lastName, this._hcn, this._mInitial, this._dateOfBirth, this._sex, this._headOfHouse, this._addressLine1,this._addressLine2,this._city,this._province,this._phoneNum };
+            return new string[] { this._patientID.ToString(), this._firstName, this._lastName, this._hcn, this._mInitial, this._dateOfBirth.ToString(), this._sex, this._headOfHouse, this._addressLine1,this._addressLine2,this._city,this._province,this._phoneNum, this._postalCode };
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class method</i></b> - THis method will be called 
@@ -206,20 +194,18 @@ namespace EMS_Library
                 new KeyValuePair<string, string>("Last Name".PadRight(20, ' ') + ": ", LastName),
                 new KeyValuePair<string, string>("Health Card".PadRight(20, ' ') + ": ", HCN),           
                 new KeyValuePair<string, string>("Middle Initial".PadRight(20, ' ') + ": ", MInitial),
-                new KeyValuePair<string, string>("Date Of Birth".PadRight(20, ' ') + ": ", DateOfBirth),
+                new KeyValuePair<string, string>("Date Of Birth".PadRight(20, ' ') + ": ", DateOfBirth.ToString()),
                 new KeyValuePair<string, string>("Gender".PadRight(20, ' ') + ": ", Sex),
                 new KeyValuePair<string, string>("Head Of House".PadRight(20, ' ') + ": ", HeadOfHouse),
                 new KeyValuePair<string, string>("Address Line 1".PadRight(20, ' ') + ": ", AddressLine1),
                 new KeyValuePair<string, string>("Address Line 2".PadRight(20, ' ') + ": ", AddressLine2),
                 new KeyValuePair<string, string>("City".PadRight(20, ' ') + ": ", City),
                 new KeyValuePair<string, string>("Province".PadRight(20, ' ') + ": ", Province),
-                new KeyValuePair<string, string>("Phone Number".PadRight(20, ' ') + ": ", PhoneNum)
+                new KeyValuePair<string, string>("Phone Number".PadRight(20, ' ') + ": ", PhoneNumber)
             };
 
             return lkvp;
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the PatientID for patient class.
@@ -238,8 +224,6 @@ namespace EMS_Library
             set { if ((value > -1)) _patientID = value; else { Logging.Log("Patient", "PatientID", String.Format( "Failed assigning Patient ID : {0}",value)); } }
         }
 
-
-
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient FirstName for patient class.
         * \details <b>Details</b>
@@ -256,7 +240,7 @@ namespace EMS_Library
             get { return _firstName; }
             set
             {
-                value = value.ToUpper();
+                value = (value ?? "").ToUpper();
                 // check the first name and set it to the first name;
                 Regex rx = new Regex("^[a-zA-Z.-]+$");
                 Match mc = rx.Match(value);
@@ -264,8 +248,6 @@ namespace EMS_Library
                 else { Logging.Log("Patient", "FirstName", String.Format( "Failed assigning Patient's FirstName : {0}",value)); }
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient LastName for patient class.
@@ -283,15 +265,13 @@ namespace EMS_Library
             get { return _lastName; }
             set
             {
-                value = value.ToUpper();
+                value = (value ?? "").ToUpper();
                 Regex rx = new Regex("^[a-zA-Z.-]+$");
                 Match mc = rx.Match(value);
                 if (mc.Success) { _lastName = value; }
                 else { Logging.Log("Patient", "LastName", String.Format( "Failed assigning Patient's LastName: {0}",value)); }
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient HCN for patient class.
@@ -309,15 +289,9 @@ namespace EMS_Library
             get { return _hcn; }
             set
             {
-                value = value.ToUpper();
-                Regex rx = new Regex("^([0-9]{10}[a-zA-Z]{2}$)");
-                Match mc = rx.Match(value);
-                if (mc.Success) { _hcn = value; }
-                else { Logging.Log("Patient", "HCN", String.Format("Failed assigning Patient's HCN Number : {0}",value)); }
+                _hcn = (value ?? "").ToUpper();
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient Minitial for patient class.
@@ -335,15 +309,13 @@ namespace EMS_Library
             get { return _mInitial; }
             set
             {
-                value = value.ToUpper();
-                Regex rx = new Regex("^[a-zA-Z]$");
+                value = (value ?? "").ToUpper();
+                Regex rx = new Regex("^[a-zA-Z]?$");
                 Match mc = rx.Match(value);
                 if (mc.Success) { _mInitial = value; }
                 else { Logging.Log("Patient", "MInitial", String.Format("Failed assigning Patient's MInitial : {0}",value)); }
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient DateOfBirth for patient class.
@@ -356,28 +328,16 @@ namespace EMS_Library
         * \return DateOfBirth - <b>String</b> - This accessors return the DateOfBirth which stored in object Data member
         * 
         */
-        public string DateOfBirth
+        public DateTime DateOfBirth
         {
-            get { return _dateOfBirth; }
+            get { return _dateOfBirth.Date; }
             set
             {
-
-                Regex rxDateofBirth = new Regex("^([0]?[0-9]|[12][0-9]|[3][01])([ ./-]?)([0]?[1-9]|[1][0-2])([ ./-]?)([0-9]{4}|[0-9]{2})$");
-                Match mc = rxDateofBirth.Match(value);
-                //DateTime dt = new DateTime();
-                if(mc.Success)
-                {
-                    _dateOfBirth = value;
-                }
-
-                /*
-                if (DateTime.TryParse(value, out dt) || DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt)) { _dateOfBirth = value; }*/
-                else { Logging.Log("Patient", "DateOfBirth", String.Format("Failed assigning Patient's DateOfBirth : {0}",value)); }
-                
+                _dateOfBirth = value;               
             }
         }
 
-
+        public string DOBString { get { return _dateOfBirth.ToShortDateString(); } }
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient Sex for patient class.
@@ -390,18 +350,19 @@ namespace EMS_Library
         * \return sex - <b>String</b> - This accessors return the gender which stored in object Data member
         * 
         */
+        List<string> validSexes = new List<string> { "M", "F", "X", "MALE", "FEMALE", "OTHER" };
+
         public string Sex
         {
             get { return _sex; }
             set
             {
-                value = value.ToUpper().ToString();
-                if (value == "M" || value == "F" || value == "X") { _sex = value; }
+                
+                value = (value ?? "").ToString().ToUpper();
+                if (validSexes.Contains(value)) { _sex = value; }
                 else { Logging.Log("Patient", "Sex", String.Format("Failed assigning Patient's Sex : {0}",value)); }
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient HeadOfHouse for patient class.
@@ -419,7 +380,8 @@ namespace EMS_Library
             get { return _headOfHouse; }
             set
             {
-                value = value.ToUpper().ToString();
+                value = (value ?? "").ToUpper().ToString();
+                _headOfHouse = value;
                 Regex rx = new Regex("^([0-9]{10}[a-zA-Z]{2}$)");
                 Match mc = rx.Match(value);
                 if (mc.Success)
@@ -430,9 +392,8 @@ namespace EMS_Library
                         _addressLine1 = headOfHouseHold.AddressLine1;
                         _addressLine2 = headOfHouseHold.AddressLine2;
                         _city = headOfHouseHold.City;
-                        _phoneNum = headOfHouseHold.PhoneNum;
-                        _province = headOfHouseHold.Province;
-                        _headOfHouse = value;
+                        _phoneNum = headOfHouseHold.PhoneNumber;
+                        _province = headOfHouseHold.Province;                        
                     }
                     else
                     {
@@ -443,8 +404,6 @@ namespace EMS_Library
                 else { Logging.Log("Patient", "HeadOfHouse", String.Format("Failed to find head-of-house-hold from patient roster : {0}",value)); }
             }
         }
-
-
 
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient AddressLine1 for patient class.
@@ -462,15 +421,13 @@ namespace EMS_Library
             get { return _addressLine1; }
             set
             {
-                value = value.ToUpper().ToString();
+                value = (value ?? "").ToUpper().ToString();
                 Regex rx = new Regex("^[a-zA-Z0-9\\s.-]+$");
                 Match mc = rx.Match(value);
                 if (mc.Success) { _addressLine1 = value; }
                 else { Logging.Log("Patient", "AddressLine1", string.Format("Failed assigning Patient's Address1 : {0}",value)); }
             }
         }
-
-
 
         /**
          * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient AddressLine2 for patient class.
@@ -488,15 +445,13 @@ namespace EMS_Library
             get { return _addressLine2; }
             set
             {
-                value = value.ToUpper().ToString();
+                value = (value ?? "").ToUpper().ToString();
                 Regex rx = new Regex("^[a-zA-Z0-9\\s.-]+$");
                 Match mc = rx.Match(value);
                 if (mc.Success) { _addressLine2 = value; }
                 else{ Logging.Log("Patient", "AddressLine2", String.Format("Failed assigning Patient's Address2 : {0}",value)); }
             }
         }
-
-
 
         /**
          * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient City for patient class.
@@ -522,7 +477,22 @@ namespace EMS_Library
             }
         }
 
-
+        /**
+         * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient City for patient class.
+         * \details <b>Details</b>
+         *
+         * This accessors used to validate and set the value of the city
+         * 
+         * \param city - <b>string</b> - This method takes string city
+         * 
+         * \return city - <b>String</b> - This accessors return the city which stored in object Data member
+         * 
+         */
+        public string PostalCode
+        {
+            get { return _postalCode; }
+            set { _postalCode = (value ?? "").ToUpper().ToString(); }
+        }
 
         /**
          * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient Province for patient class.
@@ -540,15 +510,12 @@ namespace EMS_Library
             get { return _province; }
             set
             {
-                value = value.ToUpper().ToString();
+                value = (value ?? "").ToUpper().ToString();
                 string[] provinces = { "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"};
                 if (provinces.Contains(value)) { _province = value; }
                 else { Logging.Log("Patient", "Province", String.Format("Failed assigning Patient's Province : {0}",value)); }
             }
-
         }
-
-
 
         /**
           * \brief <b>Brief Description</b> - Patient <b><i>class accessors</i></b> - this accessors used to get and set the Patient PhoneNum for patient class.
@@ -561,19 +528,28 @@ namespace EMS_Library
           * \return PhoneNum - <b>String</b> - This accessors return the PhoneNum which stored in object Data member
           * 
           */
-        public string PhoneNum
+        public string PhoneNumber
         {
             get { return _phoneNum; }
-            set
-            {
-                Regex rx = new Regex("^[0-9]{3}[ ./-]?[0-9]{3}[ ./-]?[0-9]{4}$");
-                Match mc = rx.Match(value);
-                if (mc.Success) { _phoneNum = value; }
-                else { Logging.Log("Patient", "PhoneNum", String.Format("Failed assigning Patient's PhoneNumber : {0}",value)); }
-            }
+            set { _phoneNum = value; }
         }
 
+        bool isPostalCodeValid()
+        {
+            Regex rx = new Regex("^[A-Z][0-9][A-Z][-]?[0-9][A-Z][0-9]$");
+            return rx.IsMatch(_postalCode ?? "");
+        }
 
+        bool isHCNValid()
+        {
+            Regex rx = new Regex("^([0-9]{10}[a-zA-Z]{2}$)");
+            return rx.IsMatch(HCN ?? "");
+        }
+
+        bool isPhoneNumberValid()
+        {
+            return new Regex("^[0-9]{3}[ ./-]?[0-9]{3}[ ./-]?[0-9]{4}$").IsMatch(_phoneNum ?? "");
+        }
 
         /**
           * \brief <b>Brief Description</b> - Patient <b><i>class method</i></b> - this is a method used to check that patient is read to submit
@@ -586,7 +562,17 @@ namespace EMS_Library
           */
         public bool IsReadyToSave()
         {
-            return ((this.FirstName != null) && (this.HCN != null) && (this.LastName != null) && (this.MInitial != null) && (this.DateOfBirth != null) && (this.AddressLine1 != null) && (this.Sex != null) && (this.City != null) && (this.Province != null) && (this.PhoneNum != null));
+            bool isReady = true;
+
+            if (this.FirstName == null) { isReady = false; }
+            if (isReady && this.HCN == null) { isReady = isReady && isHCNValid(); }
+            if (isReady && this.LastName == null) { isReady = false; }
+            if (isReady && this.DateOfBirth == null) { isReady = false; }
+            if (isReady && this.Sex == null) { isReady = false; }
+            if (isReady && this.PostalCode == null) { isReady = isReady && isPostalCodeValid(); }            
+            if (isReady) { if (!isPhoneNumberValid()) _phoneNum = ""; }
+
+            return isReady;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace EMS_ClientUI_V2
         ScheduleRecall ScheduleRecallPage { get; set; }
         #endregion
 
-        public SchedulingMenuPage(Frame frame)
+        public SchedulingMenuPage(Frame frame, DialogHost dialogHost)
         {
             InitializeComponent();
 

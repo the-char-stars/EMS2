@@ -2,58 +2,228 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignCardBackground}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         FontFamily="{DynamicResource MaterialDesignFont}"
-      
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EMS_ClientUI_V2"
+      xmlns:domain="clr-namespace:EMS.Validation"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
       Title="AddNewPatient">
-    <materialDesign:TransitioningContent>
-        <materialDesign:TransitioningContent.OpeningEffects>
-            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.150" />
-            <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:0.150" />
-        </materialDesign:TransitioningContent.OpeningEffects>
-        <Grid>
-            <TextBox x:Name="firstNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="First Name:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="lastNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,71,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Last Name:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="healthCardTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,102,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Healthcard Number:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="middleInitialTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Middle Initial:" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="dobTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Date of Birth (DD/MM/YYYY):" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="186"/>
-            <Label Content="Gender:" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="headHouseTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Head of House:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="addy1TxtBox" HorizontalAlignment="Left" Height="23" Margin="201,256,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Address Line 1:" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="addy2TxtBox" HorizontalAlignment="Left" Height="23" Margin="201,287,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="Address Line 2:" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="cityTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,318,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <Label Content="City:" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top" Width="186"/>
-            <Label Content="Province:" HorizontalAlignment="Left" Margin="10,347,0,0" VerticalAlignment="Top" Width="186"/>
-            <TextBox x:Name="phoneNumTxtBox" HorizontalAlignment="Left" Height="23" Margin="201,379,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Phone Number (XXX-XXX-XXXX):" HorizontalAlignment="Left" Margin="10,378,0,0" VerticalAlignment="Top" Width="186"/>
-            <Button x:Name="addNewPatientBtn" Content="Add Patient" HorizontalAlignment="Left" Margin="678,408,0,0" Width="112" Height="50" Click="AddNewPatientBtn_Click"/>
-            <Label x:Name="fNameValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,40,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
-            <Label x:Name="lNameValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,71,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
-            <Label x:Name="healthCardValid"  Content="ERROR Invalid Health Card Number!" HorizontalAlignment="Left" Margin="321,102,0,0" VerticalAlignment="Top" Width="242" Foreground="Red"/>
-            <Label x:Name="initialValid"  Content="ERROR Must contain ONE character ONLY!" HorizontalAlignment="Left" Margin="321,133,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
-            <Label x:Name="dobValid"  Content="ERROR Must be in DD/MM/YYYY format!" HorizontalAlignment="Left" Margin="321,163,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
-            <ComboBox x:Name="genderBox" HorizontalAlignment="Left" Margin="201,191,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="genderValid"  Content="ERROR Must pick a gender!" HorizontalAlignment="Left" Margin="321,193,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
-            <Label x:Name="hhValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,222,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
-            <Label x:Name="cityValid"  Content="ERROR Must contain letters only!" HorizontalAlignment="Left" Margin="321,317,0,0" VerticalAlignment="Top" Width="257" Foreground="Red"/>
-            <ComboBox x:Name="provinceBox" HorizontalAlignment="Left" Margin="201,345,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="phoneValid"  Content="ERROR Must be a valid phone number and in XXX-XXX-XXXX format!" HorizontalAlignment="Left" Margin="321,378,0,0" VerticalAlignment="Top" Width="410" Foreground="Red"/>
+    <Page.Resources>
+        <Thickness x:Key="BaseMargin">10</Thickness>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Grid.Row="0" Mode="PrimaryDark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock Style="{StaticResource MaterialDesignDisplay2TextBlock}" Padding="16" HorizontalAlignment="Center"> Add Patient </TextBlock>
+        </materialDesign:ColorZone>
+        <Grid Margin="24" MinWidth="400" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="66"/>
+            </Grid.RowDefinitions>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbFirstName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="First Name"
+                         materialDesign:ValidationAssist.UsePopup="True" HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" Height="auto" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="0" TabIndex="0">
+                    <TextBox.Text>
+                        <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule/>
+                                <domain:OnlyLettersValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="tbMiddleinitial" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="M. Initial" 
+                        HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Column="1" TabIndex="1">
+                    <TextBox.Text>
+                        <Binding Path="MInitial" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:SingleCharacterValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="tbLastName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Last Name" 
+                            HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Column="2" TabIndex="2">
+                    <TextBox.Text>
+                        <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule/>
+                                <domain:OnlyLettersValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+
+
+            <TextBox x:Name="tbHealthCard" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Health Card" 
+                        HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top" Width="auto" TabIndex="3" Grid.Row="1">
+                <TextBox.Text>
+                    <Binding Path="HCN" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <domain:NotEmptyValidationRule/>
+                            <domain:HealthCardValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <DatePicker x:Name="dpDateOfBirth" Margin="{StaticResource ResourceKey=BaseMargin}" materialDesign:HintAssist.Hint="Date of Birth" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="40">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="DateOfBirth" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:PastDateValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+
+                <ComboBox x:Name="cbGender" materialDesign:HintAssist.Hint="Gender" Margin="{StaticResource ResourceKey=BaseMargin}" IsEditable="False" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="M">Male</ComboBoxItem>
+                    <ComboBoxItem Tag="F">Female</ComboBoxItem>
+                    <ComboBoxItem Tag="X">Other</ComboBoxItem>
+                    <ComboBox.SelectedItem>
+                        <Binding Path="Sex" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedItem>
+                </ComboBox>
+            </Grid>
+
+            <TextBox x:Name="tbHeadOfHouse" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Head of House"
+                        HorizontalAlignment="Stretch" Grid.Row="4" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top" TextChanged="TbHeadOfHouse_TextChanged">
+                <TextBox.Text>
+                    <Binding Path="HeadOfHouse" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <domain:HealthCardValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbAddress1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Address Line 1"
+                        HorizontalAlignment="Stretch" Grid.Row="5" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top">
+                <TextBox.Text>
+                    <Binding Path="AddressLine1" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <domain:NotEmptyValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbAddress2" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Address Line 2"
+                        HorizontalAlignment="Stretch" Grid.Row="6" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding AddressLine2}"/>
+
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="tbCity" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="City"
+                        HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top">
+                    <TextBox.Text>
+                        <Binding Path="City" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:OnlyLettersValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <ComboBox x:Name="cbProvince" materialDesign:HintAssist.Hint="Province" Margin="{StaticResource ResourceKey=BaseMargin}" IsEditable="True" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="AB">Alberta</ComboBoxItem>
+                    <ComboBoxItem Tag="BC">British Columbia</ComboBoxItem>
+                    <ComboBoxItem Tag="MN">Manitoba</ComboBoxItem>
+                    <ComboBoxItem Tag="NB">New Brunswick</ComboBoxItem>
+                    <ComboBoxItem Tag="NL">Newfoundland and Labrador</ComboBoxItem>
+                    <ComboBoxItem Tag="NS">Nova Scotia</ComboBoxItem>
+                    <ComboBoxItem Tag="NT">Northwest Territories</ComboBoxItem>
+                    <ComboBoxItem Tag="NU">Nunavut</ComboBoxItem>
+                    <ComboBoxItem Tag="ON">Ontario</ComboBoxItem>
+                    <ComboBoxItem Tag="PE">Prince Edward Island</ComboBoxItem>
+                    <ComboBoxItem Tag="QC">Quebec</ComboBoxItem>
+                    <ComboBoxItem Tag="SK">Saskatchewan</ComboBoxItem>
+                    <ComboBoxItem Tag="YT">Yukon</ComboBoxItem>
+                    <ComboBox.SelectedValue>
+                        <Binding Path="Province" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedValue>
+                </ComboBox>
+
+                <TextBox x:Name="tbPostalCode" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Postal Code" Grid.Column="2"
+                        HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap"  VerticalAlignment="Top">
+                    <TextBox.Text>
+                        <Binding Path="PostalCode" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <domain:NotEmptyValidationRule/>
+                                <domain:PostalCodeValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+            </Grid>
+
+            <TextBox x:Name="tbPhoneNumber" Grid.Row="8" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Phone Number"
+                        HorizontalAlignment="Stretch" Margin="{StaticResource ResourceKey=BaseMargin}" TextWrapping="Wrap" VerticalAlignment="Top">
+                <TextBox.Text>
+                    <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <domain:OnlyNumbersValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Grid Grid.Row="9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnAddNewPatient"  Margin="{StaticResource ResourceKey=BaseMargin}" Content="Add Patient" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnAddNewPatient_Click"/>
+                <Button x:Name="btnClose" Grid.Column="1" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Close" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnClose_Click"/>
+            </Grid>
         </Grid>
-    </materialDesign:TransitioningContent>
+    </Grid>
 </Page>

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using EMS_Library;
+using MaterialDesignThemes.Wpf;
+using System.Windows;
 using System.Windows.Controls;
 
 
@@ -11,15 +13,17 @@ namespace EMS_ClientUI_V2
     {
         #region PRIVATE
         Frame ContentFrame { get; set; }
-        AddPatient AddPatientPage { get; set; }
         EditPatient EditPatientPage { get; set; }
         SearchPatient SearchPatientPage { get; set; }
+        DialogHost DialogHost;
+        Demographics demographics;
         #endregion
 
-        public PatientMenuPage(Frame frame)
+        public PatientMenuPage(Frame frame, DialogHost dialogHost, Demographics d)
         {
+            demographics = d;
             InitializeComponent();
-            AddPatientPage = new AddPatient();
+            DialogHost = dialogHost;
             EditPatientPage = new EditPatient();
             SearchPatientPage = new SearchPatient();
             ContentFrame = frame;
@@ -27,7 +31,9 @@ namespace EMS_ClientUI_V2
 
         private void AddPatienBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Content = AddPatientPage;
+            Frame f = new Frame { Content = new AddPatient(demographics) };
+            DialogHost.ShowDialog(f);
+            //ContentFrame.Content = AddPatientPage;
         }
 
         private void EditPatientBtn_Click(object sender, RoutedEventArgs e)

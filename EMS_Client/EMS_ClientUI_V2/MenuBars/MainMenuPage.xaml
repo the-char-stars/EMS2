@@ -16,34 +16,18 @@
       VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
     <materialDesign:ColorZone
-            Mode="PrimaryDark"
+            Mode="PrimaryMid"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
         <StackPanel
         Orientation="Horizontal"
         HorizontalAlignment="Center"   
         materialDesign:RippleAssist.IsCentered="True">
 
-            <Button x:Name="patientsBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                            Width="150"
-                            Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                            materialDesign:RippleAssist.Feedback="#DD000000" Content="Patients"
-                            Click="PatientsBtn_Click"    />
-            <Button x:Name="schedulingBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                            Width="150"
-                                Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                            materialDesign:RippleAssist.Feedback="#DD000000" Content="Scheduling"
-                                Click="SchedulingBtn_Click"/>
-            <Button x:Name="billingBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                            Width="150"
-                                Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
-                            materialDesign:RippleAssist.Feedback="#DD000000" Content="Billing"
-                                Click="BillingBtn_Click"/>
+            <StackPanel  Orientation="Horizontal"  Margin="4">
+                <RadioButton Name="btnPatients" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Patients" Checked="BtnPatients_Checked"/>
+                <RadioButton Name="btnScheduling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Scheduling" Checked="BtnScheduling_Checked"/>
+                <RadioButton Name="btnBilling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Billing" Checked="BtnBilling_Checked"/>
+            </StackPanel>
         </StackPanel>
     </materialDesign:ColorZone>
 </Page>

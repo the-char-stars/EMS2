@@ -48,7 +48,7 @@ namespace EMS_Library
         private const string backupFolderName = "Backups";          /**< The name of the Backups directory.*/
 
         private const string databaseInfoFileName = "DBInfo";
-        private const string currentDatabaseVersion = "0.0.2";
+        private const string currentDatabaseVersion = "0.0.3";
 
         private const string databaseFullPathFormat = "{0}/{1}";    /**< The stored full path of the database.*/
         #endregion
@@ -56,7 +56,7 @@ namespace EMS_Library
         #region Dictionaries
         public static readonly Dictionary<TableNames, string[]> dColumns = new Dictionary<TableNames, string[]>
             {
-                { TableNames.Patients, new string[] { "patientID", "firstName", "lastName", "HCN", "mInitial", "dateOfBirth", "sex", "headOfHouse", "addressLine1", "addressLine2", "city", "province", "phoneNum" } },
+                { TableNames.Patients, new string[] { "patientID", "firstName", "lastName", "HCN", "mInitial", "dateOfBirth", "sex", "headOfHouse", "addressLine1", "addressLine2", "city", "province", "phoneNum", "postalCode" } },
                 { TableNames.Schedule, new string[] { "weekID", "startDate", "appointmentList" } },
                 { TableNames.AppointmentBills, new string[] { "appointmentBillingID", "appointmentID", "patientID", "billingCode" } },
                 { TableNames.BillingCodes, new string[] { "billingCode", "effectiveDate", "cost" } },

@@ -19,7 +19,7 @@ namespace EMS_ClientUI_V2
 
             // start the main window
             MainWindow main = new MainWindow();
-            main.Show();
+            main.Show();            
 
             // start the login page
             LogInPage login = new LogInPage(main) { Owner = main };

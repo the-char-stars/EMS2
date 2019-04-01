@@ -16,48 +16,50 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
 
-    <Grid x:Name="MainPageGrid">
-        <!--grid settings-->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
+    <materialDesign:DialogHost Name="mainDialogueHost">
+        <materialDesign:DialogHost.Content>
+            <Grid x:Name="MainPageGrid">
+                <!--grid settings-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone
+                <materialDesign:ColorZone
             Grid.Row="0"
-            Mode="PrimaryDark"
+            Mode="PrimaryMid"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <DockPanel LastChildFill="False">
-                <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Text="EMS 2.0 - " VerticalAlignment="Center"/>
-                <TextBlock TextWrapping="Wrap" Text="A secure medical application" VerticalAlignment="Center"/>
-                <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
-                    <ListBox Width="100">
-                        <ListBoxItem>
-                            <DockPanel LastChildFill="False">
-                                <materialDesign:PackIcon Kind="Build" DockPanel.Dock="Left"/>
-                                <TextBlock DockPanel.Dock="Right">Settings</TextBlock>
-                            </DockPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <DockPanel LastChildFill="False">
-                                <materialDesign:PackIcon Kind="Logout" DockPanel.Dock="Left"/>
-                                <TextBlock DockPanel.Dock="Right">Log Out</TextBlock>
-                            </DockPanel>
-                        </ListBoxItem>
-                    </ListBox>
-                </materialDesign:PopupBox>
-                <materialDesign:Chip DockPanel.Dock="Right" Content="Admin" Icon="A" VerticalAlignment="Center"/>
-            </DockPanel>
-        </materialDesign:ColorZone>
-        <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
-        <Frame x:Name="ExtraOptionMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
-        <Frame x:Name="ContentFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
+                    <DockPanel LastChildFill="False">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="EMS 2.0 - A secure medical application" VerticalAlignment="Center" Margin="20,0"/>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
+                            <ListBox Width="100">
+                                <ListBoxItem>
+                                    <DockPanel LastChildFill="False">
+                                        <materialDesign:PackIcon Kind="Build" DockPanel.Dock="Left"/>
+                                        <TextBlock DockPanel.Dock="Right">Settings</TextBlock>
+                                    </DockPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <DockPanel LastChildFill="False">
+                                        <materialDesign:PackIcon Kind="Logout" DockPanel.Dock="Left"/>
+                                        <TextBlock DockPanel.Dock="Right">Log Out</TextBlock>
+                                    </DockPanel>
+                                </ListBoxItem>
+                            </ListBox>
+                        </materialDesign:PopupBox>
+                        <materialDesign:Chip DockPanel.Dock="Right" Content="Admin" Icon="A" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
+                <Frame x:Name="ExtraOptionMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
+                <Frame x:Name="ContentFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
 
-
-    </Grid>
+            </Grid>
+        </materialDesign:DialogHost.Content>
+    </materialDesign:DialogHost>
 </Page>

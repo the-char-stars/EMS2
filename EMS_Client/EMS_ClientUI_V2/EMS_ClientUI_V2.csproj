@@ -74,6 +74,9 @@
     <Compile Include="MenuBars\BillingMenuPage.xaml.cs">
       <DependentUpon>BillingMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Patient\PatientView.xaml.cs">
+      <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Patient\SearchPatientPage.xaml.cs">
       <DependentUpon>SearchPatientPage.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,7 @@
     <Compile Include="Scheduling\ViewAppointmentsPage.xaml.cs">
       <DependentUpon>ViewAppointmentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validation\ValidationRules.cs" />
     <Page Include="Billing\MonthlyReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Patient\PatientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Patient\SearchPatientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,7 +200,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -201,6 +211,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EMS_Billing\EMS_Billing.csproj">
+      <Project>{6b283719-c43b-4191-b3d0-fa8db08cd6f9}</Project>
+      <Name>EMS_Billing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_Demographics\EMS_Demographics.csproj">
+      <Project>{b983fb36-444b-40a2-b11c-73e383d82402}</Project>
+      <Name>EMS_Demographics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_SchedulingUI\EMS_Scheduling.csproj">
+      <Project>{9e514018-5dee-4fe1-84db-dca7f7ecc6ed}</Project>
+      <Name>EMS_Scheduling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMS_Support\EMS_Support.csproj">
+      <Project>{5553bd4f-01c9-4ac9-b5a3-9dd662dd6260}</Project>
+      <Name>EMS_Support</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

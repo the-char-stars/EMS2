@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace EMS_ClientUI_V2
         ReconcileSummary ReconcileSummaryPage { get; set; }
         #endregion
 
-        public BillingMenuPage(Frame frame)
+        public BillingMenuPage(Frame frame, DialogHost dialogHost)
         {
             InitializeComponent();
             MonthlyReportPage = new MonthlyReport();

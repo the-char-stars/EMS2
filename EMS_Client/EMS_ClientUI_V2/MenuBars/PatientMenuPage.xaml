@@ -16,10 +16,10 @@
       VerticalAlignment="Stretch">
     
     <materialDesign:ColorZone
-        Mode="Light"
         CornerRadius="5"
-        Padding="16"
-        VerticalAlignment="Stretch">
+        Padding="8"
+        VerticalAlignment="Stretch"
+        Mode="PrimaryLight">
         <materialDesign:TransitioningContent>
             <materialDesign:TransitioningContent.OpeningEffects>
                 <materialDesign:TransitionEffect Kind="SlideInFromTop" Duration="0:0:0.150" />
@@ -27,24 +27,21 @@
             </materialDesign:TransitioningContent.OpeningEffects>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="searchPatientBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Width="150"
-                            Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
+                            Margin="16, 0"
                             materialDesign:RippleAssist.Feedback="#DD000000" Content="Search Patient" Click="SearchPatientBtn_Click"
                             />
                 <Button x:Name="addPatienBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Width="150"
-                            Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
+                            Margin="16, 0"
                             materialDesign:RippleAssist.Feedback="#DD000000" Content="Add Patient" Click="AddPatienBtn_Click"
                             />
                 <Button x:Name="editPatientBtn"
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Width="150"
-                            Margin="2"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton"
+                            Margin="16, 0"
                             materialDesign:RippleAssist.Feedback="#DD000000" Content="Edit Patient" Click="EditPatientBtn_Click"
                             />
             </StackPanel>

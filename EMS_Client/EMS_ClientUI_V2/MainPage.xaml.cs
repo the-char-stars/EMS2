@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EMS_Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,14 @@ namespace EMS_ClientUI_V2
     /// </summary>
     public partial class MainPage : Page
     {
+        Demographics demographics = new Demographics();
         public MainPage()
         {
             InitializeComponent();
 
             // display the main menu with the three main buttons
             MainMenuFrame.Content = new MainMenuPage(
-                this.ContentFrame, this.ExtraOptionMenuFrame);
+                this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics);
         }
     }
 }
