@@ -29,8 +29,8 @@
                 </Grid>
             </materialDesign:Card>
         </Grid>
-        
-        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 24" VerticalAlignment="Stretch">
+
+        <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 24" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>

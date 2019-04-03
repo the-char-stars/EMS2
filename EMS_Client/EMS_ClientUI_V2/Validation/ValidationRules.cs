@@ -74,9 +74,9 @@ namespace EMS.Validation
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            return new Regex("^[A-Z][0-9][A-Z][-]?[0-9][A-Z][0-9]$").IsMatch((value ?? "").ToString())
+            return new Regex("^[A-Z][0-9][A-Z][- ]?[0-9][A-Z][0-9]$").IsMatch((value ?? "").ToString().ToUpper())
                 ? ValidationResult.ValidResult
-                : new ValidationResult(false, "Invalid Health Card Format.");
+                : new ValidationResult(false, "Invalid Postal Code Format.");
         }
     }
 

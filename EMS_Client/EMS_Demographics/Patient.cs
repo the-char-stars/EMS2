@@ -356,8 +356,7 @@ namespace EMS_Library
         {
             get { return _sex; }
             set
-            {
-                
+            {                
                 value = (value ?? "").ToString().ToUpper();
                 if (validSexes.Contains(value)) { _sex = value; }
                 else { Logging.Log("Patient", "Sex", String.Format("Failed assigning Patient's Sex : {0}",value)); }

@@ -115,13 +115,13 @@
                     <ComboBoxItem Tag="M">Male</ComboBoxItem>
                     <ComboBoxItem Tag="F">Female</ComboBoxItem>
                     <ComboBoxItem Tag="X">Other</ComboBoxItem>
-                    <ComboBox.SelectedItem>
+                    <ComboBox.SelectedValue>
                         <Binding Path="Sex" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <domain:NotEmptyValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
-                    </ComboBox.SelectedItem>
+                    </ComboBox.SelectedValue>
                 </ComboBox>
             </Grid>
 
