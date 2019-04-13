@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,20 +25,71 @@ namespace EMS_ClientUI_V2
     {
         Demographics demographics;
         DialogHost dialogHost;
-        int NumPatients = 10;
+        ObservableCollection<Patient> patientRoster = new ObservableCollection<Patient>();
+
+
         public PatientView(Demographics d, DialogHost dh)
         {
             demographics = d;
             dialogHost = dh;
             InitializeComponent();
-            tbNumPatients.DataContext = NumPatients;
-            lvPatients.ItemsSource = demographics.dPatientRoster.Values;
+            tbNumPatients.Text = demographics.dPatientRoster.Count.ToString();
+            lvPatients.ItemsSource = patientRoster;
+            foreach(Patient p in demographics.dPatientRoster.Values)
+            {
+                patientRoster.Add(p);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame f = new Frame() { Content = new AddPatient(demographics) };
-            dialogHost.ShowDialog(f);
+            Frame f = new Frame() { Content = new AddPatient(demographics, refreshTable) };
+            dialogHost.ShowDialog(f);           
+        }
+
+        private void refreshTable()
+        {
+            patientRoster.Clear();
+            foreach (Patient p in demographics.dPatientRoster.Values)
+            {
+                patientRoster.Add(p);
+            }
+            tbNumPatients.Text = demographics.dPatientRoster.Count.ToString();
+            lvPatients.InvalidateVisual();
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string firstSearch = tbFirstNameSeach.Text;
+            patientRoster.Clear();
+            foreach (Patient p in demographics.dPatientRoster.Values)
+            {
+                if (p.FirstName.Contains(tbFirstNameSeach.Text.ToUpper())
+                    && p.LastName.Contains(tbLastNameSearch.Text.ToUpper())
+                    && (cbGenderSearch.SelectedValue == null || cbGenderSearch.SelectedValue.ToString() == "ALL" || p.Sex.Contains(cbGenderSearch.SelectedValue.ToString().ToUpper()))
+                    && p.HCN.Contains(tbHealthCard.Text.ToUpper()))
+                {
+                    patientRoster.Add(p);
+                }
+            }
+            lvPatients.InvalidateVisual();
+            btnSeachBadge.Badge = patientRoster.Count;
+        }
+
+        private void tbSearchTermChanged(object sender, RoutedEventArgs e)
+        {
+            int searchCount = 0;
+            foreach (Patient p in demographics.dPatientRoster.Values)
+            {
+                if (p.FirstName.Contains(tbFirstNameSeach.Text.ToUpper()) 
+                    && p.LastName.Contains(tbLastNameSearch.Text.ToUpper())
+                    && (cbGenderSearch.SelectedValue == null || cbGenderSearch.SelectedValue.ToString() == "ALL" || p.Sex.Contains(cbGenderSearch.SelectedValue.ToString().ToUpper()))
+                    && p.HCN.Contains(tbHealthCard.Text.ToUpper()))
+                {
+                    searchCount++;
+                }
+            }
+            btnSeachBadge.Badge = searchCount.ToString();
         }
     }
 }

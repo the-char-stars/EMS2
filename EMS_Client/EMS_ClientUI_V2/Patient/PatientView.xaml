@@ -15,7 +15,7 @@
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <StackPanel Grid.Column="0">
             <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Padding="8" Margin="24, 24, 0, 0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -28,15 +28,42 @@
                     <TextBlock FontSize="16" Grid.Row="2" TextAlignment="Right">Stored Patients</TextBlock>
                 </Grid>
             </materialDesign:Card>
-        </Grid>
+            <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 12, 0, 0">
+                <StackPanel>
+                    <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
+                        <TextBlock FontSize="36" Text="Search" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
+                    </materialDesign:ColorZone>
+                    <StackPanel Margin="16">
+                        <Grid  Margin="0, 0, 0, 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="First Name" Name="tbFirstNameSeach" Margin="0, 0, 8, 0" TextChanged="tbSearchTermChanged"/>
+                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Last Name" Name="tbLastNameSearch" Margin="8, 0, 0, 0" TextChanged="tbSearchTermChanged" Grid.Column="1"/>
+                        </Grid>
+                        <ComboBox  materialDesign:HintAssist.Hint="Gender" SelectedValuePath="Tag" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Name="cbGenderSearch" SelectionChanged="tbSearchTermChanged" Margin="0,0,0,8">
+                            <ComboBoxItem Tag="ALL"></ComboBoxItem>
+                            <ComboBoxItem Tag="M">Male</ComboBoxItem>
+                            <ComboBoxItem Tag="F">Female</ComboBoxItem>
+                            <ComboBoxItem Tag="X">Other</ComboBoxItem>
+                        </ComboBox>
+                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Health Card" Name="tbHealthCard" TextChanged="tbSearchTermChanged" Margin="0, 0, 0, 8"/>
+                        <materialDesign:Badged Name="btnSeachBadge" HorizontalAlignment="Center" Margin="0, 24, 0, 8">
+                            <Button Click="btnSearch_Click">SEARCH</Button>
+                        </materialDesign:Badged>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+        </StackPanel>
 
         <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 24" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="85*"/>
+                    <RowDefinition Height="108*"/>
                 </Grid.RowDefinitions>
-                <ListView Name="lvPatients">
+                <ListView Name="lvPatients" Grid.RowSpan="2">
                     <ListView.View>
                         <GridView >
                             <GridViewColumn DisplayMemberBinding="{Binding PatientID}" Header="PatinetID" />
@@ -54,7 +81,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="36" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="255,0,255,36" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
                     <materialDesign:PackIcon Kind="Add" />
                 </Button>
             </Grid>

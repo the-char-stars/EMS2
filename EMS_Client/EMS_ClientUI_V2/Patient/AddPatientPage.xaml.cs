@@ -26,8 +26,11 @@ namespace EMS_ClientUI_V2
     {
         Demographics demographics;
         Patient addingPatient = new Patient();
-        public AddPatient(Demographics d)
+        public delegate void RefreshScreen();
+        RefreshScreen refreshScreen;
+        public AddPatient(Demographics d, RefreshScreen r)
         {
+            refreshScreen = r;
             demographics = d;
             this.DataContext = addingPatient;
             InitializeComponent();
@@ -37,6 +40,7 @@ namespace EMS_ClientUI_V2
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
+            refreshScreen();
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
@@ -45,6 +49,7 @@ namespace EMS_ClientUI_V2
             if (addingPatient.IsReadyToSave())
             {
                 demographics.AddNewPatient(addingPatient);
+                refreshScreen();
                 DialogHost.CloseDialogCommand.Execute(null, null);
             }
             else

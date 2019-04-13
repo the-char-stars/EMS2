@@ -28,7 +28,6 @@ namespace EMS_ClientUI_V2
         Frame ExtraOptionMenuFrame { get; set; }
 
         // PAGES
-        PatientMenuPage PatientsMenu { get; set; }
         SchedulingMenuPage SchedulingMenu { get; set; }
         BillingMenuPage BillingMenu { get; set; }
         PatientView pv;
@@ -41,7 +40,6 @@ namespace EMS_ClientUI_V2
             ExtraOptionMenuFrame = extraMenu;
 
             pv = new PatientView(d, dialogHost);
-            PatientsMenu = new PatientMenuPage(ContentFrame, dialogHost, d);
             SchedulingMenu = new SchedulingMenuPage(ContentFrame, dialogHost);
             BillingMenu = new BillingMenuPage(ContentFrame, dialogHost);
         }
