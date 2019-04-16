@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -46,7 +47,7 @@ namespace EMS_Library
         private const string databaseName = "DBase.xml";            /**< The name of the database file.*/
         private const string masterFileName = "masterFile.txt";     /**< The name of the master file.*/
         private const string backupFolderName = "Backups";          /**< The name of the Backups directory.*/
-
+        private const string DatabaseConnectionString = "Server=2A314-E07;Database=EMS2;User Id=sa;Password=Conestoga1;";
         private const string databaseInfoFileName = "DBInfo";
         private const string currentDatabaseVersion = "0.0.3";
 
@@ -56,7 +57,7 @@ namespace EMS_Library
         #region Dictionaries
         public static readonly Dictionary<TableNames, string[]> dColumns = new Dictionary<TableNames, string[]>
             {
-                { TableNames.Patients, new string[] { "patientID", "firstName", "lastName", "HCN", "mInitial", "dateOfBirth", "sex", "headOfHouse", "addressLine1", "addressLine2", "city", "province", "phoneNum", "postalCode" } },
+                { TableNames.Patients, new string[] { "PatientID", "FirstName", "LastName", "HCN", "MInitial", "DateOfBirth", "Gender", "HeadOfHouse", "AddressLine1", "AddressLine2", "City", "Province", "PhoneNum", "PostalCode" } },
                 { TableNames.Schedule, new string[] { "weekID", "startDate", "appointmentList" } },
                 { TableNames.AppointmentBills, new string[] { "appointmentBillingID", "appointmentID", "patientID", "billingCode" } },
                 { TableNames.BillingCodes, new string[] { "billingCode", "effectiveDate", "cost" } },
@@ -649,6 +650,33 @@ namespace EMS_Library
             try
             {
                 dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
+                
+                /*
+                SqlConnection con = new SqlConnection(DatabaseConnectionString);
+                SqlBulkCopy bulk = new SqlBulkCopy(con);
+                bulk.DestinationTableName = "tblPatients";
+                foreach (DataColumn col in dataSet.Tables[0].Columns)
+                    bulk.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                con.Open();
+                bulk.WriteToServer(dataSet.Tables[0]);
+                con.Close();
+                */
+
+
+                using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.KeepIdentity))
+                {
+                    // my DataTable column names match my SQL Column names, so I simply made this loop. However if your column names don't match, just pass in which datatable name matches the SQL column name in Column Mappings
+                    foreach (DataColumn col in dataSet.Tables[0].Columns)
+                    {
+                        bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                    }
+
+                    bulkCopy.BulkCopyTimeout = 600;
+                    bulkCopy.DestinationTableName = "tblPatients";
+                    bulkCopy.WriteToServer(dataSet.Tables[0]);
+                }
+
+
             }
             catch (Exception e)
             {

@@ -15,7 +15,7 @@ USE EMS2;		/*here we tell SSMS that from here we everything we create or delete,
 
 /* creating the patient table which will hold the patients profile details*/
 Create table tblPatients (
-	PatientID int IDENTITY(0,1) PRIMARY KEY,
+	PatientID int PRIMARY KEY,
 	FirstName varchar(64),
 	LastName varchar(64),
 	HCN varchar(12),
@@ -27,8 +27,8 @@ Create table tblPatients (
 	AddressLine2 varchar(64),
 	City varchar(64),
 	Province varchar(2),
-	PostalCode varchar(10),
-	PhoneNum int
+	PhoneNum varchar(10),
+	PostalCode varchar(10)
 );
 
 /* here script is creating the Appointment table to hold appointment information*/
@@ -59,8 +59,9 @@ create table tblBillingCodes(
 create table tblAppointmentBillingRecords(
 	AppointmentID int NOT NULL FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
 	PatientID int NOT NULL FOREIGN KEY REFERENCES tblPatients(PatientID),
-	BillingCode varchar(25) NOT NULL FOREIGN KEY REFERENCES tblBillingCodes(Billing_code),
+	BillingCode varchar(25) NOT NULL FOREIGN KEY REFERENCES tblBillingCodes(BillingCode),
 );
+
 
 /*creating user information which will contains the user login information*/
 create table tblUsers(
