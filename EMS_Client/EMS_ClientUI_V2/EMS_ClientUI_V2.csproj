@@ -62,14 +62,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Billing\MonthlyReportPage.xaml.cs">
-      <DependentUpon>MonthlyReportPage.xaml</DependentUpon>
+    <Compile Include="Billing\CalendarPicker.xaml.cs">
+      <DependentUpon>CalendarPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Billing\ReconcileMonthlyPage.xaml.cs">
       <DependentUpon>ReconcileMonthlyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Billing\ReconcileSummaryPage.xaml.cs">
       <DependentUpon>ReconcileSummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\BillingView.xaml.cs">
+      <DependentUpon>BillingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuBars\BillingMenuPage.xaml.cs">
       <DependentUpon>BillingMenuPage.xaml</DependentUpon>
@@ -90,7 +93,7 @@
       <DependentUpon>ViewAppointmentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\ValidationRules.cs" />
-    <Page Include="Billing\MonthlyReportPage.xaml">
+    <Page Include="Billing\CalendarPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,6 +104,10 @@
     <Page Include="Billing\ReconcileSummaryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Billing\BillingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MenuBars\BillingMenuPage.xaml">
       <SubType>Designer</SubType>

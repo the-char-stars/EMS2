@@ -29,11 +29,11 @@ namespace EMS_ClientUI_V2
 
         // PAGES
         SchedulingMenuPage SchedulingMenu { get; set; }
-        BillingMenuPage BillingMenu { get; set; }
+        BillingView BillingMenu { get; set; }
         PatientView pv;
         #endregion
 
-        public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics d)
+        public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics d, Scheduling scheduling, Billing b)
         {
             InitializeComponent();
             ContentFrame = content;
@@ -41,12 +41,13 @@ namespace EMS_ClientUI_V2
 
             pv = new PatientView(d, dialogHost);
             SchedulingMenu = new SchedulingMenuPage(ContentFrame, dialogHost);
-            BillingMenu = new BillingMenuPage(ContentFrame, dialogHost);
+            BillingMenu = new BillingView(scheduling, d, dialogHost, b);
         }
 
         private void BtnBilling_Checked(object sender, RoutedEventArgs e)
         {
-            ExtraOptionMenuFrame.Content = BillingMenu;
+            ContentFrame.Content = BillingMenu;
+            ExtraOptionMenuFrame.Content = null;
         }
 
         private void BtnScheduling_Checked(object sender, RoutedEventArgs e)

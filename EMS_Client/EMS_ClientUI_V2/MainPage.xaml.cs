@@ -22,13 +22,16 @@ namespace EMS_ClientUI_V2
     public partial class MainPage : Page
     {
         Demographics demographics = new Demographics();
+        Scheduling scheduling = new Scheduling();
+        Billing billing = new Billing();
+
         public MainPage()
         {
             InitializeComponent();
 
             // display the main menu with the three main buttons
             MainMenuFrame.Content = new MainMenuPage(
-                this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics);
+                this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics, scheduling, billing);
         }
     }
 }

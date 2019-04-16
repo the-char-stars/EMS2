@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EMS_ClientUI_V2.Scheduling
+namespace EMS_ClientUI_V2
 {
     /// <summary>
     /// Interaction logic for SchedulingView.xaml
@@ -24,5 +24,6 @@ namespace EMS_ClientUI_V2.Scheduling
         {
             InitializeComponent();
         }
+        
     }
 }

@@ -214,7 +214,7 @@ namespace EMS_Library
                     }
                 }
 
-                if(FileIO.SaveToFile(string.Format("{0}{1}MonthlyBillingFile", year, month), billingFileInfo))
+                if(FileIO.SaveToFile(string.Format(@"Reports/{0}{1}MonthlyBillingFile", year, month), billingFileInfo))
                 {
                     Logging.Log("Billing", "GenerateMonthlyBillingFile", ("Generated Monthly Billing File for YEAR: " + year + " and Month: " + month));
                     return true;
