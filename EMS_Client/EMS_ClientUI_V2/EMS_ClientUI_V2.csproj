@@ -83,6 +83,9 @@
     <Compile Include="Scheduling\ScheduleRecallPage.xaml.cs">
       <DependentUpon>ScheduleRecallPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scheduling\SchedulingView.xaml.cs">
+      <DependentUpon>SchedulingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scheduling\ViewAppointmentsPage.xaml.cs">
       <DependentUpon>ViewAppointmentsPage.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Scheduling\ScheduleRecallPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scheduling\SchedulingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
