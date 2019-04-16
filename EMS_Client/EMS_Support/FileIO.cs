@@ -58,10 +58,10 @@ namespace EMS_Library
         public static readonly Dictionary<TableNames, string[]> dColumns = new Dictionary<TableNames, string[]>
             {
                 { TableNames.Patients, new string[] { "PatientID", "FirstName", "LastName", "HCN", "MInitial", "DateOfBirth", "Gender", "HeadOfHouse", "AddressLine1", "AddressLine2", "City", "Province", "PhoneNum", "PostalCode" } },
-                { TableNames.Schedule, new string[] { "weekID", "startDate", "appointmentList" } },
+                { TableNames.Schedule, new string[] { "AppointmentID", "AppointmentDate", "AppointmentTimeSlot" } },
                 { TableNames.AppointmentBills, new string[] { "appointmentBillingID", "appointmentID", "patientID", "billingCode" } },
-                { TableNames.BillingCodes, new string[] { "billingCode", "effectiveDate", "cost" } },
-                { TableNames.Appointments, new string[] { "appointmentID", "patientID", "dependantPatinetID", "recallFlag" } },
+                { TableNames.BillingCodes, new string[] { "BillingCode", "Effective_Date", "Cost" } },
+                { TableNames.Appointments, new string[] { "AppointmentID", "PatientID", "DependantID", "recallFlag" , "AppointmentNotes" } },
                 { TableNames.Users, new string[] { "UserID", "UserName", "Password", "AccessLevel" } }
             };  /**< The names of the columns in each TableNames enum.*/
 
@@ -69,7 +69,7 @@ namespace EMS_Library
             {
                 { TableNames.Patients, "tblPatients" },
                 { TableNames.Schedule, "tblSchedule" },
-                { TableNames.AppointmentBills, "tblAppointmentBills" },
+                { TableNames.AppointmentBills, "tblAppointmentBillingRecords" },
                 { TableNames.BillingCodes, "tblBillingCodes" },
                 { TableNames.Appointments, "tblAppointments" },
                 { TableNames.Users, "tblUsers" }
@@ -649,33 +649,29 @@ namespace EMS_Library
             bool saveSuccessful = true;
             try
             {
+                // writing the xml file
                 dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
-                
-                /*
-                SqlConnection con = new SqlConnection(DatabaseConnectionString);
-                SqlBulkCopy bulk = new SqlBulkCopy(con);
-                bulk.DestinationTableName = "tblPatients";
-                foreach (DataColumn col in dataSet.Tables[0].Columns)
-                    bulk.ColumnMappings.Add(col.ColumnName, col.ColumnName);
-                con.Open();
-                bulk.WriteToServer(dataSet.Tables[0]);
-                con.Close();
-                */
 
 
-                using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.KeepIdentity))
+                // sending all the table data to the SQL server database.
+                string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };
+
+                for (int i = 0; i < dataSet.Tables.Count; i++)
                 {
-                    // my DataTable column names match my SQL Column names, so I simply made this loop. However if your column names don't match, just pass in which datatable name matches the SQL column name in Column Mappings
-                    foreach (DataColumn col in dataSet.Tables[0].Columns)
+                    // using SQL bulk copy to copy entire table to the sql server
+                    using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.KeepIdentity))
                     {
-                        bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+
+                        foreach (DataColumn col in dataSet.Tables[i].Columns)
+                        {
+                            bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName); // mapping all columns with sql tabel.
+                        }
+
+                        bulkCopy.BulkCopyTimeout = 600;
+                        bulkCopy.DestinationTableName = databaseTables[i];
+                        bulkCopy.WriteToServer(dataSet.Tables[i]);          // writing data to the sql server database.
                     }
-
-                    bulkCopy.BulkCopyTimeout = 600;
-                    bulkCopy.DestinationTableName = "tblPatients";
-                    bulkCopy.WriteToServer(dataSet.Tables[0]);
                 }
-
 
             }
             catch (Exception e)

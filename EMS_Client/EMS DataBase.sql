@@ -33,23 +33,24 @@ Create table tblPatients (
 
 /* here script is creating the Appointment table to hold appointment information*/
 create table tblAppointments(
-	AppointmentID int IDENTITY(0,1) PRIMARY KEY,
-	PatientID int NOT NULL FOREIGN KEY REFERENCES tblPatients(PatientID),
+	AppointmentID int PRIMARY KEY,
+	PatientID int FOREIGN KEY REFERENCES tblPatients(PatientID),
 	DependantID int FOREIGN KEY REFERENCES tblPatients(PatientID),
+	recallFlag int,
 	AppointmentNotes varchar(512)
 );
 
 /* creating the schedule table where EMS will store it all the Appointment which has been */
 create table tblSchedules(
-	AppointmentID int NOT NULL FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
-	AppointmentDate date NOT NULL,
-	AppointmentTimeSlot int NOT NULL
+	AppointmentID int FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
+	AppointmentDate date,
+	AppointmentTimeSlot int
 );
 
 
 /* creating billing codes table which will contain all the billing records which EMS has generated*/ 
 create table tblBillingCodes(
-	BillingCode varchar(25) NOT NULL PRIMARY KEY,
+	BillingCode varchar(25) PRIMARY KEY,
 	Effective_Date date,
 	Cost decimal
 );
@@ -57,15 +58,16 @@ create table tblBillingCodes(
 
 /*creating the appointment billing record which will contain information about which billing records is from which appointment*/
 create table tblAppointmentBillingRecords(
-	AppointmentID int NOT NULL FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
-	PatientID int NOT NULL FOREIGN KEY REFERENCES tblPatients(PatientID),
-	BillingCode varchar(25) NOT NULL FOREIGN KEY REFERENCES tblBillingCodes(BillingCode),
+	AppointmentBillingRecordsID int PRIMARY KEY,
+	AppointmentID int FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
+	PatientID int FOREIGN KEY REFERENCES tblPatients(PatientID),
+	BillingCode varchar(25) FOREIGN KEY REFERENCES tblBillingCodes(BillingCode),
 );
 
 
 /*creating user information which will contains the user login information*/
 create table tblUsers(
-	UserID int IDENTITY(0,1) PRIMARY KEY,
+	UserID int PRIMARY KEY,
 	UserName varchar(256),
 	Password varchar(256),
 	AccessLevel int	
