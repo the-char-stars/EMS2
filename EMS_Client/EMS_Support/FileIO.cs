@@ -49,7 +49,7 @@ namespace EMS_Library
         private const string backupFolderName = "Backups";          /**< The name of the Backups directory.*/
         private const string DatabaseConnectionString = "Server=2A314-E07;Database=EMS2;User Id=sa;Password=Conestoga1;";
         private const string databaseInfoFileName = "DBInfo";
-        private const string currentDatabaseVersion = "0.0.3";
+        private const string currentDatabaseVersion = "0.0.4";
 
         private const string databaseFullPathFormat = "{0}/{1}";    /**< The stored full path of the database.*/
         #endregion

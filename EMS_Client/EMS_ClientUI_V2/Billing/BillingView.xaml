@@ -18,33 +18,9 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 0" VerticalAlignment="Stretch"><!-- LIST VIEW -->
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="85*"/>
-                    <RowDefinition Height="108*"/>
-                </Grid.RowDefinitions>
-                <ListView Name="lvPatients" Grid.RowSpan="2">
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn DisplayMemberBinding="{Binding PatientID}" Header="PatinetID" />
-                            <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="First Name" />
-                            <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Last Name" />
-                            <GridViewColumn DisplayMemberBinding="{Binding MInitial}" Header="M Initial" />
-                            <GridViewColumn DisplayMemberBinding="{Binding DOBString}" Header="Date Of Birth" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Sex}" Header="Gender" />
-                            <GridViewColumn DisplayMemberBinding="{Binding AddressLine1}" Header="Address" />
-                            <GridViewColumn DisplayMemberBinding="{Binding AddressLine2}" Header="" />
-                            <GridViewColumn DisplayMemberBinding="{Binding PostalCode}" Header="Postal Code" />
-                            <GridViewColumn DisplayMemberBinding="{Binding City}" Header="City" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Province}" Header="Province" />
-                            <GridViewColumn DisplayMemberBinding="{Binding PhoneNumber}" Header="PhoneNumber" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-        </materialDesign:Card>
+        <GroupBox Name="tbReportTitle" FontSize="36" Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 0" VerticalAlignment="Stretch" Style="{DynamicResource MaterialDesignCardGroupBox}"><!-- LIST VIEW -->
+            <TextBlock Name="tbReportDisplay" Margin="8" FontSize="12" TextWrapping="Wrap" Foreground="#FF030000" Grid.IsSharedSizeScope="True"/>
+        </GroupBox>
         <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Margin="24, 16, 24, 24" Padding="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ><!-- BUTTONS -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -60,7 +36,7 @@
                 <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
                     <TextBlock FontSize="36" Text="Reports" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
                 </materialDesign:ColorZone>
-                <TreeView Name="tvReports">
+                <TreeView Name="tvReports" SelectedItemChanged="TvReports_SelectedItemChanged">
                     <TreeViewItem Name="tvcMonthlyBillingReport" Header="Monthly Billing Reports"></TreeViewItem>
                     <TreeViewItem Name="tvcGovResponseReports" Header="Government Response Reports"></TreeViewItem>
                 </TreeView>

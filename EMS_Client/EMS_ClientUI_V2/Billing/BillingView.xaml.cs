@@ -28,7 +28,7 @@ namespace EMS_ClientUI_V2
         Scheduling scheduling;
         Demographics demographics;
         Billing billing;
-        
+
         public BillingView(Scheduling sched, Demographics demo, DialogHost dialogHost, Billing b)
         {
             InitializeComponent();
@@ -36,6 +36,8 @@ namespace EMS_ClientUI_V2
             scheduling = sched;
             demographics = demo;
             billing = b;
+
+
             UpdateReportTree();
             
         }
@@ -112,6 +114,21 @@ namespace EMS_ClientUI_V2
             }
 
             tvReports.InvalidateVisual();
+        }
+
+        private void TvReports_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            string filePath = "Reports/" + tvReports.SelectedValue.ToString();
+            tbReportTitle.Header = tvReports.SelectedValue.ToString();
+            if (File.Exists(filePath))
+            {
+                tbReportDisplay.Text = File.ReadAllText(filePath);
+            }
+            else
+            {
+                tbReportDisplay.Text = "";
+                tbReportTitle.Header = "";
+            }
         }
     }
 }
