@@ -6,64 +6,84 @@
       xmlns:local="clr-namespace:EMS_ClientUI_V2"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="768" d:DesignWidth="1366"
       Title="PatientView">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*" MinWidth="200"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Padding="8" Margin="24, 24, 0, 0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock FontSize="16">There are</TextBlock>
-                    <TextBlock FontSize="36" Name="tbNumPatients" Text="0" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
-                    <TextBlock FontSize="16" Grid.Row="2" TextAlignment="Right">Stored Patients</TextBlock>
-                </Grid>
-            </materialDesign:Card>
-            <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 12, 0, 0">
-                <StackPanel>
-                    <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
-                        <TextBlock FontSize="36" Text="Search" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
-                    </materialDesign:ColorZone>
-                    <StackPanel Margin="16">
-                        <Grid  Margin="0, 0, 0, 8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="First Name" Name="tbFirstNameSeach" Margin="0, 0, 8, 0" TextChanged="tbSearchTermChanged"/>
-                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Last Name" Name="tbLastNameSearch" Margin="8, 0, 0, 0" TextChanged="tbSearchTermChanged" Grid.Column="1"/>
-                        </Grid>
-                        <ComboBox  materialDesign:HintAssist.Hint="Gender" SelectedValuePath="Tag" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Name="cbGenderSearch" SelectionChanged="tbSearchTermChanged" Margin="0,0,0,8">
-                            <ComboBoxItem Tag="ALL"></ComboBoxItem>
-                            <ComboBoxItem Tag="M">Male</ComboBoxItem>
-                            <ComboBoxItem Tag="F">Female</ComboBoxItem>
-                            <ComboBoxItem Tag="X">Other</ComboBoxItem>
-                        </ComboBox>
-                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Health Card" Name="tbHealthCard" TextChanged="tbSearchTermChanged" Margin="0, 0, 0, 8"/>
-                        <materialDesign:Badged Name="btnSeachBadge" HorizontalAlignment="Center" Margin="0, 24, 0, 8">
-                            <Button Click="btnSearch_Click">SEARCH</Button>
-                        </materialDesign:Badged>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Padding="8" Margin="24, 24, 0, 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="16">There are</TextBlock>
+                        <TextBlock FontSize="36" Name="tbNumPatients" Text="0" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
+                        <TextBlock FontSize="16" Grid.Row="2" TextAlignment="Right">Stored Patients</TextBlock>
+                    </Grid>
+                </materialDesign:Card>
+                <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 12, 0, 0">
+                    <StackPanel>
+                        <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
+                            <TextBlock FontSize="36" Text="Search" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
+                        </materialDesign:ColorZone>
+                        <StackPanel Margin="16">
+                            <Grid  Margin="0, 0, 0, 8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="First Name" Name="tbFirstNameSeach" Margin="0, 0, 8, 0" TextChanged="tbSearchTermChanged"/>
+                                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Last Name" Name="tbLastNameSearch" Margin="8, 0, 0, 0" TextChanged="tbSearchTermChanged" Grid.Column="1"/>
+                            </Grid>
+                            <ComboBox  materialDesign:HintAssist.Hint="Gender" SelectedValuePath="Tag" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Name="cbGenderSearch" SelectionChanged="tbSearchTermChanged" Margin="0,0,0,8">
+                                <ComboBoxItem Tag="ALL"></ComboBoxItem>
+                                <ComboBoxItem Tag="M">Male</ComboBoxItem>
+                                <ComboBoxItem Tag="F">Female</ComboBoxItem>
+                                <ComboBoxItem Tag="X">Other</ComboBoxItem>
+                            </ComboBox>
+                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Health Card" Name="tbHealthCard" TextChanged="tbSearchTermChanged" Margin="0, 0, 0, 8"/>
+                            <materialDesign:Badged Name="btnSeachBadge" HorizontalAlignment="Center" Margin="0, 24, 0, 8">
+                                <Button Click="btnSearch_Click">SEARCH</Button>
+                            </materialDesign:Badged>
+                        </StackPanel>
                     </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+            <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 16, 0, 24" Grid.Row="1" VerticalAlignment="Stretch">
+                <StackPanel Name="spSelectedPatient">
+                    <materialDesign:ColorZone Mode="PrimaryMid">
+                        <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="FirstName"/>
+                                    <Binding Path="LastName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </materialDesign:ColorZone>
                 </StackPanel>
             </materialDesign:Card>
-        </StackPanel>
+        </Grid>
 
         <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 24" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="85*"/>
-                    <RowDefinition Height="108*"/>
+                    <RowDefinition Height="18*"/>
                 </Grid.RowDefinitions>
-                <ListView Name="lvPatients" Grid.RowSpan="2">
+                <ListView Name="lvPatients" Grid.RowSpan="2" SelectionChanged="LvPatients_SelectionChanged">
                     <ListView.View>
                         <GridView >
                             <GridViewColumn DisplayMemberBinding="{Binding PatientID}" Header="PatinetID" />
@@ -81,7 +101,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="255,0,255,36" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
+                <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,36" materialDesign:ShadowAssist.ShadowDepth="Depth5" Click="Button_Click">
                     <materialDesign:PackIcon Kind="Add" />
                 </Button>
             </Grid>

@@ -91,5 +91,13 @@ namespace EMS_ClientUI_V2
             }
             btnSeachBadge.Badge = searchCount.ToString();
         }
+
+        private void LvPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvPatients.SelectedValue != null)
+            {
+                spSelectedPatient.DataContext = lvPatients.SelectedValue;
+            }
+        }
     }
 }
