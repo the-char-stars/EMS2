@@ -12,22 +12,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EMS_ClientUI_V2"
-      Title="MainMenuPage"
-      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+      Title="MainMenuPage">
 
-    <materialDesign:ColorZone
-            Mode="PrimaryMid"
-            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
-        <StackPanel
-        Orientation="Horizontal"
-        HorizontalAlignment="Center"   
-        materialDesign:RippleAssist.IsCentered="True">
-
-            <StackPanel  Orientation="Horizontal"  Margin="4">
-                <RadioButton Name="btnPatients" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Patients" Checked="BtnPatients_Checked"/>
-                <RadioButton Name="btnScheduling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Scheduling" Checked="BtnScheduling_Checked"/>
-                <RadioButton Name="btnBilling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" Padding="80, 0" IsChecked="False" Content="Billing" Checked="BtnBilling_Checked"/>
-            </StackPanel>
-        </StackPanel>
+    <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Name="btnPatients" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" IsChecked="False" Content="Patients" Checked="BtnPatients_Checked" MaxWidth="400" Grid.Column="0"/>
+            <RadioButton Name="btnScheduling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" IsChecked="False" Content="Scheduling" Checked="BtnScheduling_Checked" MaxWidth="400" Grid.Column="1"/>
+            <RadioButton Name="btnBilling" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="16,0" IsChecked="False" Content="Billing" Checked="BtnBilling_Checked" MaxWidth="400" Grid.Column="2"/>
+        </Grid>
     </materialDesign:ColorZone>
 </Page>
