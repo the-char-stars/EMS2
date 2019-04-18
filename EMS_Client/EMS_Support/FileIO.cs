@@ -47,7 +47,7 @@ namespace EMS_Library
         private const string databaseName = "DBase.xml";            /**< The name of the database file.*/
         private const string masterFileName = "masterFile.txt";     /**< The name of the master file.*/
         private const string backupFolderName = "Backups";          /**< The name of the Backups directory.*/
-        private const string DatabaseConnectionString = "Server=2A314-E07;Database=EMS2;User Id=sa;Password=Conestoga1;";
+        private const string DatabaseConnectionString = "Server=tcp:thecharstarsems.database.windows.net,1433;Initial Catalog=TheCharStars_EMS;Persist Security Info=False;User ID=charstar;Password=ukdE9TPyKw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private const string databaseInfoFileName = "DBInfo";
         private const string currentDatabaseVersion = "0.0.4";
 
@@ -68,7 +68,7 @@ namespace EMS_Library
         private static readonly Dictionary<TableNames, string> dTableNames = new Dictionary<TableNames, string>
             {
                 { TableNames.Patients, "tblPatients" },
-                { TableNames.Schedule, "tblSchedule" },
+                { TableNames.Schedule, "tblSchedules" },
                 { TableNames.AppointmentBills, "tblAppointmentBillingRecords" },
                 { TableNames.BillingCodes, "tblBillingCodes" },
                 { TableNames.Appointments, "tblAppointments" },
@@ -112,35 +112,42 @@ namespace EMS_Library
 
             if (shouldConvert)
             {
-                DataSet newDataSet = GenerateEmptyDataset();
-                DataSet oldDataSet = GetDataSet(true);
-                foreach (DataTable dt in oldDataSet.Tables)
+                try
                 {
-                    List<DataColumn> ldc = new List<DataColumn>();
-                    foreach (DataColumn dc in dt.Columns)
+                    DataSet newDataSet = GenerateEmptyDataset();
+                    DataSet oldDataSet = GetDataSet(true);
+                    foreach (DataTable dt in oldDataSet.Tables)
                     {
-                        if (!newDataSet.Tables[dt.TableName].Columns.Contains(dc.ColumnName))
+                        List<DataColumn> ldc = new List<DataColumn>();
+                        foreach (DataColumn dc in dt.Columns)
                         {
-                            ldc.Add(dc);
+                            if (!newDataSet.Tables[dt.TableName].Columns.Contains(dc.ColumnName))
+                            {
+                                ldc.Add(dc);
+                            }
+                        }
+                        foreach (DataColumn dc in ldc) { dt.Columns.Remove(dc.ColumnName); }
+                        foreach (DataColumn dc in newDataSet.Tables[dt.TableName].Columns)
+                        {
+                            if (!dt.Columns.Contains(dc.ColumnName))
+                            {
+                                dt.Columns.Add(dc.ColumnName);
+                            }
+                        }
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            newDataSet.Tables[dt.TableName].Rows.Add(ConvertRowToStringArray(dr));
                         }
                     }
-                    foreach (DataColumn dc in ldc) { dt.Columns.Remove(dc.ColumnName); }
-                    foreach (DataColumn dc in newDataSet.Tables[dt.TableName].Columns)
-                    {
-                        if (!dt.Columns.Contains(dc.ColumnName))
-                        {
-                            dt.Columns.Add(dc.ColumnName);
-                        }
-                    }
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        newDataSet.Tables[dt.TableName].Rows.Add(ConvertRowToStringArray(dr));
-                    }
+                    GenerateBackupDatabase();
+                    File.Delete(dbInfoPath);
+                    File.WriteAllText(dbInfoPath, currentDatabaseVersion);
+                    SaveDatabase(newDataSet);
                 }
-                GenerateBackupDatabase();
-                File.Delete(dbInfoPath);
-                File.WriteAllText(dbInfoPath, currentDatabaseVersion);
-                SaveDatabase(newDataSet);
+                catch(Exception e)
+                {
+                    Logging.Log(e, "FileIO", "CheckForUpdates");
+                }
             }
         }
 
@@ -227,7 +234,7 @@ namespace EMS_Library
                 // If the file doesn't exist, create it and populate the file with an empty XML schema
                 File.CreateText(databaseFullPath).Close();
                 ds = GenerateEmptyDataset();
-                ds.WriteXml(databaseFullPath, XmlWriteMode.WriteSchema);
+                //ds.WriteXml(databaseFullPath, XmlWriteMode.WriteSchema);
                 Logging.Log("FileIO", "Constructor", "Database does not exist, creating a new empty database.");
             }
             return ds;
@@ -647,10 +654,11 @@ namespace EMS_Library
         private static bool SaveDatabase(DataSet dataSet)
         {
             bool saveSuccessful = true;
+            string s;
             try
             {
                 // writing the xml file
-                dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
+                //dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
 
 
                 // sending all the table data to the SQL server database.
@@ -659,11 +667,11 @@ namespace EMS_Library
                 for (int i = 0; i < dataSet.Tables.Count; i++)
                 {
                     // using SQL bulk copy to copy entire table to the sql server
-                    using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.KeepIdentity))
+                    using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.Default))
                     {
-
                         foreach (DataColumn col in dataSet.Tables[i].Columns)
                         {
+                            s = col.ColumnName;
                             bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName); // mapping all columns with sql tabel.
                         }
 
