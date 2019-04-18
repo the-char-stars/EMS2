@@ -58,9 +58,9 @@ namespace EMS_Library
             dAppointments = GetAppointmentsFromDatabase();
             dSchedule = GetScheduleFromDatabase();
 
-            DateTime dateTime = new DateTime(2018, 1, 1);
-            if (dSchedule.Count < 104) { ScheduleAppointment(new Appointment(-1, -1, -1, -1), dateTime, 0); }
-            for (int i = dSchedule.Count; i < 104; i++) UpdateAppointmentDate(dateTime.AddDays(i * 7), 0, 0);
+            //DateTime dateTime = new DateTime(2018, 1, 1);
+            //if (dSchedule.Count < 104) { ScheduleAppointment(new Appointment(-1, -1, -1, -1), dateTime, 0); }
+            //for (int i = dSchedule.Count; i < 104; i++) UpdateAppointmentDate(dateTime.AddDays(i * 7), 0, 0);
         }
 
         /**

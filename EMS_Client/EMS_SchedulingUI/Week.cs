@@ -58,7 +58,8 @@ namespace EMS_Library
             if (weekData != null)
             {
                 WeekID = (Int32.Parse(weekData[0]));
-                StartDate = DateTime.ParseExact(weekData[1].ToString(), Scheduling.DATE_FORMAT, CultureInfo.InvariantCulture);
+                DateTime.TryParse(weekData[1].ToString(), out StartDate);
+                //StartDate = DateTime.ParseExact(weekData[1].ToString(), Scheduling.DATE_FORMAT, CultureInfo.InvariantCulture);
                 AppointmentList = weekData[2].Split(DEFAULT_DELIMETER);
             }
             else
