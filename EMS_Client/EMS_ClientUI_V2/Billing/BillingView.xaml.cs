@@ -92,6 +92,7 @@ namespace EMS_ClientUI_V2
 
         private void UpdateReportTree()
         {
+            if (!Directory.Exists("Reports")) { Directory.CreateDirectory("Reports"); }
             tvcMonthlyBillingReport.Items.Clear();
             tvcGovResponseReports.Items.Clear();
 
