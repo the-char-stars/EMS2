@@ -44,7 +44,7 @@ create table tblAppointments(
 create table tblSchedules(
 	AppointmentID int FOREIGN KEY REFERENCES tblAppointments(AppointmentID),
 	AppointmentDate date,
-	AppointmentTimeSlot int
+	AppointmentTimeSlot varchar(128)
 );
 
 
