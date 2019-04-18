@@ -50,7 +50,7 @@ namespace EMS_Library
         private const string DatabaseConnectionString = "Server=tcp:thecharstarsems.database.windows.net,1433;Initial Catalog=TheCharStars_EMS;Persist Security Info=False;User ID=charstar;Password=ukdE9TPyKw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private const string databaseInfoFileName = "DBInfo";
         private const string currentDatabaseVersion = "0.0.4";
-
+        private const string tmpDatabaseString = "Server=JARVIS\\JARVISSQL;Database=EMS2;User Id=sa;Password=Conestoga1;";
         private const string databaseFullPathFormat = "{0}/{1}";    /**< The stored full path of the database.*/
         #endregion
 
@@ -220,23 +220,63 @@ namespace EMS_Library
         */
         private static DataSet GetDataSet(bool isCheck = false)
         {
-            CreateDatabaseDirectory();
+
+
+            /*
+            // this code is for creating xml file database
+            CreateDatabaseDirectory();           
             if (!isCheck) CheckForUpdates();
-            DataSet ds = new DataSet();
-            string databaseFullPath = string.Format(databaseFullPathFormat, databasePath, databaseName);
-            if (File.Exists(databaseFullPath))
+
+           string databaseFullPath = string.Format(databaseFullPathFormat, databasePath, databaseName);
+           if (File.Exists(databaseFullPath))
+           {
+               // If the file already exists, simply read the data into the DataSet object
+               ds.ReadXml(databaseFullPath, XmlReadMode.ReadSchema);
+           }
+           else
+           {
+               // If the file doesn't exist, create it and populate the file with an empty XML schema
+               File.CreateText(databaseFullPath).Close();
+               ds = GenerateEmptyDataset();
+               //ds.WriteXml(databaseFullPath, XmlWriteMode.WriteSchema);
+               Logging.Log("FileIO", "Constructor", "Database does not exist, creating a new empty database.");
+           }
+           */
+
+            /* --- Xml file database ends here--- */
+
+            DataSet ds = new DataSet();   // dataset which will carry the all the data table into it.
+
+            /*  reading data from database starts here */
+            string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };
+            
+            try
             {
-                // If the file already exists, simply read the data into the DataSet object
-                ds.ReadXml(databaseFullPath, XmlReadMode.ReadSchema);
+                SqlConnection conn = new SqlConnection(DatabaseConnectionString);
+                conn.Open();            // opening the connecion for the database.
+                for (int i = 0; i < databaseTables.Length; i++)
+                {
+                    DataTable dt = new DataTable();
+                    string query = "select * from " + databaseTables[i];
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+
+                    // create data adapter
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    // this will query your database and return the result to your datatable
+                    da.Fill(dt);
+                    dt.TableName = databaseTables[i];
+                    ds.Tables.Add(dt.Copy());
+                    
+                    da.Dispose();
+                }
+                conn.Close();       // closing the connection for the database
             }
-            else
+            catch(Exception e)
             {
-                // If the file doesn't exist, create it and populate the file with an empty XML schema
-                File.CreateText(databaseFullPath).Close();
-                ds = GenerateEmptyDataset();
-                //ds.WriteXml(databaseFullPath, XmlWriteMode.WriteSchema);
-                Logging.Log("FileIO", "Constructor", "Database does not exist, creating a new empty database.");
+                Logging.Log(e, "FileIO", "SaveDatabase", "Unable to read data from database Database");
             }
+
             return ds;
         }
 
