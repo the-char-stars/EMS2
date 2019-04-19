@@ -709,8 +709,10 @@ namespace EMS_Library
                     using (SqlConnection connection = new SqlConnection(DatabaseConnectionString))
                     {
                         SqlCommand command = new SqlCommand("DELETE FROM "+ databaseTables[i] + ";", connection);
+                        SqlCommand command2 = new SqlCommand("DBCC CHECKIDENT('"+ databaseTables[i] + "', RESEED, 0);",connection);
                         connection.Open();
                         command.ExecuteNonQuery();
+                        if (databaseTables[i] == "tblPatients") { command2.ExecuteNonQuery(); }
                         connection.Close();
                         
                     }
