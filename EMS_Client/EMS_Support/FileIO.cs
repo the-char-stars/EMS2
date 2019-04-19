@@ -701,11 +701,20 @@ namespace EMS_Library
                 //dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
 
 
-                // sending all the table data to the SQL server database.
+                    // sending all the table data to the SQL server database.
                 string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };
 
                 for (int i = 0; i < dataSet.Tables.Count; i++)
                 {
+                    using (SqlConnection connection = new SqlConnection(DatabaseConnectionString))
+                    {
+                        SqlCommand command = new SqlCommand("DELETE FROM "+ databaseTables[i] + ";", connection);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                        
+                    }
+
                     // using SQL bulk copy to copy entire table to the sql server
                     using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.Default))
                     {
