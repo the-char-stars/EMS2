@@ -62,22 +62,26 @@
                 </materialDesign:Card>
             </StackPanel>
             <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 16, 0, 24" Grid.Row="1" VerticalAlignment="Stretch">
-                <StackPanel Name="spSelectedPatient">
-                    <materialDesign:ColorZone Mode="PrimaryMid">
-                        <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0} {1}">
-                                    <Binding Path="FirstName"/>
-                                    <Binding Path="LastName"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </materialDesign:ColorZone>
-                </StackPanel>
+                <Grid>
+                    <StackPanel Name="spSelectedPatient">
+                        <materialDesign:ColorZone Mode="PrimaryMid">
+                            <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="FirstName"/>
+                                        <Binding Path="LastName"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </materialDesign:ColorZone>
+                    </StackPanel>
+                    <Button Name="btnEdit" Margin="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="BtnEdit_Click">Edit</Button>
+
+                </Grid>
             </materialDesign:Card>
         </Grid>
 
-        <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 24" VerticalAlignment="Stretch">
+        <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16,24,24,24" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="85*"/>

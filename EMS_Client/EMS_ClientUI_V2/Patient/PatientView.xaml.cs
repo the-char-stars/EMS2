@@ -26,7 +26,7 @@ namespace EMS_ClientUI_V2
         Demographics demographics;
         DialogHost dialogHost;
         ObservableCollection<Patient> patientRoster = new ObservableCollection<Patient>();
-
+        Patient selectedPatient;
 
         public PatientView(Demographics d, DialogHost dh)
         {
@@ -97,6 +97,18 @@ namespace EMS_ClientUI_V2
             if (lvPatients.SelectedValue != null)
             {
                 spSelectedPatient.DataContext = lvPatients.SelectedValue;
+                selectedPatient = (Patient)lvPatients.SelectedValue;
+                
+            }
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (spSelectedPatient.DataContext != null)
+            {
+                Frame f = new Frame() { Content = new EditPatient(demographics,selectedPatient, refreshTable) };
+                dialogHost.ShowDialog(f);
             }
         }
     }

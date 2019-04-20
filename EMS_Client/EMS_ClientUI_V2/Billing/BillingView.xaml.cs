@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EMS_Library;
 using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
 using System.IO;
 
 namespace EMS_ClientUI_V2
