@@ -31,7 +31,7 @@ namespace EMS_ClientUI_V2
 
             // display the main menu with the three main buttons
             MainMenuFrame.Content = new MainMenuPage(
-                this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics, scheduling, billing);
+                this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics, scheduling, billing, ErrorMessage);
         }
     }
 }

@@ -35,7 +35,7 @@
             Mode="PrimaryMid"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <DockPanel LastChildFill="False">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="EMS 2.0 - A secure medical application" VerticalAlignment="Center" Margin="20,0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="EMS 2.0 - A secure medical application" VerticalAlignment="Center" Margin="24,0"/>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
                             <ListBox Width="100">
                                 <ListBoxItem>
@@ -58,7 +58,7 @@
                 <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
                 <Frame x:Name="ExtraOptionMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
                 <Frame x:Name="ContentFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" />
-
+                <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="ErrorMessage" VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Stretch" Margin="40, 0"/>
             </Grid>
         </materialDesign:DialogHost.Content>
     </materialDesign:DialogHost>

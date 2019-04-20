@@ -33,15 +33,15 @@ namespace EMS_ClientUI_V2
         PatientView pv;
         #endregion
 
-        public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics d, Scheduling scheduling, Billing b)
+        public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics d, Scheduling scheduling, Billing b, Snackbar sb)
         {
             InitializeComponent();
             ContentFrame = content;
             ExtraOptionMenuFrame = extraMenu;
 
-            pv = new PatientView(d, dialogHost);
+            pv = new PatientView(d, dialogHost, sb);
             SchedulingMenu = new SchedulingMenuPage(ContentFrame, dialogHost);
-            BillingMenu = new BillingView(scheduling, d, dialogHost, b);
+            BillingMenu = new BillingView(scheduling, d, dialogHost, b, sb);
         }
 
         private void BtnBilling_Checked(object sender, RoutedEventArgs e)
