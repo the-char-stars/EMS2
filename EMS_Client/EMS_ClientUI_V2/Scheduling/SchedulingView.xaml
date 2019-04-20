@@ -9,32 +9,29 @@
       d:DesignHeight="768" d:DesignWidth="1366"
       Title="SchedulingView">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="24">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Margin="24, 16, 24, 24" Padding="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <materialDesign:Card VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Name="btnGenerateMonthlyReport" Content="Generate Monthly Report" Margin="8" Grid.Column="0"/>
-                <Button Name="btnReconcileMonthlyReport" Content="Reoncile Monthly Report" Margin="8" Grid.Column="1"/>
-                <Button Name="btnViewReconcileReport" Content="View Reconciled Report" Margin="8" Grid.Column="2"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="64"/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Mode="PrimaryMid" Padding="8" Grid.Row="0">
+                    <TextBlock FontSize="36" Text="Appointments" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
+                </materialDesign:ColorZone>
+                <Button Grid.Row="2" Margin="16" Content="Update Appointment" Name="btnUpdateAppointment" Click="BtnUpdateAppointment_Click"/>
+                <ScrollViewer Grid.Row="1" Margin="8, 8, 0, 8">
+                    <StackPanel Name="lvTodaysSchedule" VerticalAlignment="Stretch" Margin="8"/>
+                </ScrollViewer>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Margin="24, 24, 0, 0" VerticalAlignment="Stretch" Grid.Row="0">
-            <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
-                <TextBlock FontSize="36" Text="Reports" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
-            </materialDesign:ColorZone>
-        </materialDesign:Card>
-
+        <Viewbox Grid.Column="0" Margin="16, -8, 16, 0">
+            <Calendar HorizontalAlignment="Center" VerticalAlignment="Stretch" Name="calSelectedDate" SelectedDatesChanged="CalSelectedDate_DisplayDateChanged"/>
+        </Viewbox>
     </Grid>
 </Page>
