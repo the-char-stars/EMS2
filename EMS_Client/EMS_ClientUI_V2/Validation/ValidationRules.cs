@@ -31,9 +31,13 @@ namespace EMS.Validation
 
     class OnlyLettersValidationRule : ValidationRule
     {
+        bool isValid(char x)
+        {
+            return x == '-' || char.IsLetter(x);
+        }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            return (value ?? "").ToString().All(char.IsLetter)
+            return (value ?? "").ToString().All(isValid)
                 ? ValidationResult.ValidResult
                 : new ValidationResult(false, "Non-numeric input only.");
         }
