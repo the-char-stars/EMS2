@@ -48,6 +48,7 @@ namespace EMS_ClientUI_V2
         {
             patientToUpdate = (Patient)this.DataContext;
             demographics.UpdatePatient(patientToUpdate);
+            BtnClose_Click(sender, e);
         }
     }
 }

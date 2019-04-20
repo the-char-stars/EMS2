@@ -1014,7 +1014,7 @@ namespace EMS_Library
                     {
                         foreach (DataRow dr in dataSet.Tables[dTableNames[tableName]].Rows)
                         {
-                            if ((string)dr[0] == dataRow[0])
+                            if ((string)dr[0].ToString() == dataRow[0].ToString())
                             {
                                 dataSet.Tables[dTableNames[tableName]].Rows.Remove(dr);
                                 break;
