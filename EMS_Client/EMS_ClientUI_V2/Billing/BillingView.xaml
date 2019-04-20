@@ -21,7 +21,7 @@
         <GroupBox Name="tbReportTitle" FontSize="36" Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16, 24, 24, 0" VerticalAlignment="Stretch" Style="{DynamicResource MaterialDesignCardGroupBox}"><!-- LIST VIEW -->
             <TextBlock Name="tbReportDisplay" Margin="8" FontSize="12" TextWrapping="Wrap" Foreground="#FF030000" Grid.IsSharedSizeScope="True"/>
         </GroupBox>
-        <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Margin="24, 16, 24, 24" Padding="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ><!-- BUTTONS -->
+        <materialDesign:Card Grid.Row="1" Grid.ColumnSpan="2" Margin="24, 16, 24, 24" Padding="4" MinHeight="64" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ><!-- BUTTONS -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -31,7 +31,8 @@
                 <Button Name="btnReconcileMonthlyReport" Content="Reoncile Monthly Report" Margin="8" Grid.Column="1" Click="BtnReconcileMonthlyReport_Click"/>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Margin="24, 24, 0, 0" VerticalAlignment="Stretch" Grid.Row="0"> <!-- REPORTS SECTION -->
+        <materialDesign:Card Margin="24, 24, 0, 0" VerticalAlignment="Stretch" Grid.Row="0">
+            <!-- REPORTS SECTION -->
             <StackPanel>
                 <materialDesign:ColorZone Mode="PrimaryMid" Padding="8">
                     <TextBlock FontSize="36" Text="Reports" Grid.Row="1" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
@@ -42,6 +43,5 @@
                 </TreeView>
             </StackPanel>
         </materialDesign:Card>
-        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="ErrorMessage" />
     </Grid>
 </Page>

@@ -28,16 +28,17 @@ namespace EMS_ClientUI_V2
         Scheduling scheduling;
         Demographics demographics;
         Billing billing;
+        Snackbar snackBar;
 
-        public BillingView(Scheduling sched, Demographics demo, DialogHost dialogHost, Billing b)
+        public BillingView(Scheduling sched, Demographics demo, DialogHost dialogHost, Billing b, Snackbar sb)
         {
             InitializeComponent();
             dh = dialogHost;
             scheduling = sched;
             demographics = demo;
             billing = b;
-
-
+            snackBar = sb;
+            tbReportTitle.Header = "";
             UpdateReportTree();
             
         }
@@ -55,11 +56,11 @@ namespace EMS_ClientUI_V2
             // check if the report generation was successful
             if (billing.GenerateMonthlyBillingFile(scheduling, demographics, dt.Year, dt.Month))
             {
-                ErrorMessage.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
+                snackBar.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
             }
             else
             {
-                ErrorMessage.MessageQueue.Enqueue("DID NOT GENERATE");
+                snackBar.MessageQueue.Enqueue("DID NOT GENERATE");
             }
 
             UpdateReportTree();
@@ -79,11 +80,11 @@ namespace EMS_ClientUI_V2
             // check if the report generation was successful
             if (billing.ReconcileMonthlyBilling(date).Count != 0)
             {
-                ErrorMessage.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
+                snackBar.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
             }
             else
             {
-                ErrorMessage.MessageQueue.Enqueue("DID NOT GENERATE");
+                snackBar.MessageQueue.Enqueue("DID NOT GENERATE");
             }
 
             UpdateReportTree();
