@@ -6,7 +6,6 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,5 +14,6 @@
         mc:Ignorable="d"
         Title="EMS System 2.0"
         WindowState="Maximized">
+
     <Frame Name="ContentFrame" NavigationUIVisibility="Hidden"></Frame>
 </Window>

@@ -23,6 +23,8 @@ namespace EMS_ClientUI_V2
         public MainWindow()
         {
             InitializeComponent();
+            this.Background = new ImageBrush(new BitmapImage(new Uri("../../Images/Background2.jpg", UriKind.Relative)));
+
         }
         public void changeMainFrame(Page page)
         {
