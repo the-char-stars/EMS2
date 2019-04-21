@@ -15,6 +15,8 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EMS_Library
 {
@@ -1182,12 +1184,11 @@ namespace EMS_Library
         {
             try
             {
-
                 DataTable dt = GetDataSet().Tables[5];
 
                 foreach (DataRow r in dt.Rows)
                 {
-                    if (r["Username"].ToString() == userName && r["Password"].ToString() == passWord)
+                    if (r["Username"].ToString() == CalculateMD5Hash(userName) && r["Password"].ToString() == CalculateMD5Hash(passWord))
                     {
                         return true;
                     }
@@ -1199,6 +1200,43 @@ namespace EMS_Library
             }
             return false;
         }
-        
+
+        private static void updateStringToHash()
+        {
+            try
+            {
+                DataSet ds = GetDataSet();
+                // change the current 
+                foreach (DataRow r in ds.Tables[5].Rows)
+                {
+                    r["Username"] = CalculateMD5Hash(r["Username"].ToString());
+                    r["Password"] = CalculateMD5Hash(r["Password"].ToString());
+                }
+
+                SaveDatabase(ds);
+            }
+            catch (Exception e)
+            {
+                Logging.Log(e, "FileIO", "CheckUser", "Unable to add user to Database");
+            }
+
+        }
+
+
+        public static string CalculateMD5Hash(string input)
+        {
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
     }
 }
