@@ -90,6 +90,9 @@
     <Compile Include="Scheduling\ScheduleRecallPage.xaml.cs">
       <DependentUpon>ScheduleRecallPage.xaml</DependentUpon>
     </Compile>
+	<Compile Include="Scheduling\AppointmentScheduler.xaml.cs">
+      <DependentUpon>AppointmentScheduler.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scheduling\SchedulingView.xaml.cs">
       <DependentUpon>SchedulingView.xaml</DependentUpon>
     </Compile>

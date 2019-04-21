@@ -712,7 +712,7 @@ namespace EMS_Library
                         SqlCommand command2 = new SqlCommand("DBCC CHECKIDENT('"+ databaseTables[i] + "', RESEED, 0);",connection);
                         connection.Open();
                         command.ExecuteNonQuery();
-                        if (databaseTables[i] == "tblPatients") { command2.ExecuteNonQuery(); }
+                        if (i == 0 || i == 3) { command2.ExecuteNonQuery(); }
                         connection.Close();
                         
                     }
@@ -757,7 +757,7 @@ namespace EMS_Library
         */
         public static int GenerateTableID(TableNames tableName)
         {
-            int newID = GetDataSet().Tables[dTableNames[tableName]].Rows.Count;
+            int newID = GetDataSet().Tables[dTableNames[tableName]].Rows.Count + 1;
             Logging.Log("FileIO", "GenerateTableID", string.Format("table {0} generated next ID: {1}", dTableNames[tableName], newID.ToString()));
             return newID;
         }

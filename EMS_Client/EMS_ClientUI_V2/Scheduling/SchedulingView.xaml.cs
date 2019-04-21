@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EMS_Library;
+using MaterialDesignThemes.Wpf;
+
 
 namespace EMS_ClientUI_V2
 {
@@ -23,16 +25,14 @@ namespace EMS_ClientUI_V2
     {
         Scheduling scheduling;
         Demographics demographics;
-        public SchedulingView(Scheduling s, Demographics d)
+        DialogHost dialogHost;
+        public SchedulingView(Scheduling s, Demographics d, DialogHost dh)
         {
+            dialogHost = dh;
             scheduling = s;
             demographics = d;
             InitializeComponent();
-            int i = 1;
-            foreach (Appointment a in scheduling.GetScheduleByDay(DateTime.Now).GetAppointments())
-            {
-                lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, i++));
-            }
+            updateAppointments(DateTime.Today);
         }
 
         private void BtnUpdateAppointment_Click(object sender, RoutedEventArgs e)
@@ -40,15 +40,20 @@ namespace EMS_ClientUI_V2
             // update the selected appointment
         }
 
-        private void CalSelectedDate_DisplayDateChanged(object sender, EventArgs e)
+        void updateAppointments(DateTime dt)
         {
             lvTodaysSchedule.Children.Clear();
             int i = 1;
 
-            foreach (Appointment a in scheduling.GetScheduleByDay(calSelectedDate.SelectedDate.Value).GetAppointments())
+            foreach (Appointment a in scheduling.GetScheduleByDay(dt).GetAppointments())
             {
-                lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, i++));
+                lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, dialogHost, i++, dt, updateAppointments));
             }
+        }
+
+        private void CalSelectedDate_DisplayDateChanged(object sender, EventArgs e)
+        {
+            updateAppointments(calSelectedDate.SelectedDate.Value);
         }
     }
 }

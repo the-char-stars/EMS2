@@ -84,6 +84,10 @@ namespace EMS_Library
                 if (lAppointments[timeSlot].AppointmentID == -1)
                 {
                     isSuccess = true;
+                    if (appointment.AppointmentID == -1)
+                    {
+                        appointment.AppointmentID = FileIO.GenerateTableID(FileIO.TableNames.Appointments);
+                    }
                     lAppointments[timeSlot] = appointment;
                 }
                 Logging.Log("Day", "AddAppointment", string.Format("Appointment {0} ", appointment.AppointmentID) + (isSuccess ? "successfully added." : "failed to add. Appointment is already filled."));

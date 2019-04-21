@@ -29,7 +29,7 @@ namespace EMS_Library
    */
     public class Appointment
     {
-        public int AppointmentID { get; }  /**< The unique ID by which each appointment can be found by. */
+        public int AppointmentID { get; set; }  /**< The unique ID by which each appointment can be found by. */
         public int PatientID { get; set; }      /**< The unique ID by which each patient can be found by. */
         public int DependantID { get; set; }    /**< The unique ID by which the person that showed up to the appointment with the patient can be found by. */
         public int RecallFlag { get; set; }     /**< The flag that indicates how long until the patient needs to be recalled for another appointment. */

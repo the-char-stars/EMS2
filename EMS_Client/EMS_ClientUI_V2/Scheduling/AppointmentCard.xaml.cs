@@ -13,20 +13,36 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EMS_Library;
+using MaterialDesignThemes.Wpf;
 
 namespace EMS_ClientUI_V2
 {
     /// <summary>
     /// Interaction logic for AppointmentCard.xaml
     /// </summary>
+    public delegate void UpdateDisplay(DateTime dt);
     public partial class AppointmentCard : UserControl
     {
         public Appointment appointment;
+        Scheduling scheduling;
+        Demographics demographics;
         public Patient primary = null, dependant = null;
-        public AppointmentCard(Appointment a, Demographics d, Scheduling s, int slot)
+        DialogHost dialogHost;
+        int timeSlot;
+        DateTime selectedDate;
+
+        UpdateDisplay updateDisplay;
+        public AppointmentCard(Appointment a, Demographics d, Scheduling s, DialogHost dh, int slot, DateTime dt, UpdateDisplay upd)
         {
             InitializeComponent();
+            updateDisplay = upd;
+            dialogHost = dh;
             appointment = a;
+            scheduling = s;
+            demographics = d;
+            timeSlot = slot;
+            selectedDate = dt;
+
             if (appointment.AppointmentID == -1)
             {
                 tbTitle.Text = "Unscheduled Appointment";
@@ -40,6 +56,7 @@ namespace EMS_ClientUI_V2
             }
             else
             {
+                czState.Mode = ColorZoneMode.PrimaryLight;
                 primary = d.GetPatientByID(a.PatientID);
                 dependant = d.GetPatientByID(a.DependantID);
 
@@ -48,8 +65,15 @@ namespace EMS_ClientUI_V2
                 chipPrimaryPatient.Content = string.Format("{0} {1}", primary.FirstName, primary.LastName);
                 chipPrimaryPatient.Icon = primary.FirstName[0];
 
-                chipSecondaryPatient.Content = string.Format("{0} {1}", dependant.FirstName, dependant.LastName);
-                chipSecondaryPatient.Icon = dependant.FirstName[0];
+                if (dependant != null)
+                {
+                    chipSecondaryPatient.Content = string.Format("{0} {1}", dependant.FirstName, dependant.LastName);
+                    chipSecondaryPatient.Icon = dependant.FirstName[0];
+                }
+                else
+                {
+                    chipSecondaryPatient.Visibility = Visibility.Hidden;
+                }
 
                 btnEditAppointment.Click += EditAppointment;
                 btnCancelAppointment.Click += CancelAppointment;
@@ -59,7 +83,8 @@ namespace EMS_ClientUI_V2
 
         void ScheduleAppointment(object sender, EventArgs e)
         {
-
+            Frame f = new Frame() { Content = new AppointmentScheduler(scheduling, demographics, appointment, selectedDate, timeSlot, updateDisplay) };
+            dialogHost.ShowDialog(f);
         }
 
         void EditAppointment(object sender, EventArgs e)

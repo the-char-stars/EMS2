@@ -14,7 +14,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="16"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -25,7 +25,7 @@
                 <materialDesign:Chip Name="chipPrimaryPatient" Content="Albert" Icon="A" Margin="8" IconBackground="{DynamicResource PrimaryHueLightBrush}"/>
                 <materialDesign:Chip Name="chipSecondaryPatient" Content="Jimmy" Icon="J" Margin="8, 0, 0, 8" IconBackground="{DynamicResource PrimaryHueLightBrush}"/>
             </StackPanel>
-            <materialDesign:ColorZone Mode="Accent" Padding="8" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <materialDesign:ColorZone Name="czState" Mode="Accent" Padding="8" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Grid>
     </materialDesign:Card>
 </UserControl>
