@@ -712,7 +712,7 @@ namespace EMS_Library
                         SqlCommand command2 = new SqlCommand("DBCC CHECKIDENT('"+ databaseTables[i] + "', RESEED, 0);",connection);
                         connection.Open();
                         command.ExecuteNonQuery();
-                        if (i == 0 || i == 3) { command2.ExecuteNonQuery(); }
+                        if (i == 0 || i == 3 || i == 5) { command2.ExecuteNonQuery(); }
                         connection.Close();
                         
                     }
@@ -1177,5 +1177,28 @@ namespace EMS_Library
             }
             return false;
         }
+
+        public static bool CheckUser(string userName,string passWord)
+        {
+            try
+            {
+
+                DataTable dt = GetDataSet().Tables[5];
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    if (r["Username"].ToString() == userName && r["Password"].ToString() == passWord)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logging.Log(e, "FileIO", "CheckUser", "Unable to CheckUser check User_Login.");
+            }
+            return false;
+        }
+        
     }
 }
