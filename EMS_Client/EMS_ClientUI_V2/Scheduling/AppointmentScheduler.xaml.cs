@@ -58,9 +58,18 @@ namespace EMS_ClientUI_V2
             if (cbPrimaryPatient.SelectedItem != null)
             {
                 cbSecondaryPatient.Items.Clear();
-                foreach (Patient p in demographics.GetDependants(primary))
+                List<Patient> lp = demographics.GetRelations(primary);
+                foreach (Patient p in lp)
                 {
                     cbSecondaryPatient.Items.Add(p);
+                }
+                if (lp.Count > 0)
+                {
+                    cbSecondaryPatient.IsEnabled = true;
+                }
+                else
+                {
+                    cbSecondaryPatient.IsEnabled = false;
                 }
             }
         }

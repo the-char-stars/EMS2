@@ -405,7 +405,7 @@ namespace EMS_Test_Demographics
 
                 d.AddNewPatient(p);
 
-                List<Patient> dp = d.GetDependants(p);
+                List<Patient> dp = d.GetRelations(p);
 
                 if(!(dp == null))
                 {
@@ -438,7 +438,7 @@ namespace EMS_Test_Demographics
             {
                 Demographics d = new Demographics();
                 
-                d.GetDependants(null);
+                d.GetRelations(null);
 
             }
             catch (Exception)

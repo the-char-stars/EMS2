@@ -220,8 +220,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnAddNewPatient"  Margin="{StaticResource ResourceKey=BaseMargin}" Content="Add Patient" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnAddNewPatient_Click"/>
-                <Button x:Name="btnClose" Grid.Column="1" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Close" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnClose_Click" RenderTransformOrigin="0.5,0.508"/>
+                <Button x:Name="btnAddNewPatient" Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Add Patient" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnAddNewPatient_Click"/>
+                <Button x:Name="btnClose" Style="{StaticResource MaterialDesignRaisedButton}" Grid.Column="1" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Close" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnClose_Click" RenderTransformOrigin="0.5,0.508"/>
             </Grid>
         </Grid>
     </Grid>

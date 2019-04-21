@@ -220,8 +220,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnUpdate"  Margin="{StaticResource ResourceKey=BaseMargin}" Content="Update" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnUpdate_Click" />
-                <Button x:Name="btnClose" Grid.Column="1" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Close" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnClose_Click" />
+                <Button x:Name="btnUpdate" Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Update" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnUpdate_Click" />
+                <Button x:Name="btnClose" Style="{StaticResource MaterialDesignRaisedButton}" Grid.Column="1" Margin="{StaticResource ResourceKey=BaseMargin}" Content="Close" Width="112" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="BtnClose_Click" />
             </Grid>
         </Grid>
     </Grid>

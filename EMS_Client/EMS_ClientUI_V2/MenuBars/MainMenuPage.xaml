@@ -14,16 +14,16 @@
       xmlns:local="clr-namespace:EMS_ClientUI_V2"
       Title="MainMenuPage">
 
-    <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
+    <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5" materialDesign:ShadowAssist.ShadowDepth="Depth1">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <RadioButton Name="btnPatients" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="19.5" Margin="16,0" IsChecked="False" Content="Patients" Checked="BtnPatients_Checked" MaxWidth="400" Grid.Column="0"/>
-            <RadioButton Name="btnScheduling" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="19.5" Margin="16,0" IsChecked="False" Content="Scheduling" Checked="BtnScheduling_Checked" MaxWidth="400" Grid.Column="1"/>
-            <RadioButton Name="btnBilling" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="19.5" Margin="16,0" IsChecked="False" Content="Billing" Checked="BtnBilling_Checked" MaxWidth="400" Grid.Column="2"/>
+            <RadioButton Name="btnPatients" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="18" Margin="16,0" IsChecked="False" Content="Patients" Checked="BtnPatients_Checked" MaxWidth="400" Grid.Column="0"/>
+            <RadioButton Name="btnScheduling" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="18" Margin="16,0" IsChecked="False" Content="Scheduling" Checked="BtnScheduling_Checked" MaxWidth="400" Grid.Column="1"/>
+            <RadioButton Name="btnBilling" Style="{StaticResource MaterialDesignTabRadioButton}" FontSize="18" Margin="16,0" IsChecked="False" Content="Billing" Checked="BtnBilling_Checked" MaxWidth="400" Grid.Column="2"/>
         </Grid>
     </materialDesign:ColorZone>
 </Page>

@@ -277,7 +277,7 @@ namespace EMS_Library
         * 
         * \return <b>List<Patient></b> - this method will return list of all the dependents.
         */
-        public List<Patient> GetDependants(Patient pHeadOfHouse)
+        public List<Patient> GetRelations(Patient pHeadOfHouse)
         {
             if(pHeadOfHouse != null)
             {
@@ -287,7 +287,7 @@ namespace EMS_Library
                 /// here we search all the dependents into the patientRoster and make the list of dependent the 
                 foreach (Patient dependant in dPatientRoster.Values)
                 {
-                    if (pHeadOfHouse.HCN == dependant.HeadOfHouse)
+                    if (pHeadOfHouse.HCN == dependant.HeadOfHouse || pHeadOfHouse.HeadOfHouse == dependant.HCN)
                     {
                         lDependants.Add(dependant);
                         Logging.Log("Demographics", "GetDependants", String.Format("Successfully searched Patient dependents with HouseHoldNumber : {0} from patient roster and added to the dependents list", pHeadOfHouse.HCN));

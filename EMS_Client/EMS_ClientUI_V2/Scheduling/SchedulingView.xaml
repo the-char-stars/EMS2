@@ -30,8 +30,10 @@
                 </ScrollViewer>
             </Grid>
         </materialDesign:Card>
-        <Viewbox Grid.Column="0" Margin="16, -8, 16, 0">
-            <Calendar HorizontalAlignment="Center" VerticalAlignment="Stretch" Name="calSelectedDate" SelectedDatesChanged="CalSelectedDate_DisplayDateChanged"/>
-        </Viewbox>
+        <materialDesign:Card Margin="16, 0, 16, 0">
+            <Viewbox Grid.Column="0" Margin="0, -8, 0, 0">
+                <Calendar HorizontalAlignment="Center" VerticalAlignment="Stretch" Name="calSelectedDate" SelectedDatesChanged="CalSelectedDate_DisplayDateChanged" materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
+            </Viewbox>
+        </materialDesign:Card>
     </Grid>
 </Page>

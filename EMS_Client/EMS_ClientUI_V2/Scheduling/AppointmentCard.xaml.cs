@@ -53,6 +53,13 @@ namespace EMS_ClientUI_V2
                 btnCancelAppointment.Click += ScheduleAppointment;
 
                 btnEditAppointment.Visibility = Visibility.Hidden;
+
+                if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0)
+                {
+                    cardBackground.Background = Brushes.LightGray;
+                    btnCancelAppointment.Visibility = Visibility.Hidden;
+                    btnEditAppointment.Visibility = Visibility.Hidden;
+                }
             }
             else
             {
@@ -75,10 +82,20 @@ namespace EMS_ClientUI_V2
                     chipSecondaryPatient.Visibility = Visibility.Hidden;
                 }
 
-                btnEditAppointment.Click += EditAppointment;
-                btnCancelAppointment.Click += CancelAppointment;
+                if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0)
+                {
+                    cardBackground.Background = Brushes.LightGray;
+                    czState.Mode = ColorZoneMode.PrimaryDark;
+                    btnEditAppointment.Visibility = Visibility.Hidden;
+                    btnCancelAppointment.Content = "Add Codes / Notes";
+                    btnCancelAppointment.Click += AddCodesAndNotes;
+                }
+                else
+                {
+                    btnEditAppointment.Click += EditAppointment;
+                    btnCancelAppointment.Click += CancelAppointment;
+                }
             }
-
         }
 
         void ScheduleAppointment(object sender, EventArgs e)
@@ -93,6 +110,11 @@ namespace EMS_ClientUI_V2
         }
 
         void CancelAppointment(object sender, EventArgs e)
+        {
+
+        }
+
+        void AddCodesAndNotes(object sender, EventArgs e)
         {
 
         }
