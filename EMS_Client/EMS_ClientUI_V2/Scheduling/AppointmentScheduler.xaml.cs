@@ -59,6 +59,8 @@ namespace EMS_ClientUI_V2
 
         private void CbPrimaryPatient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Logging.Log("Primary patient selection changed in AppointmentScheduler");
+
             primary = (Patient)cbPrimaryPatient.SelectedItem;
             if (cbPrimaryPatient.SelectedItem != null)
             {
@@ -86,6 +88,8 @@ namespace EMS_ClientUI_V2
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Okay button pressed in Appointment Scheduler");
+
             if (cbPrimaryPatient.SelectedItem != null)
             {
                 appointment.PatientID = primary.PatientID;
@@ -102,6 +106,8 @@ namespace EMS_ClientUI_V2
                 {
                     scheduling.ScheduleAppointment(appointment, selectedDate, timeSlot - 1);
                 }
+                Logging.Log("Appointment scheduled from AppointmentScheduler");
+
                 updateDisplay(selectedDate);
                 DialogHost.CloseDialogCommand.Execute(null, null);
             }

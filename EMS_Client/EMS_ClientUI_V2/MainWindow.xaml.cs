@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EMS_Library;
 
 namespace EMS_ClientUI_V2
 {
@@ -22,6 +23,7 @@ namespace EMS_ClientUI_V2
     {
         public MainWindow()
         {
+            Logging.Log("Initializing MainWindow");
             InitializeComponent();
             this.Background = new ImageBrush(new BitmapImage(new Uri("../../Images/Background2.jpg", UriKind.Relative)));
 

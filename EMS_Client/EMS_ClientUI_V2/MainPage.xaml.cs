@@ -27,6 +27,7 @@ namespace EMS_ClientUI_V2
 
         public MainPage()
         {
+            Logging.Log("Initialize MainPage");
             InitializeComponent();
 
             // display the main menu with the three main buttons
