@@ -26,19 +26,21 @@ namespace EMS_ClientUI_V2
         public Appointment appointment;
         Scheduling scheduling;
         Demographics demographics;
+        Billing billing;
         public Patient primary = null, dependant = null;
         DialogHost dialogHost;
         int timeSlot;
         DateTime selectedDate;
 
         UpdateDisplay updateDisplay;
-        public AppointmentCard(Appointment a, Demographics d, Scheduling s, DialogHost dh, int slot, DateTime dt, UpdateDisplay upd)
+        public AppointmentCard(Appointment a, Demographics d, Scheduling s, Billing b, DialogHost dh, int slot, DateTime dt, UpdateDisplay upd)
         {
             InitializeComponent();
             updateDisplay = upd;
             dialogHost = dh;
             appointment = a;
             scheduling = s;
+            billing = b;
             demographics = d;
             timeSlot = slot;
             selectedDate = dt;
@@ -118,7 +120,7 @@ namespace EMS_ClientUI_V2
 
         void AddCodesAndNotes(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

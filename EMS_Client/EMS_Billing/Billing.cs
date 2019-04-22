@@ -35,7 +35,7 @@ namespace EMS_Library
    */
     public class Billing
     {
-        private Dictionary<string, BillingRecord> allBillingCodes = new Dictionary<string, BillingRecord>(); /**< The string representation of all billing codes in the database.*/
+        public Dictionary<string, BillingRecord> allBillingCodes = new Dictionary<string, BillingRecord>(); /**< The string representation of all billing codes in the database.*/
         private Dictionary<string, ApptBillRecord> appointmentBillingRecords = new Dictionary<string, ApptBillRecord>();  /**< The string representation of all appointment records in the database.*/
         public List<string[]> flaggedEncounters = new List<string[]>();
         /**

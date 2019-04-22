@@ -26,8 +26,10 @@ namespace EMS_ClientUI_V2
         Scheduling scheduling;
         Demographics demographics;
         DialogHost dialogHost;
-        public SchedulingView(Scheduling s, Demographics d, DialogHost dh)
+        Billing billing;
+        public SchedulingView(Scheduling s, Demographics d, Billing b, DialogHost dh)
         {
+            billing = b;
             dialogHost = dh;
             scheduling = s;
             demographics = d;
@@ -47,7 +49,7 @@ namespace EMS_ClientUI_V2
 
             foreach (Appointment a in scheduling.GetScheduleByDay(dt).GetAppointments())
             {
-                lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, dialogHost, i++, dt, updateAppointments));
+                lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, billing, dialogHost, i++, dt, updateAppointments));
             }
         }
 
