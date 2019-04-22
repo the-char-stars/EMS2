@@ -35,6 +35,7 @@ namespace EMS_ClientUI_V2
 
         public MainMenuPage(Frame content, Frame extraMenu, DialogHost dialogHost, Demographics demographics, Scheduling scheduling, Billing billing, Snackbar snackBar)
         {
+            Logging.Log("Initiating MainMenuPage");
             InitializeComponent();
             ContentFrame = content;
             ExtraOptionMenuFrame = extraMenu;
@@ -46,18 +47,21 @@ namespace EMS_ClientUI_V2
 
         private void BtnBilling_Checked(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Billing selected from MainMenuPage");
             ContentFrame.Content = billingView;
             ExtraOptionMenuFrame.Content = null;
         }
 
         private void BtnScheduling_Checked(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Scheduling selected from MainMenuPage");
             ContentFrame.Content = schedulingView;
             ExtraOptionMenuFrame.Content = null;
         }
 
         private void BtnPatients_Checked(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Patients selected from MainMenuPage");
             ContentFrame.Content = patientView;
             ExtraOptionMenuFrame.Content = null;
         }

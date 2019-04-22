@@ -31,6 +31,7 @@ namespace EMS_ClientUI_V2
 
         public LogInPage(MainWindow main)
         {
+            Logging.Log("Login page initiated.");
             InitializeComponent();
             wasClosed = false;
             isValidPass = false;
@@ -44,13 +45,17 @@ namespace EMS_ClientUI_V2
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-    
+
+            Logging.Log("User attempting to log in");
+            
             if (FileIO.CheckUser(userName.Text, userPassword.Password.ToString()))
             {
+
                 isValidPass = true;
                 mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 if (mainWindow != null)
                 {
+                    Logging.Log("User logged in");
                     // display the main page on the main window
                     mainWindow.ContentFrame.Content = new MainPage();
 
@@ -59,15 +64,18 @@ namespace EMS_ClientUI_V2
                 }
 
                 loginErrorMessage.Text = "Error encountered while logging you in. Please try again!";
+                Logging.Log("Error encountered when logging in");
             }
             else
             {
                 loginErrorMessage.Text = "Username/Password invalid. Try again!";
+                Logging.Log("Username/Password invalid");
             }
         }
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Closing app from LoginPage");
             this.Close();
         }
 

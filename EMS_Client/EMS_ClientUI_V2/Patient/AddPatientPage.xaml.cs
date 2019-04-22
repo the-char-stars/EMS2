@@ -30,6 +30,7 @@ namespace EMS_ClientUI_V2
         RefreshScreen refreshScreen;
         public AddPatient(Demographics d, RefreshScreen r)
         {
+            Logging.Log("Add a patient pop up window is initiated");
             refreshScreen = r;
             demographics = d;
             this.DataContext = addingPatient;

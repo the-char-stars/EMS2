@@ -30,6 +30,7 @@ namespace EMS_ClientUI_V2
 
         public PatientView(Demographics d, DialogHost dh)
         {
+            Logging.Log("Initiated PatientView page");
             demographics = d;
             dialogHost = dh;
             InitializeComponent();
@@ -43,12 +44,16 @@ namespace EMS_ClientUI_V2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("User selected AddPatient button");
+
             Frame f = new Frame() { Content = new AddPatient(demographics, refreshTable) };
             dialogHost.ShowDialog(f);           
         }
 
         private void refreshTable()
         {
+            Logging.Log("Refreshing patientRoster Dictionary");
+
             patientRoster.Clear();
             foreach (Patient p in demographics.dPatientRoster.Values)
             {
@@ -60,6 +65,8 @@ namespace EMS_ClientUI_V2
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Searching for Patient");
+
             string firstSearch = tbFirstNameSeach.Text;
             patientRoster.Clear();
             foreach (Patient p in demographics.dPatientRoster.Values)
@@ -94,6 +101,8 @@ namespace EMS_ClientUI_V2
 
         private void LvPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Logging.Log("Patient selected from the ListView in the PatientView");
+
             if (lvPatients.SelectedValue != null)
             {
                 spSelectedPatient.DataContext = lvPatients.SelectedValue;
@@ -104,6 +113,7 @@ namespace EMS_ClientUI_V2
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Edit Patient button was clicked in PatientView page");
 
             if (spSelectedPatient.DataContext != null)
             {
