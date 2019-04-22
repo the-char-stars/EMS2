@@ -28,6 +28,7 @@ namespace EMS_ClientUI_V2
         Patient addingPatient = new Patient();
         public delegate void RefreshScreen();
         RefreshScreen refreshScreen;
+
         public AddPatient(Demographics d, RefreshScreen r)
         {
             Logging.Log("Add a patient pop up window is initiated");
@@ -41,20 +42,24 @@ namespace EMS_ClientUI_V2
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Closed AddPatient pop up");
             refreshScreen();
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
         private void BtnAddNewPatient_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Add Patient button is pressed");
             if (addingPatient.IsReadyToSave())
             {
                 demographics.AddNewPatient(addingPatient);
+                Logging.Log("Patient is added to database");
                 refreshScreen();
                 DialogHost.CloseDialogCommand.Execute(null, null);
             }
             else
             {
+                Logging.Log("Could not add Patient from AddPatient pop up page");
                 tbFirstName.Text = tbFirstName.Text;
                 tbLastName.Text = tbLastName.Text;
                 tbHealthCard.Text = tbHealthCard.Text;

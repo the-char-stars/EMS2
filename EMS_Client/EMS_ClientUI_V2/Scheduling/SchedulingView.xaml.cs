@@ -30,6 +30,8 @@ namespace EMS_ClientUI_V2
         public SchedulingView(Scheduling s, Demographics d, Billing b, DialogHost dh)
         {
             billing = b;
+            Logging.Log("Scheduling View Initiated");
+
             dialogHost = dh;
             scheduling = s;
             demographics = d;
@@ -39,18 +41,21 @@ namespace EMS_ClientUI_V2
 
         private void BtnUpdateAppointment_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Update Appointment Button clicked");
             // update the selected appointment
         }
 
         void updateAppointments(DateTime dt)
         {
             lvTodaysSchedule.Children.Clear();
-            int i = 1;
+            int i = 1;//MAGIC NUMBER
 
             foreach (Appointment a in scheduling.GetScheduleByDay(dt).GetAppointments())
             {
                 lvTodaysSchedule.Children.Add(new AppointmentCard(a, demographics, scheduling, billing, dialogHost, i++, dt, updateAppointments));
             }
+
+            Logging.Log("Appointments are updated");
         }
 
         private void CalSelectedDate_DisplayDateChanged(object sender, EventArgs e)
