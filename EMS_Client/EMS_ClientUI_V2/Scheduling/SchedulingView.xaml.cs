@@ -28,6 +28,8 @@ namespace EMS_ClientUI_V2
         DialogHost dialogHost;
         public SchedulingView(Scheduling s, Demographics d, DialogHost dh)
         {
+            Logging.Log("Add a patient pop up window is initiated");
+
             dialogHost = dh;
             scheduling = s;
             demographics = d;
