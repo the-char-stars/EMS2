@@ -44,9 +44,8 @@ namespace EMS_ClientUI_V2
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            // check if user is valid -----> PLACEHOLDER VALUES. MUST BE CHANGED
-            //if (userName.Text == "admin" && userPassword.Password.ToString() == "123")
-            if(FileIO.CheckUser(userName.Text, userPassword.Password.ToString()))
+    
+            if (FileIO.CheckUser(userName.Text, userPassword.Password.ToString()))
             {
                 isValidPass = true;
                 mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
