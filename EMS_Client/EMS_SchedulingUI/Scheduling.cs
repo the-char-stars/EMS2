@@ -409,7 +409,7 @@ namespace EMS_Library
                 Day previousDay = GetDayByAppointmentID(appointmentID);
                 if (ScheduleAppointment(dAppointments[appointmentID], newDate, newTimeSlot))
                 {
-                    if (previousDay != null) { dSchedule[previousDay.WeekID].dDays[previousDay.GetDayOfWeek()].DeleteAppointment(previousDay.GetTimeslotByAppointmentID(appointmentID)); }
+                    if (previousDay != null) { dSchedule[previousDay.WeekID].dDays[previousDay.GetDayOfWeek()].DeleteAppointment(previousDay.GetTimeslotByAppointmentID(appointmentID), appointmentID); }
                     SaveScheduleToDatabase();
                     Logging.Log("Scheduling", "UpdateAppointmentDate", string.Format("Appointment (ID: {0}) found. Schedule successfully changed.", appointmentID));
                 }
@@ -430,7 +430,7 @@ namespace EMS_Library
         * 
         * \return <b>bool</b> - if successfully removed or not
         */
-        public bool CancelAppointment(int appointmentID)
+        public bool CancelAppointment(int appointmentID, int timeSlot)
         {
             Logging.Log("Scheduling", "CancelAppointment", string.Format("Cancelling appointment (ID: {0})", appointmentID));
             bool updateSuccessful = true;
@@ -442,7 +442,7 @@ namespace EMS_Library
             }
             else
             {
-                updateSuccessful = GetDayByAppointmentID(appointmentID).DeleteAppointment(appointmentID, true);
+                updateSuccessful = GetDayByAppointmentID(appointmentID).DeleteAppointment(appointmentID, timeSlot, true);
                 SaveScheduleToDatabase();
                 if (updateSuccessful)
                 {

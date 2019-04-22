@@ -111,7 +111,8 @@ namespace EMS_ClientUI_V2
 
         void CancelAppointment(object sender, EventArgs e)
         {
-
+            scheduling.CancelAppointment(appointment.AppointmentID, timeSlot);
+            updateDisplay(selectedDate);
         }
 
         void AddCodesAndNotes(object sender, EventArgs e)
