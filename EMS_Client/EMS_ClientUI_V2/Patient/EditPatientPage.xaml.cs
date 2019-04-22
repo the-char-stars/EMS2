@@ -30,6 +30,7 @@ namespace EMS_ClientUI_V2
 
         public EditPatient(Demographics d, Patient p, RefreshScreen r)
         {
+            Logging.Log("Edit patient is initiated and pop up is displayed");
             demographics = d;
             patientToUpdate = p;
             refreshScreen = r;
@@ -41,11 +42,13 @@ namespace EMS_ClientUI_V2
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             refreshScreen();
+            Logging.Log("Edit patient pop up closed");
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Patient data is updated using Edit Patient pop up window from PatientView page");
             patientToUpdate = (Patient)this.DataContext;
             demographics.UpdatePatient(patientToUpdate);
             BtnClose_Click(sender, e);
