@@ -1184,14 +1184,34 @@ namespace EMS_Library
         {
             try
             {
-                DataTable dt = GetDataSet().Tables[5];
-
-                foreach (DataRow r in dt.Rows)
+                using (SqlConnection connection = new SqlConnection(DatabaseConnectionString))
                 {
-                    if (r["Username"].ToString() == CalculateMD5Hash(userName) && r["Password"].ToString() == CalculateMD5Hash(passWord))
+                    SqlCommand command = new SqlCommand("dbo.CheckUserLogin",connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@UserName", SqlDbType.VarChar).Value = CalculateMD5Hash(userName);
+                    command.Parameters.Add("@UserPassword", SqlDbType.VarChar).Value = CalculateMD5Hash(passWord);
+
+                    connection.Open();
+
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    command.ExecuteNonQuery();
+                    
+                    if ((returnParameter.Value).ToString() == 1.ToString())
                     {
+                        connection.Close();
                         return true;
                     }
+                    else
+                    {
+                        connection.Close();
+                        return false;
+                    }
+                    
+
+                    
+
                 }
             }
             catch (Exception e)
