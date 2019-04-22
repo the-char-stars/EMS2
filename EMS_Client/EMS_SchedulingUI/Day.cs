@@ -171,13 +171,13 @@ namespace EMS_Library
         * 
         * \return <b>bool</b> - return the if the appointment was deleted or not
         */
-        public bool DeleteAppointment(int timeSlot, bool isAppointmentID = false)
+        public bool DeleteAppointment(int appointmentID, int timeSlot, bool isAppointmentID = false)
         {
             if (isAppointmentID)
             {
                 for (int i = 0; i < lAppointments.Count; i++)
                 {
-                    if (lAppointments[i].AppointmentID == timeSlot)
+                    if (lAppointments[i].AppointmentID == appointmentID)
                     {
                         Logging.Log("Day", "DeleteAppointment", string.Format("Appointment {0} deleted.", lAppointments[timeSlot].AppointmentID));
                         lAppointments[i] = new Appointment(-1, -1, -1, 0);
