@@ -402,13 +402,13 @@ namespace EMS_Client.MenuOptions
                             validInfo = PrintErrorOnLine(pInitialPosition, "Middle initial error", lineOffset, errorOffset);
                         }
 
-                        //  DATE OF BIRTH
-                        lineOffset++;
-                        newPatient.DateOfBirth = _content[lineOffset].Second;
-                        if (newPatient.DateOfBirth != _content[lineOffset].Second.ToUpper() || newPatient.DateOfBirth == "")
-                        {
-                            validInfo = PrintErrorOnLine(pInitialPosition, "Date of Birth error", lineOffset, errorOffset);
-                        }
+                        ////  DATE OF BIRTH
+                        //lineOffset++;
+                        //newPatient.DateOfBirth = _content[lineOffset].Second;
+                        //if (newPatient.DateOfBirth != _content[lineOffset].Second.ToUpper() || newPatient.DateOfBirth == "")
+                        //{
+                        //    validInfo = PrintErrorOnLine(pInitialPosition, "Date of Birth error", lineOffset, errorOffset);
+                        //}
 
                         // GENDER 
                         lineOffset++;
