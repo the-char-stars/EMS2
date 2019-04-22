@@ -34,6 +34,8 @@ namespace EMS_ClientUI_V2
 
         public AppointmentScheduler(Scheduling s, Demographics d, Appointment a, DateTime da, int ts, UpdateDisplay upd, bool ud = false)
         {
+            Logging.Log("AppointmentScheduler is initiated");
+
             InitializeComponent();
             isUpdate = ud;
             updateDisplay = upd;
@@ -51,6 +53,7 @@ namespace EMS_ClientUI_V2
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
+            Logging.Log("Cancel button pressed in AppointmentScheduler pop up window");
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
