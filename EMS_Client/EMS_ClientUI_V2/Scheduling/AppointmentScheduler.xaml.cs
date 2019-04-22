@@ -30,10 +30,12 @@ namespace EMS_ClientUI_V2
 
         DateTime selectedDate;
         int timeSlot;
+        bool isUpdate;
 
-        public AppointmentScheduler(Scheduling s, Demographics d, Appointment a, DateTime da, int ts, UpdateDisplay upd)
+        public AppointmentScheduler(Scheduling s, Demographics d, Appointment a, DateTime da, int ts, UpdateDisplay upd, bool ud = false)
         {
             InitializeComponent();
+            isUpdate = ud;
             updateDisplay = upd;
             timeSlot = ts;
             selectedDate = da;
@@ -88,7 +90,15 @@ namespace EMS_ClientUI_V2
                 {
                     appointment.DependantID = dependant.PatientID;
                 }
-                scheduling.ScheduleAppointment(appointment, selectedDate, timeSlot - 1);
+
+                if (isUpdate)
+                {
+                    scheduling.UpdateAppointmentInfo(appointment.AppointmentID, primary.PatientID, dependant == null ? -1 : dependant.PatientID, 0);
+                }
+                else
+                {
+                    scheduling.ScheduleAppointment(appointment, selectedDate, timeSlot - 1);
+                }
                 updateDisplay(selectedDate);
                 DialogHost.CloseDialogCommand.Execute(null, null);
             }

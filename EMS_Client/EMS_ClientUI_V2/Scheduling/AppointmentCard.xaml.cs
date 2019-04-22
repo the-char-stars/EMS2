@@ -106,7 +106,8 @@ namespace EMS_ClientUI_V2
 
         void EditAppointment(object sender, EventArgs e)
         {
-
+            Frame f = new Frame() { Content = new AppointmentScheduler(scheduling, demographics, appointment, selectedDate, timeSlot, updateDisplay, true) };
+            dialogHost.ShowDialog(f);
         }
 
         void CancelAppointment(object sender, EventArgs e)
