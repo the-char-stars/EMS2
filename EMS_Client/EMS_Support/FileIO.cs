@@ -46,7 +46,7 @@ namespace EMS_Library
 
         #region Constant Variables
         private static bool isDatabaseSaved = true;
-        private static DataSet currentDataSet = null;
+        public static DataSet currentDataSet = null;
         private const string databasePath = "./DBase";              /**< The constant path to the database folder*/
         private const string databaseName = "DBase.xml";            /**< The name of the database file.*/
         private const string masterFileName = "masterFile.txt";     /**< The name of the master file.*/

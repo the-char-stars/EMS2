@@ -38,11 +38,17 @@ namespace EMS_ClientUI_V2
             }
 
             lbiLogOut.Selected += LbiLogOut_Selected;
+            lbiBackup.Selected += LbiBackup_Selected;
             chipUser.Content = Username;
             // display the main menu with the three main buttons
             MainMenuFrame.Content = new MainMenuPage(
                 this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics, scheduling, billing, ErrorMessage);
             this.Background = new ImageBrush(new BitmapImage(new Uri("../../Images/Background3.jpg", UriKind.Relative)));
+        }
+
+        private void LbiBackup_Selected(object sender, RoutedEventArgs e)
+        {
+            FileIO.BackupDatabase(FileIO.currentDataSet);
         }
 
         private void LbiLogOut_Selected(object sender, RoutedEventArgs e)
