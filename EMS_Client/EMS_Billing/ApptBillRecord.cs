@@ -70,7 +70,7 @@ namespace EMS_Library
         */
         public string[] ToStringArray()
         {
-            string[] tmp = { AppointmentBillingID, AppointmentID, PatientID, BillingCode };
+            string[] tmp = { AppointmentID, PatientID, BillingCode };
             return tmp;
         }
     }

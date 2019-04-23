@@ -79,7 +79,7 @@ namespace EMS_Library
 
         private static readonly Dictionary<FileInputFormat, Delegate> dStringParse = new Dictionary<FileInputFormat, Delegate>
             {
-                { FileInputFormat.MasterBillingCode, new Func<string, KeyValuePair<string, string[]>>(ParseMasterBillingCodeString) },
+                { FileInputFormat.MasterBillingCode, new Func<string, KeyValuePair<string, object[]>>(ParseMasterBillingCodeString) },
                 { FileInputFormat.GovernmentResponse, new Func<string, KeyValuePair<string, string[]>>(ParseGovernmentResponseString) },
                 { FileInputFormat.BillingOutput, new Func<string, KeyValuePair<string, string[]>>(ParseBillingOutputString) }
             };  /**< The functions used to parse each of the FileInputFormat file types*/
@@ -490,11 +490,11 @@ namespace EMS_Library
         * 
         * \see ParseBillingOutputString(string), ParseGovernmentResponseString(string)
         */
-        private static KeyValuePair<string, string[]> ParseMasterBillingCodeString(string line)
+        private static KeyValuePair<string, object[]> ParseMasterBillingCodeString(string line)
         {
             // A665 20120401 00000913500
             string key = null;
-            string[] value = { null };
+            object[] value = { null };
             if (line.Length == 23)
             {
                 key = line.Substring(0, 4);
@@ -506,12 +506,12 @@ namespace EMS_Library
                 if (!d.IsMatch(codeString) || !DateTime.TryParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) || !Int32.TryParse(costString, out int i))
                 {
                     Logging.Log("FileIO", "ParseMasterBillingCodeString", "Error Value: " + value);
-                    return new KeyValuePair<string, string[]>(null, null);
+                    return new KeyValuePair<string, object[]>(null, null);
                 }
-                value = new string[] { codeString, dateString, costString};
-                Logging.Log("FileIO", "ParseMasterBillingCodeString", value);                
+                value = new object[] { codeString, dt, costString};
+                Logging.Log("FileIO", "ParseMasterBillingCodeString", value.ToString());                
             }
-            return new KeyValuePair<string, string[]>(key, value);
+            return new KeyValuePair<string, object[]>(key, value);
         }
 
         /**
@@ -606,7 +606,7 @@ namespace EMS_Library
             {
                 try
                 {
-                    KeyValuePair<string, string[]> kvpRecord = (KeyValuePair<string, string[]>)dStringParse[fileInputFormat].DynamicInvoke(inputLine);
+                    KeyValuePair<string, object[]> kvpRecord = (KeyValuePair<string, object[]>)dStringParse[fileInputFormat].DynamicInvoke(inputLine);
                     if (kvpRecord.Key != null)
                     {
                         if (!dCurrentBaseTable.ContainsKey(kvpRecord.Key)) { baseTable.Rows.Add(kvpRecord.Value); }
@@ -948,7 +948,7 @@ namespace EMS_Library
                         dataRow[0] = GenerateTableIDString(tableName);
                         dataSet.Tables[dTableNames[tableName]].Rows.Add(dataRow);
                     }
-                    else if (!dCurrentTableRecords.ContainsKey(dataRow[0])) { dataSet.Tables[dTableNames[tableName]].Rows.Add(dataRow); }
+                    else if (!dCurrentTableRecords.ContainsKey(dataRow[0]) || tableName == TableNames.AppointmentBills) { dataSet.Tables[dTableNames[tableName]].Rows.Add(dataRow); }
                     else
                     {
                         Logging.Log("FileIO", "AddRecordToDataTable", string.Format("Record with ID {0} already exists in table {1}", dataRow[0], dTableNames[tableName]));

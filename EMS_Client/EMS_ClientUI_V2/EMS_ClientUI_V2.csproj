@@ -87,6 +87,9 @@
     <Compile Include="Scheduling\AppointmentCard.xaml.cs">
       <DependentUpon>AppointmentCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scheduling\AppointmentEditor.xaml.cs">
+      <DependentUpon>AppointmentEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scheduling\ScheduleRecallPage.xaml.cs">
       <DependentUpon>ScheduleRecallPage.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
     <Page Include="Scheduling\AppointmentCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scheduling\AppointmentEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Scheduling\AppointmentScheduler.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -120,7 +120,8 @@ namespace EMS_ClientUI_V2
 
         void AddCodesAndNotes(object sender, EventArgs e)
         {
-            
+            Frame f = new Frame() { Content = new AppointmentEditor(scheduling, demographics, appointment, billing, selectedDate, timeSlot, updateDisplay, true) };
+            dialogHost.ShowDialog(f);
         }
     }
 }

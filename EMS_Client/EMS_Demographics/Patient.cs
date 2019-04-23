@@ -176,6 +176,11 @@ namespace EMS_Library
             return new string[] { this._patientID.ToString(), this._firstName, this._lastName, this._hcn, this._mInitial, this._dateOfBirth.ToString(), this._sex, this._headOfHouse, this._addressLine1,this._addressLine2,this._city,this._province,this._phoneNum, this._postalCode };
         }
 
+        public string GetName()
+        {
+            return string.Format("{0} {1}", FirstName, LastName);
+        }
+
         /**
         * \brief <b>Brief Description</b> - Patient <b><i>class method</i></b> - THis method will be called 
         * \details <b>Details</b>

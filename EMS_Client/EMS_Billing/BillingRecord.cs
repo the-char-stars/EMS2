@@ -54,7 +54,7 @@ namespace EMS_Library
             try
             {
                 BillingCode = s[0].ToString();
-                EffectiveDate = DateTime.ParseExact(s[1].ToString(),"yyyymmdd", CultureInfo.InvariantCulture);                
+                EffectiveDate = DateTime.Parse(s[1].ToString());                
                 Cost = Double.Parse(s[2].ToString()) / 10000;
             }
             catch (Exception e)
@@ -62,6 +62,12 @@ namespace EMS_Library
                 Logging.Log(e, "BillingRecord", "Constructor", "FAILED parsing from data row");
             }
         }
+
+        public override string ToString()
+        {
+            return BillingCode;
+        }
+
         /**
         * \brief <b>Brief Description</b> - Billing<b><i>class method</i></b> - This checks any DateTime and validates the given time to confirm it is after the effective date.
         * \details <b>Details</b>

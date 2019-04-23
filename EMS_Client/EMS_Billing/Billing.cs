@@ -144,6 +144,19 @@ namespace EMS_Library
             }
         }
 
+        public List<ApptBillRecord> GetApptBillRecords(int appointmentID)
+        {
+            List<ApptBillRecord> lappt = new List<ApptBillRecord>();
+            foreach (ApptBillRecord abr in appointmentBillingRecords.Values)
+            {
+                if (Int32.Parse(abr.AppointmentID) == appointmentID)
+                {
+                    lappt.Add(abr);
+                }
+            }
+            return lappt;
+        }
+
         /**
         * \brief <b>Brief Description</b> - Billing<b> <i>class method</i></b> - This adds a recall flag to an appointment
         * \details <b>Details</b>
@@ -164,7 +177,6 @@ namespace EMS_Library
         */
         public bool FlagAppointment(Scheduling obj, int appointmentID, int recallFlag)
         {
-
             try
             {
                 Logging.Log("Billing", "AddNewRecord", ("Flagged appointment for reccall Appointment ID: " + appointmentID + " Recall Flag: " + recallFlag));
