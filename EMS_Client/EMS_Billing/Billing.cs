@@ -60,7 +60,7 @@ namespace EMS_Library
                 allBillingCodes.Add(s[0], new BillingRecord(s));
             }
 
-            foreach (string[] s in FileIO.ConvertTableToDictionary(FileIO.GetDataTable(FileIO.TableNames.AppointmentBills)).Values)
+            foreach (string[] s in FileIO.ConvertTableToList(FileIO.GetDataTable(FileIO.TableNames.AppointmentBills)))
             {
                 appointmentBillingRecords.Add(new ApptBillRecord(s));
             }
@@ -89,12 +89,11 @@ namespace EMS_Library
             {
                 if (appointmentID != null && patientID != null && billingCode != null && allBillingCodes.ContainsKey(billingCode.ToUpper()))
                 {
-                    string apptBillingID = FileIO.GenerateTableIDString(FileIO.TableNames.AppointmentBills);
-                    string[] userInfo = { apptBillingID, appointmentID, patientID, billingCode.ToUpper() };
+                    string[] userInfo = { appointmentID, patientID, billingCode.ToUpper() };
                     appointmentBillingRecords.Add(new ApptBillRecord(userInfo));
                     SaveApptBillingRecords();
 
-                    Logging.Log("Billing", "AddNewRecord", ("Adding " + billingCode + " to Appointment ID : " + appointmentID + " Patient ID : " + patientID + " For ApptBilling ID : " + apptBillingID));
+                    Logging.Log("Billing", "AddNewRecord", ("Adding " + billingCode + " to Appointment ID : " + appointmentID + " Patient ID : " + patientID));
 
                     return true;
                 }

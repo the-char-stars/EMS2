@@ -77,17 +77,16 @@ namespace EMS_ClientUI_V2
                 loginErrorMessage.Text = "";
                 loginAttempts = 0;
             }
-
-            if (FileIO.CheckUser(userName.Text, userPassword.Password.ToString()))
+            FileIO.AccessLevel ac = FileIO.CheckUser(userName.Text, userPassword.Password.ToString());
+            if (ac != FileIO.AccessLevel.InvalidCredentials)
             {
-
                 isValidPass = true;
                 mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 if (mainWindow != null)
                 {
                     Logging.Log("User logged in");
                     // display the main page on the main window
-                    mainWindow.ContentFrame.Content = new MainPage();
+                    mainWindow.ContentFrame.Content = new MainPage(userName.Text, ac, mainWindow);
 
                     // close the log in window
                     this.Close();

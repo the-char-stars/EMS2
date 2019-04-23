@@ -37,14 +37,14 @@
                     <DockPanel LastChildFill="False">
                         <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Text="EMS 2.0 - A secure medical application" VerticalAlignment="Center" Margin="24,0"/>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
-                            <ListBox Width="100">
-                                <ListBoxItem>
+                            <ListBox Width="100">   
+                                <ListBoxItem Name="lbiBackup">
                                     <DockPanel LastChildFill="False">
                                         <materialDesign:PackIcon Kind="Build" DockPanel.Dock="Left"/>
-                                        <TextBlock DockPanel.Dock="Right">Settings</TextBlock>
+                                        <TextBlock DockPanel.Dock="Right">Backup</TextBlock>
                                     </DockPanel>
                                 </ListBoxItem>
-                                <ListBoxItem>
+                                <ListBoxItem Name="lbiLogOut">
                                     <DockPanel LastChildFill="False">
                                         <materialDesign:PackIcon Kind="Logout" DockPanel.Dock="Left"/>
                                         <TextBlock DockPanel.Dock="Right">Log Out</TextBlock>
@@ -52,7 +52,7 @@
                                 </ListBoxItem>
                             </ListBox>
                         </materialDesign:PopupBox>
-                        <materialDesign:Chip DockPanel.Dock="Right" Content="Admin" Icon="A" VerticalAlignment="Center"/>
+                        <materialDesign:Chip Name="chipUser" DockPanel.Dock="Right" Content="Admin" Icon="A" VerticalAlignment="Center"/>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Frame x:Name="MainMenuFrame" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />

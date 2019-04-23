@@ -50,10 +50,9 @@ namespace EMS_Library
         {
             try
             {
-                AppointmentBillingID = s[0].ToString();
-                AppointmentID = s[1].ToString();
-                PatientID = s[2].ToString();
-                BillingCode = s[3].ToString();
+                AppointmentID = s[0].ToString();
+                PatientID = s[1].ToString();
+                BillingCode = s[2].ToString();
             }
             catch (Exception e)
             {

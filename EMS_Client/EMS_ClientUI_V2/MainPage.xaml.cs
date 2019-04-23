@@ -24,16 +24,37 @@ namespace EMS_ClientUI_V2
         Demographics demographics = new Demographics();
         Scheduling scheduling = new Scheduling();
         Billing billing = new Billing();
+        MainWindow mainWindow;
 
-        public MainPage()
+        public MainPage(string Username, FileIO.AccessLevel accessLevel, MainWindow mw)
         {
+            mainWindow = mw;
             Logging.Log("Initialize MainPage");
             InitializeComponent();
+            if (accessLevel > FileIO.AccessLevel.Root)
+            {
+                lbiBackup.Visibility = Visibility.Hidden;
+                lbiBackup.Height = 0;
+            }
 
+            lbiLogOut.Selected += LbiLogOut_Selected;
+            chipUser.Content = Username;
             // display the main menu with the three main buttons
             MainMenuFrame.Content = new MainMenuPage(
                 this.ContentFrame, this.ExtraOptionMenuFrame, this.mainDialogueHost, demographics, scheduling, billing, ErrorMessage);
             this.Background = new ImageBrush(new BitmapImage(new Uri("../../Images/Background3.jpg", UriKind.Relative)));
+        }
+
+        private void LbiLogOut_Selected(object sender, RoutedEventArgs e)
+        {
+            LogInPage login = new LogInPage(mainWindow) { Owner = mainWindow };
+            login.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            login.ShowDialog();
+
+            if (login.wasClosed)
+            {
+                mainWindow.Close();
+            }
         }
     }
 }

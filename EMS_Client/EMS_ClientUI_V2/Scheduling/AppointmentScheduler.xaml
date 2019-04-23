@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <StackPanel Margin="24" MinWidth="400">
 
-        <ComboBox x:Name="cbPrimaryPatient" materialDesign:HintAssist.Hint="Primary Patient" IsEditable="False" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0, 16, 0, 0" SelectionChanged="CbPrimaryPatient_SelectionChanged">
+        <ComboBox x:Name="cbPrimaryPatient" materialDesign:HintAssist.Hint="Primary Patient" IsEditable="True" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0, 16, 0, 0" SelectionChanged="CbPrimaryPatient_SelectionChanged">
             <ComboBox.SelectedValue>
                 <Binding Path="PatientID" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -19,7 +19,7 @@
                 </Binding>
             </ComboBox.SelectedValue>
         </ComboBox>
-        <ComboBox x:Name="cbSecondaryPatient" materialDesign:HintAssist.Hint="Secondary Patient" IsEditable="False" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0, 16, 0, 0" SelectionChanged="CbSecondaryPatient_SelectionChanged">
+        <ComboBox x:Name="cbSecondaryPatient" materialDesign:HintAssist.Hint="Secondary Patient" IsEditable="True" Grid.Column="1" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0, 16, 0, 0" SelectionChanged="CbSecondaryPatient_SelectionChanged">
             <ComboBox.SelectedValue>
                 <Binding Path="PatientID" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -30,11 +30,11 @@
         </ComboBox>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="69*"/>
-                <ColumnDefinition Width="307*"/>
-                <ColumnDefinition Width="376*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel" Name="btnCancel" Margin="0, 16, 8, 0" Click="BtnCancel_Click" Grid.ColumnSpan="2"/>
+            <Button Content="Cancel" Name="btnCancel" Margin="0, 16, 8, 0" Click="BtnCancel_Click"/>
             <Button Content="OK" Name="btnOk" Grid.Column="2" Margin="8, 16, 0, 0" Click="BtnOk_Click"/>
 
         </Grid>

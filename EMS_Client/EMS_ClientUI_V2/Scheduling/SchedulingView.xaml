@@ -19,12 +19,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="64"/>
                     <RowDefinition/>
-                    <RowDefinition Height="64"/>
                 </Grid.RowDefinitions>
                 <materialDesign:ColorZone Mode="PrimaryMid" Padding="8" Grid.Row="0">
                     <TextBlock FontSize="36" Text="Appointments" TextAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"></TextBlock>
                 </materialDesign:ColorZone>
-                <Button Grid.Row="2" Margin="16" Content="Update Appointment" Name="btnUpdateAppointment" Click="BtnUpdateAppointment_Click"/>
                 <ScrollViewer Grid.Row="1" Margin="8, 8, 0, 8">
                     <StackPanel Name="lvTodaysSchedule" VerticalAlignment="Stretch" Margin="8"/>
                 </ScrollViewer>

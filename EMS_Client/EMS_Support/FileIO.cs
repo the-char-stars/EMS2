@@ -41,7 +41,7 @@ namespace EMS_Library
         #region Enums
         public enum TableNames : byte { Patients, Schedule, BillingCodes, Appointments, AppointmentBills, Users };     /**<\enum The Enums to reference which table the function wishes to access/modify.*/
         public enum FileInputFormat : byte { MasterBillingCode, BillingOutput, GovernmentResponse };                   /**<\enum The Enums to reference which parse type to use when parsing input files.*/
-        public enum AccessLevel : int { InvalidCredentials = -1, Root, Physician, Reception };                         /**<\enum The Enums representing the level of access the user has*/
+        public enum AccessLevel : int { InvalidCredentials = -1, Root = 1, Physician, Reception };                         /**<\enum The Enums representing the level of access the user has*/
         #endregion
 
         #region Constant Variables
@@ -347,6 +347,22 @@ namespace EMS_Library
             return new Dictionary<string, string[]>();
         }
 
+        public static List<string[]> ConvertTableToList(DataTable dataTable)
+        {
+            if (dataTable != null)
+            {
+                Logging.Log("FileIO", "ConvertTableToList", string.Format("Converting Table {0} to List<string[]>", dataTable.TableName));
+                List<string[]> lDataTable = new List<string[]>();
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    lDataTable.Add(ConvertRowToStringArray(dataRow));                   
+                }
+                return lDataTable;
+            }
+            Logging.Log("FileIO", "ConvertTableToList", "dataTable is null");
+            return new List<string[]>();
+        }
+
         /**
         * \brief <b>Brief Description</b> - FileIO <b><i>class method</i></b> - This function converts a DataRow to a string[]
         * \details <b>Details</b>
@@ -622,7 +638,8 @@ namespace EMS_Library
         {
             bool saveSuccessful = true;
             if (!isDatabaseSaved)
-            {                
+            {
+                isDatabaseSaved = true;
                 string s;
                 try
                 {
@@ -654,8 +671,7 @@ namespace EMS_Library
                             bulkCopy.DestinationTableName = dTableNames[t];
                             bulkCopy.WriteToServer(currentDataSet.Tables[dTableNames[t]]);          // writing data to the sql server database.
                         }
-                    }
-                    isDatabaseSaved = true;
+                    }                    
                 }
                 catch (Exception e)
                 {
@@ -1112,7 +1128,7 @@ namespace EMS_Library
             return false;
         }
 
-        public static bool CheckUser(string userName,string passWord)
+        public static AccessLevel CheckUser(string userName,string passWord)
         {
             try
             {
@@ -1129,28 +1145,14 @@ namespace EMS_Library
                     returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     command.ExecuteNonQuery();
-                    
-                    if ((returnParameter.Value).ToString() == 1.ToString())
-                    {
-                        connection.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        connection.Close();
-                        return false;
-                    }
-                    
-
-                    
-
+                    return (AccessLevel)((int)returnParameter.Value);
                 }
             }
             catch (Exception e)
             {
                 Logging.Log(e, "FileIO", "CheckUser", "Unable to CheckUser check User_Login.");
             }
-            return false;
+            return AccessLevel.InvalidCredentials;
         }
 
         private static void updateStringToHash()
