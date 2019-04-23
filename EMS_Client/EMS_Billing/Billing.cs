@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -240,8 +241,9 @@ namespace EMS_Library
         */
         public List<string> ReconcileMonthlyBilling (string monthFilePath = "govFile.txt")
         {
-            string tmpYear = monthFilePath.Substring(0, 4);
-            string tmpMonth = monthFilePath.Substring(4, 2);
+            string[] fn = monthFilePath.Split('\\');
+            string tmpYear = fn.Last().Substring(0, 4);
+            string tmpMonth = fn.Last().Substring(4, 2);
 
             double totalBilled = 0;
             double totalRcvd = 0;
@@ -277,16 +279,16 @@ namespace EMS_Library
             totalRcvd = totalRcvd / 10000;
 
             theSummary.Add("TotalBilled", totalBilled);
-            theSummaryDisplayed.Add("Total Billed : " + totalBilled.ToString());
+            theSummaryDisplayed.Add("Total Billed : " + totalBilled.ToString("C2", CultureInfo.CurrentCulture));
 
             theSummary.Add("TotalReceived", totalRcvd);
-            theSummaryDisplayed.Add("Total Received : " + totalRcvd.ToString());
+            theSummaryDisplayed.Add("Total Received : " + totalRcvd.ToString("C2", CultureInfo.CurrentCulture));
 
             theSummary.Add("ReceivedPercentage", ((totalRcvd / totalBilled) * 100));
-            theSummaryDisplayed.Add("Received Percentage : " + ((totalRcvd / totalBilled) * 100).ToString());
+            theSummaryDisplayed.Add("Received Percentage : " + ((totalRcvd / totalBilled) * 100).ToString("C2", CultureInfo.CurrentCulture));
 
             theSummary.Add("AverageBilling", (totalRcvd / reconciledAppointment.Count));
-            theSummaryDisplayed.Add("Average Billing : " + (totalRcvd / reconciledAppointment.Count).ToString());
+            theSummaryDisplayed.Add("Average Billing : " + (totalRcvd / reconciledAppointment.Count).ToString("C2", CultureInfo.CurrentCulture));
 
             theSummary.Add("NumberOfFollowUps", totalFlagged);
             theSummaryDisplayed.Add("Number of Follow Ups : " + totalFlagged.ToString());

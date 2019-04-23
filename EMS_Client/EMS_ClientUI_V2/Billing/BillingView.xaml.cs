@@ -75,9 +75,9 @@ namespace EMS_ClientUI_V2
         private void ReconcileMonthlyReport(DateTime dt)
         {
             // format the name of the text file
-            string date = string.Format(@"Reports/{0}{1}govFile.txt", dt.Year, dt.Month);
+            string date = string.Format(@"Reports\{0,2:D2}{1,2:D2}", dt.Year, dt.Month);
             // check if the report generation was successful
-            List<string> ls = billing.ReconcileMonthlyBilling(date);
+            List<string> ls = billing.GenerateMonthlyBillingSummary(date);
             if (ls.Count != 0)
             {
                 snackBar.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
@@ -86,6 +86,8 @@ namespace EMS_ClientUI_V2
             {
                 snackBar.MessageQueue.Enqueue("DID NOT GENERATE");
             }
+            tbReportDisplay.Text = "";
+            tbReportTitle.Content = "Monthly Report Summary";
             foreach (string s in ls)
             {
                 tbReportDisplay.Text += s + '\n';
