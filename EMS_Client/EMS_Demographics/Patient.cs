@@ -32,8 +32,8 @@ namespace EMS_Library
     * \author <i>The Char Stars - Divyangbhai Dankhara</i>
     */
     public class Patient
-    {        
-        private int _patientID;                 
+    {
+        private int _patientID;
         private string _firstName = null;
         private string _lastName = null;
         private string _hcn = null;
@@ -80,7 +80,7 @@ namespace EMS_Library
         public Patient(Demographics d = null)
         {
             if (d == null) d = new Demographics();
-            Logging.Log("Patient", "Patient",  "Initializing New the Patient object with default constructor");
+            Logging.Log("Patient", "Patient", "Initializing New the Patient object with default constructor");
             this.DateOfBirth = DateTime.Now.AddDays(-1);
             demographics = d;
             // default constructor
@@ -104,7 +104,7 @@ namespace EMS_Library
         */
         public Patient(Demographics d, string[] patientRecord, bool isNew = false)
         {
-            Logging.Log("Patient", "Patient" , "Initialize the Patient object with preexisting Patient data");
+            Logging.Log("Patient", "Patient", "Initialize the Patient object with preexisting Patient data");
             demographics = d;
             int i = 0;
 
@@ -123,6 +123,7 @@ namespace EMS_Library
             Province = patientRecord[i++];
             PhoneNumber = patientRecord[i++];
             PostalCode = patientRecord[i++];
+            ResponseCode = patientRecord[i++];
         }
 
         /**
@@ -160,7 +161,10 @@ namespace EMS_Library
             Province = patientRecord[i++];
             PhoneNumber = patientRecord[i++];
             PostalCode = patientRecord[i++];
+            ResponseCode = patientRecord[i++];
         }
+
+        public string ResponseCode { get; set; }
 
         /**
         * \brief <b>Brief Description</b> Patient - Constructor <b><i>class method</i></b> - This method used to return all the data member as string array.

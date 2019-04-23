@@ -80,6 +80,12 @@ namespace EMS_Library
             return dApps;
         }
 
+        public void CheckInAppointment(int appointmentID)
+        {
+            dAppointments[appointmentID].CheckIn();
+            SaveAppointmentsToDatabase();
+        }
+
         /**
         * \brief <b>Brief Description</b> - Program <b><i>class method</i></b> - Get all weeks from the database.
         * \details <b>Details</b>

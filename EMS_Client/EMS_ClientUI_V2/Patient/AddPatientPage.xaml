@@ -197,6 +197,7 @@
                         <Binding Path="PostalCode" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <domain:PostalCodeValidationRule/>
+                                <domain:NotEmptyValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

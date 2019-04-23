@@ -33,6 +33,8 @@ namespace EMS_Library
         public int PatientID { get; set; }      /**< The unique ID by which each patient can be found by. */
         public int DependantID { get; set; }    /**< The unique ID by which the person that showed up to the appointment with the patient can be found by. */
         public int RecallFlag { get; set; }     /**< The flag that indicates how long until the patient needs to be recalled for another appointment. */
+        public string AppointmentNotes { get; set; }     
+        public int IsCheckedIn { get; set; }     
 
         /**
         * \brief <b>Brief Description</b> - Program <b><i>Constructor</i></b> - constructs with string array
@@ -50,6 +52,7 @@ namespace EMS_Library
                     PatientID = Int32.Parse(appointmentInfo[1]);
                     DependantID = Int32.Parse(appointmentInfo[2]);
                     RecallFlag = Int32.Parse(appointmentInfo[3]);
+                    IsCheckedIn = Int32.Parse(appointmentInfo[4]);
                 }
                 catch (FormatException e) { Logging.Log(e, "Appointment", "Constructor", "FormatException"); }
                 catch (ArgumentNullException e) { Logging.Log(e, "Appointment", "Constructor", "ArgumentNullException"); }
@@ -68,6 +71,7 @@ namespace EMS_Library
             PatientID = patientID;
             DependantID = dependantID;
             RecallFlag = recallFlag;
+            IsCheckedIn = 0;
         }
 
         /**
@@ -82,6 +86,7 @@ namespace EMS_Library
             PatientID = patientID;
             DependantID = dependantID;
             RecallFlag = recallFlag;
+            IsCheckedIn = 0;
         }
 
         /**
@@ -96,6 +101,12 @@ namespace EMS_Library
             PatientID = -1;
             DependantID = -1;
             RecallFlag = -1;
+            IsCheckedIn = 0;
+        }
+
+        public void CheckIn()
+        {
+            IsCheckedIn = 1;
         }
 
         /**
@@ -123,7 +134,7 @@ namespace EMS_Library
         */
         public string[] ToStringArray()
         {
-            return new string[] { AppointmentID.ToString(), PatientID.ToString(), DependantID.ToString(), RecallFlag.ToString() };
+            return new string[] { AppointmentID.ToString(), PatientID.ToString(), DependantID.ToString(), RecallFlag.ToString(), IsCheckedIn.ToString() };
         }
     }
 }

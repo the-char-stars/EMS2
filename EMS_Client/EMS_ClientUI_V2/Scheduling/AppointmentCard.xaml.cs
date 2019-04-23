@@ -54,13 +54,14 @@ namespace EMS_ClientUI_V2
                 btnCancelAppointment.Content = "Schedule Appointment";
                 btnCancelAppointment.Click += ScheduleAppointment;
 
+                btnCheckIn.Visibility = Visibility.Hidden;
                 btnEditAppointment.Visibility = Visibility.Hidden;
 
                 if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0)
                 {
                     cardBackground.Background = Brushes.LightGray;
                     btnCancelAppointment.Visibility = Visibility.Hidden;
-                    btnEditAppointment.Visibility = Visibility.Hidden;
+                    btnEditAppointment.Visibility = Visibility.Hidden;                    
                 }
             }
             else
@@ -84,8 +85,9 @@ namespace EMS_ClientUI_V2
                     chipSecondaryPatient.Visibility = Visibility.Hidden;
                 }
 
-                if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0)
+                if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0 || appointment.IsCheckedIn == 1)
                 {
+                    btnCheckIn.Visibility = Visibility.Hidden;
                     cardBackground.Background = Brushes.LightGray;
                     czState.Mode = ColorZoneMode.PrimaryDark;
                     btnEditAppointment.Visibility = Visibility.Hidden;
@@ -115,6 +117,13 @@ namespace EMS_ClientUI_V2
         void CancelAppointment(object sender, EventArgs e)
         {
             scheduling.CancelAppointment(appointment.AppointmentID, timeSlot);
+            updateDisplay(selectedDate);
+        }
+
+        private void BtnCheckIn_Click(object sender, RoutedEventArgs e)
+        {
+            scheduling.CheckInAppointment(appointment.AppointmentID);
+            appointment.CheckIn();
             updateDisplay(selectedDate);
         }
 

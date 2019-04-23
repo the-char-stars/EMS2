@@ -11,7 +11,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,6 +74,25 @@ namespace EMS_Library
         {
             if(patient != null)
             {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://ems-api.azurewebsites.net/api/hcn/update");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = '{' + string.Format("\"hcn\":\"{0}\", \"hcv\":\"{1}\", \"post\":\"{2}\"", patient.HCN.Substring(0, 10), patient.HCN.Substring(10, 2), patient.PostalCode) + '}';
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                }
+
                 FileIO.AddRecordToDataTable(patient.ToStringArray(), FileIO.TableNames.Patients);
                 Logging.Log("Demographics", "AddNewPatient", String.Format("Adding new patient with PatientHCN {0} to the database file", patient.HCN));
                 GetPatientList();
@@ -217,6 +238,28 @@ namespace EMS_Library
         {
             if(patient != null)
             {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://ems-api.azurewebsites.net/api/hcn/validate");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = '{' + string.Format("\"hcn\":\"{0}\", \"hcv\":\"{1}\", \"post\":\"{2}\"", patient.HCN.Substring(0, 10), patient.HCN.Substring(10, 2), patient.PostalCode) + '}';
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    string s = result.Split(':')[1];
+                    string t = s.Split('\"')[1];
+                    patient.ResponseCode = t;
+                }
+
                 dPatientRoster[patient.PatientID] = patient;
                 FileIO.UpdateRecordFromTable(patient.ToStringArray(), FileIO.TableNames.Patients);
                 Logging.Log("Demographics", "UpdatePatient", "Update the patient to the patient roster");
@@ -227,7 +270,7 @@ namespace EMS_Library
                 FileIO.AddRecordToDataTable(patient.ToStringArray(), FileIO.TableNames.Patients);
                 Logging.Log("Demographics", "UpdatePatient", "Adding the patient to the patient roster");
             }            
-        }
+            }
 
 
 

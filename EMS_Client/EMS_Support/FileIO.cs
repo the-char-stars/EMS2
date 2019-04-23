@@ -61,11 +61,11 @@ namespace EMS_Library
         #region Dictionaries
         public static readonly Dictionary<TableNames, string[]> dColumns = new Dictionary<TableNames, string[]>
             {
-                { TableNames.Patients, new string[] { "PatientID", "FirstName", "LastName", "HCN", "MInitial", "DateOfBirth", "Gender", "HeadOfHouse", "AddressLine1", "AddressLine2", "City", "Province", "PhoneNum", "PostalCode" } },
+                { TableNames.Patients, new string[] { "PatientID", "FirstName", "LastName", "HCN", "MInitial", "DateOfBirth", "Gender", "HeadOfHouse", "AddressLine1", "AddressLine2", "City", "Province", "PhoneNum", "PostalCode", "ResponseCode" } },
                 { TableNames.Schedule, new string[] { "AppointmentID", "AppointmentDate", "AppointmentTimeSlot" } },
                 { TableNames.AppointmentBills, new string[] { "appointmentBillingID", "appointmentID", "patientID", "billingCode" } },
                 { TableNames.BillingCodes, new string[] { "BillingCode", "Effective_Date", "Cost" } },
-                { TableNames.Appointments, new string[] { "AppointmentID", "PatientID", "DependantID", "recallFlag" , "AppointmentNotes" } },
+                { TableNames.Appointments, new string[] { "AppointmentID", "PatientID", "DependantID", "recallFlag", "IsCheckedIn" } },
                 { TableNames.Users, new string[] { "UserID", "UserName", "Password", "AccessLevel" } }
             };  /**< The names of the columns in each TableNames enum.*/
 

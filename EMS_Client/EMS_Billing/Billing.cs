@@ -181,13 +181,16 @@ namespace EMS_Library
                         if (a.AppointmentID.ToString() == abr.AppointmentID)
                         {
                             patient = demo.GetPatientByID(Int32.Parse(abr.PatientID));
-                            tmp = schedule.GetDateByAppointmentID(a.AppointmentID).ToString("yyyyMMdd");
-                            tmp += patient.HCN;
-                            tmp += patient.Sex;
-                            tmp += abr.BillingCode;
-                            tmp += (allBillingCodes[abr.BillingCode].Cost * 10000).ToString("00000000000");
+                            if (patient.ResponseCode != "PUNKO")
+                            {
+                                tmp = schedule.GetDateByAppointmentID(a.AppointmentID).ToString("yyyyMMdd");
+                                tmp += patient.HCN;
+                                tmp += patient.Sex;
+                                tmp += abr.BillingCode;
+                                tmp += (allBillingCodes[abr.BillingCode].Cost * 10000).ToString("00000000000");
 
-                            billingFileInfo.Add(tmp);
+                                billingFileInfo.Add(tmp);
+                            }
                         }
                     }
                 }
