@@ -78,7 +78,7 @@ namespace EMS_ClientUI_V2
             }
             else
             {
-                tbPrimaryPatient.Text = demographics.GetPatientByID(appointment.PatientID).GetName();
+                tbDependantPatient.Text = demographics.GetPatientByID(appointment.DependantID).GetName();
                 btnSecondaryAdd.Click += BtnSecondaryAdd_Click; ;
             }
         }

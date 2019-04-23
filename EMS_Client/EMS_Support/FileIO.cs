@@ -45,6 +45,8 @@ namespace EMS_Library
         #endregion
 
         #region Constant Variables
+        private static bool isDatabaseSaved = true;
+        private static DataSet currentDataSet = null;
         private const string databasePath = "./DBase";              /**< The constant path to the database folder*/
         private const string databaseName = "DBase.xml";            /**< The name of the database file.*/
         private const string masterFileName = "masterFile.txt";     /**< The name of the master file.*/
@@ -94,64 +96,6 @@ namespace EMS_Library
         * \return <b>string</b> - The full relative path to the database
         */
         public static string GetFullPath() { return string.Format(databaseFullPathFormat, databasePath, databaseName); }
-
-        /**
-        * \brief <b>Brief Description</b> - FileIO <b><i>class method</i></b> - Checks to see if there have been any structural changes to the database
-        * \details <b>Details</b>
-        *
-        * Checks to see if there have been any structural changes to the database and migrates the data over to the new scheme
-        * 
-        * \return <b>VOID</b>
-        */
-        public static void CheckForUpdates()
-        {
-            CreateDatabaseDirectory();
-            string dbInfoPath = string.Format(databaseFullPathFormat, databasePath, databaseInfoFileName);
-            bool shouldConvert = true;
-
-            if (File.Exists(dbInfoPath)) { shouldConvert = (File.ReadAllLines(dbInfoPath)[0] != currentDatabaseVersion); }
-            else { File.WriteAllText(dbInfoPath, currentDatabaseVersion); }
-
-            if (shouldConvert)
-            {
-                try
-                {
-                    DataSet newDataSet = GenerateEmptyDataset();
-                    DataSet oldDataSet = GetDataSet(true);
-                    foreach (DataTable dt in oldDataSet.Tables)
-                    {
-                        List<DataColumn> ldc = new List<DataColumn>();
-                        foreach (DataColumn dc in dt.Columns)
-                        {
-                            if (!newDataSet.Tables[dt.TableName].Columns.Contains(dc.ColumnName))
-                            {
-                                ldc.Add(dc);
-                            }
-                        }
-                        foreach (DataColumn dc in ldc) { dt.Columns.Remove(dc.ColumnName); }
-                        foreach (DataColumn dc in newDataSet.Tables[dt.TableName].Columns)
-                        {
-                            if (!dt.Columns.Contains(dc.ColumnName))
-                            {
-                                dt.Columns.Add(dc.ColumnName);
-                            }
-                        }
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            newDataSet.Tables[dt.TableName].Rows.Add(ConvertRowToStringArray(dr));
-                        }
-                    }
-                    GenerateBackupDatabase();
-                    File.Delete(dbInfoPath);
-                    File.WriteAllText(dbInfoPath, currentDatabaseVersion);
-                    SaveDatabase(newDataSet);
-                }
-                catch(Exception e)
-                {
-                    Logging.Log(e, "FileIO", "CheckForUpdates");
-                }
-            }
-        }
 
         /**
         * \brief <b>Brief Description</b> - FileIO <b><i>class method</i></b> - Generate a backup database
@@ -222,64 +166,40 @@ namespace EMS_Library
         */
         private static DataSet GetDataSet(bool isCheck = false)
         {
-
-
-            /*
-            // this code is for creating xml file database
-            CreateDatabaseDirectory();           
-            if (!isCheck) CheckForUpdates();
-
-           string databaseFullPath = string.Format(databaseFullPathFormat, databasePath, databaseName);
-           if (File.Exists(databaseFullPath))
-           {
-               // If the file already exists, simply read the data into the DataSet object
-               ds.ReadXml(databaseFullPath, XmlReadMode.ReadSchema);
-           }
-           else
-           {
-               // If the file doesn't exist, create it and populate the file with an empty XML schema
-               File.CreateText(databaseFullPath).Close();
-               ds = GenerateEmptyDataset();
-               //ds.WriteXml(databaseFullPath, XmlWriteMode.WriteSchema);
-               Logging.Log("FileIO", "Constructor", "Database does not exist, creating a new empty database.");
-           }
-           */
-
-            /* --- Xml file database ends here--- */
-
-            DataSet ds = new DataSet();   // dataset which will carry the all the data table into it.
-
-            /*  reading data from database starts here */
-            string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };
-            
-            try
+            if (currentDataSet == null)
             {
-                SqlConnection conn = new SqlConnection(DatabaseConnectionString);
-                conn.Open();            // opening the connecion for the database.
-                for (int i = 0; i < databaseTables.Length; i++)
+                DataSet ds = new DataSet();   // dataset which will carry the all the data table into it.
+                /*  reading data from database starts here */
+                string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };            
+                try
                 {
-                    DataTable dt = new DataTable();
-                    string query = "select * from " + databaseTables[i];
-                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlConnection conn = new SqlConnection(DatabaseConnectionString);
+                    conn.Open();            // opening the connecion for the database.
+                    for (int i = 0; i < databaseTables.Length; i++)
+                    {
+                        DataTable dt = new DataTable();
+                        string query = "select * from " + databaseTables[i];
+                        SqlCommand cmd = new SqlCommand(query, conn);
 
 
-                    // create data adapter
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    // this will query your database and return the result to your datatable
-                    da.Fill(dt);
-                    dt.TableName = databaseTables[i];
-                    ds.Tables.Add(dt.Copy());
+                        // create data adapter
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        // this will query your database and return the result to your datatable
+                        da.Fill(dt);
+                        dt.TableName = databaseTables[i];
+                        ds.Tables.Add(dt.Copy());
                     
-                    da.Dispose();
+                        da.Dispose();
+                    }
+                    conn.Close();       // closing the connection for the database
                 }
-                conn.Close();       // closing the connection for the database
+                catch(Exception e)
+                {
+                    Logging.Log(e, "FileIO", "SaveDatabase", "Unable to read data from database Database");
+                }
+                currentDataSet = ds;
             }
-            catch(Exception e)
-            {
-                Logging.Log(e, "FileIO", "SaveDatabase", "Unable to read data from database Database");
-            }
-
-            return ds;
+            return currentDataSet;
         }
 
         /**
@@ -685,6 +605,11 @@ namespace EMS_Library
             else Logging.Log("FileIO", "UpdateBillingCodesFromFile", string.Format("File {0} does not exist. Failed to update billing codes", masterBillingCodeFilePath));
         }
 
+        public static void BackupDatabase(DataSet dataSet)
+        {
+            dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
+        }
+
         /**
         * \brief <b>Brief Description</b> - FileIO <b><i>class method</i></b> - This function saves the database
         * \details <b>Details</b>
@@ -693,54 +618,58 @@ namespace EMS_Library
         * 
         * \return <b>bool</b> - If the save was successful or not
         */
-        private static bool SaveDatabase(DataSet dataSet)
+        public static bool SaveDatabase()
         {
             bool saveSuccessful = true;
-            string s;
-            try
-            {
-                // writing the xml file
-                //dataSet.WriteXml(string.Format(databaseFullPathFormat, databasePath, databaseName), XmlWriteMode.WriteSchema);
-
-
-                    // sending all the table data to the SQL server database.
-                string[] databaseTables = new string[] { "tblPatients", "tblSchedules", "tblBillingCodes", "tblAppointments", "tblAppointmentBillingRecords", "tblUsers" };
-
-                for (int i = 0; i < dataSet.Tables.Count; i++)
+            if (!isDatabaseSaved)
+            {                
+                string s;
+                try
                 {
-                    using (SqlConnection connection = new SqlConnection(DatabaseConnectionString))
+                    // writing the xml file
+                        // sending all the table data to the SQL server database.
+                    foreach (FileIO.TableNames t in Enum.GetValues(typeof(FileIO.TableNames)))
                     {
-                        SqlCommand command = new SqlCommand("DELETE FROM "+ databaseTables[i] + ";", connection);
-                        SqlCommand command2 = new SqlCommand("DBCC CHECKIDENT('"+ databaseTables[i] + "', RESEED, 0);",connection);
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        if (i == 0 || i == 3 || i == 5) { command2.ExecuteNonQuery(); }
-                        connection.Close();
-                        
-                    }
-
-                    // using SQL bulk copy to copy entire table to the sql server
-                    using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.Default))
-                    {
-                        foreach (DataColumn col in dataSet.Tables[i].Columns)
+                        using (SqlConnection connection = new SqlConnection(DatabaseConnectionString))
                         {
-                            s = col.ColumnName;
-                            bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName); // mapping all columns with sql tabel.
+                            SqlCommand command = new SqlCommand("DELETE FROM "+ dTableNames[t] + ";", connection);
+                            SqlCommand command2 = new SqlCommand("DBCC CHECKIDENT('"+ dTableNames[t] + "', RESEED, 0);",connection);
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            if (t == TableNames.Patients || t == TableNames.Appointments || t == TableNames.Users) { command2.ExecuteNonQuery(); }
+                            connection.Close();
+                        
                         }
 
-                        bulkCopy.BulkCopyTimeout = 600;
-                        bulkCopy.DestinationTableName = databaseTables[i];
-                        bulkCopy.WriteToServer(dataSet.Tables[i]);          // writing data to the sql server database.
-                    }
-                }
+                        // using SQL bulk copy to copy entire table to the sql server
+                        using (var bulkCopy = new SqlBulkCopy(DatabaseConnectionString, SqlBulkCopyOptions.Default))
+                        {
+                            foreach (DataColumn col in currentDataSet.Tables[dTableNames[t]].Columns)
+                            {
+                                s = col.ColumnName;
+                                bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName); // mapping all columns with sql tabel.
+                            }
 
-            }
-            catch (Exception e)
-            {
-                saveSuccessful = false;
-                Logging.Log(e, "FileIO", "SaveDatabase", "Unable to save Database");
+                            bulkCopy.BulkCopyTimeout = 600;
+                            bulkCopy.DestinationTableName = dTableNames[t];
+                            bulkCopy.WriteToServer(currentDataSet.Tables[dTableNames[t]]);          // writing data to the sql server database.
+                        }
+                    }
+                    isDatabaseSaved = true;
+                }
+                catch (Exception e)
+                {
+                    saveSuccessful = false;
+                    Logging.Log(e, "FileIO", "SaveDatabase", "Unable to save Database");
+                }                
             }
             return saveSuccessful;
+        }
+
+        private static void FlagForSave(DataSet dataSet)
+        {
+            currentDataSet = dataSet;
+            isDatabaseSaved = false;
         }
 
         /**
@@ -955,7 +884,8 @@ namespace EMS_Library
                         return false;
                     }
                     Logging.Log("FileIO", "AddRecordToDataTable", string.Format("Adding record with ID {0} to table {1}", dataRow[0], dTableNames[tableName]));
-                    return save ? SaveDatabase(dataSet) : true;
+                    FlagForSave(dataSet);
+                    return true;
                 }
             }
             catch (Exception e)
@@ -1032,7 +962,8 @@ namespace EMS_Library
                     return false;
                 }
                 Logging.Log("FileIO", "UpdateRecordFromTable", string.Format("Updating record with ID {0} in table {1}", dataRow[0], dTableNames[tableName]));
-                return save ? SaveDatabase(dataSet) : true;
+                FlagForSave(dataSet);
+                return true;
             }
             return false;
         }
@@ -1101,7 +1032,8 @@ namespace EMS_Library
                 Logging.Log("FileIO", "SetDataTable", string.Format("Replacing a DataTable containing {0} records with a Datatable containing {1}", dataSet.Tables[dTableNames[tableName]].Rows.Count, newDataTable.Rows.Count));
                 dataSet.Tables[dTableNames[tableName]].Clear();
                 dataSet.Tables[dTableNames[tableName]].Merge(newDataTable);
-                return SaveDatabase(dataSet);
+                FlagForSave(dataSet);
+                return true;
             }
             return false;
         }
@@ -1227,13 +1159,13 @@ namespace EMS_Library
             {
                 DataSet ds = GetDataSet();
                 // change the current 
-                foreach (DataRow r in ds.Tables[5].Rows)
+                foreach (DataRow r in ds.Tables[dTableNames[TableNames.Users]].Rows)
                 {
                     r["Username"] = CalculateMD5Hash(r["Username"].ToString());
                     r["Password"] = CalculateMD5Hash(r["Password"].ToString());
                 }
 
-                SaveDatabase(ds);
+                FlagForSave(ds);
             }
             catch (Exception e)
             {

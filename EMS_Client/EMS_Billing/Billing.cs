@@ -36,7 +36,7 @@ namespace EMS_Library
     public class Billing
     {
         public Dictionary<string, BillingRecord> allBillingCodes = new Dictionary<string, BillingRecord>(); /**< The string representation of all billing codes in the database.*/
-        private Dictionary<string, ApptBillRecord> appointmentBillingRecords = new Dictionary<string, ApptBillRecord>();  /**< The string representation of all appointment records in the database.*/
+        private List<ApptBillRecord> appointmentBillingRecords = new List<ApptBillRecord>();  /**< The string representation of all appointment records in the database.*/
         public List<string[]> flaggedEncounters = new List<string[]>();
         /**
          * \brief <b>Brief Description</b> - <b><i>Constructor</i></b> - Called upon to begin the process of handling all billing information for patients
@@ -62,7 +62,7 @@ namespace EMS_Library
 
             foreach (string[] s in FileIO.ConvertTableToDictionary(FileIO.GetDataTable(FileIO.TableNames.AppointmentBills)).Values)
             {
-                appointmentBillingRecords.Add(s[0], new ApptBillRecord(s));
+                appointmentBillingRecords.Add(new ApptBillRecord(s));
             }
 
         }
@@ -91,7 +91,7 @@ namespace EMS_Library
                 {
                     string apptBillingID = FileIO.GenerateTableIDString(FileIO.TableNames.AppointmentBills);
                     string[] userInfo = { apptBillingID, appointmentID, patientID, billingCode.ToUpper() };
-                    appointmentBillingRecords.Add(apptBillingID, new ApptBillRecord(userInfo));
+                    appointmentBillingRecords.Add(new ApptBillRecord(userInfo));
                     SaveApptBillingRecords();
 
                     Logging.Log("Billing", "AddNewRecord", ("Adding " + billingCode + " to Appointment ID : " + appointmentID + " Patient ID : " + patientID + " For ApptBilling ID : " + apptBillingID));
@@ -111,43 +111,10 @@ namespace EMS_Library
             }
         }
 
-        /**
-        * \brief <b>Brief Description</b> - Billing<b> <i>class method</i></b> - This updates billing codes under a patients appointment
-        * \details <b>Details</b>
-        *
-        * This will allow the user to update billing code under an appointmentID which will include the PatientID, AppointmentID
-        * and a billing code that will relate to how much the appointment will cost.
-        * 
-        * \param appointmentBillingID - <b>string</b> - This is the appointment billing ID.
-        * \param appointmentID - <b>string</b> - This is the appointment ID.
-        * \param patientID - <b>string</b> - This is the patient ID.
-        * \param billingCode - <b>string</b> - This is the billing code.
-        * 
-        * \return - <b>bool</b> - true if successfull and false if not    
-        * <exception cref="ArgumentException">Thrown trying to update a billing code / appointmentBillingRecord with an ID not in the dictionary. Try/Catch block, make no change on error.</exception>
-        */
-        public bool UpdateRecord (string appointmentBillingID, string appointmentID, string patientID, string billingCode)
-        {
-            try
-            {
-                Logging.Log("Billing", "UpdateRecord", ("UPDATING " + billingCode + " to Appointment ID : " + appointmentID + " Patient ID : " + patientID + " For ApptBilling ID : " + appointmentBillingID));
-                string[] userInfo = { appointmentBillingID, appointmentID, patientID, billingCode };
-                appointmentBillingRecords.Remove(appointmentBillingID);
-                appointmentBillingRecords.Add(appointmentID, new ApptBillRecord(userInfo));
-                SaveApptBillingRecords();
-                return true;
-            }
-            catch(Exception e)
-            {
-                Logging.Log(e, "Billing", "UpdateRecord", "FAILED UPDATING RECORD -EXCEPTION HIT");
-                return false;
-            }
-        }
-
         public List<ApptBillRecord> GetApptBillRecords(int appointmentID)
         {
             List<ApptBillRecord> lappt = new List<ApptBillRecord>();
-            foreach (ApptBillRecord abr in appointmentBillingRecords.Values)
+            foreach (ApptBillRecord abr in appointmentBillingRecords)
             {
                 if (Int32.Parse(abr.AppointmentID) == appointmentID)
                 {
@@ -210,7 +177,7 @@ namespace EMS_Library
             {
                 foreach (Appointment a in schedule.GetAppointmentsByMonth(new DateTime(year, month, 1)))
                 {
-                    foreach (ApptBillRecord abr in appointmentBillingRecords.Values)
+                    foreach (ApptBillRecord abr in appointmentBillingRecords)
                     {
                         if (a.AppointmentID.ToString() == abr.AppointmentID)
                         {
@@ -347,7 +314,7 @@ namespace EMS_Library
         public void SaveApptBillingRecords()
         {
             FileIO.SetDataTable(FileIO.GetDataTableStructure(FileIO.TableNames.AppointmentBills), FileIO.TableNames.AppointmentBills);
-            foreach (ApptBillRecord a in appointmentBillingRecords.Values)
+            foreach (ApptBillRecord a in appointmentBillingRecords)
             {
                 FileIO.AddRecordToDataTable(a.ToStringArray(), FileIO.TableNames.AppointmentBills);
             }
