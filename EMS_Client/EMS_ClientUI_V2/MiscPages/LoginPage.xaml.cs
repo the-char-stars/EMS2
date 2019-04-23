@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -26,7 +27,11 @@ namespace EMS_ClientUI_V2
 
         #region PRIVATE
         private bool isValidPass { get; set; }
+        private int loginAttempts { get; set; }
         private MainWindow mainWindow { get; set; }
+        private readonly TimeSpan loginAttemptInterval = TimeSpan.FromSeconds(60);
+        private readonly Stopwatch loginStopwatch = new Stopwatch();
+        private readonly int maxLoginAttempts = 3;
         #endregion
 
         public LogInPage(MainWindow main)
@@ -36,6 +41,8 @@ namespace EMS_ClientUI_V2
             wasClosed = false;
             isValidPass = false;
             mainWindow = main;
+            loginAttempts = 0;
+            loginStopwatch.Start();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -43,11 +50,34 @@ namespace EMS_ClientUI_V2
             wasClosed = (isValidPass) ? false : true;
         }
 
+        private bool CanSignIn()
+        {
+            if(this.loginStopwatch.IsRunning && this.loginStopwatch.Elapsed >= this.loginAttemptInterval)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
 
             Logging.Log("User attempting to log in");
-            
+
+            // check if the user has tried to log in more than 3 times and is on cooldown
+            if (loginAttempts >= maxLoginAttempts && !CanSignIn())
+            {
+                loginErrorMessage.Text = "Too many attempts in the past minute!";
+                return;
+            }
+            // check if the cooldown has expired and the user should be able to try to log in again
+            else if(loginAttempts >= maxLoginAttempts && CanSignIn())
+            {
+                loginErrorMessage.Text = "";
+                loginAttempts = 0;
+            }
+
             if (FileIO.CheckUser(userName.Text, userPassword.Password.ToString()))
             {
 
@@ -70,6 +100,8 @@ namespace EMS_ClientUI_V2
             {
                 loginErrorMessage.Text = "Username/Password invalid. Try again!";
                 Logging.Log("Username/Password invalid");
+                loginAttempts++;
+                loginStopwatch.Restart();
             }
         }
 
