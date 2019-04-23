@@ -1176,7 +1176,6 @@ namespace EMS_Library
 
         }
 
-
         public static string CalculateMD5Hash(string input)
         {
             // step 1, calculate MD5 hash from input

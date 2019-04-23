@@ -24,21 +24,28 @@ namespace EMS_ClientUI_V2
     public partial class PatientView : Page
     {
         Demographics demographics;
+        Scheduling scheduling;
         DialogHost dialogHost;
         ObservableCollection<Patient> patientRoster = new ObservableCollection<Patient>();
         Patient selectedPatient;
 
-        public PatientView(Demographics d, DialogHost dh)
+        public PatientView(Demographics d, DialogHost dh, Scheduling s)
         {
             Logging.Log("Initiated PatientView page");
             demographics = d;
             dialogHost = dh;
+            scheduling = s;
             InitializeComponent();
             tbNumPatients.Text = demographics.dPatientRoster.Count.ToString();
             lvPatients.ItemsSource = patientRoster;
             foreach(Patient p in demographics.dPatientRoster.Values)
             {
                 patientRoster.Add(p);
+            }
+
+            foreach(Appointment a in scheduling.GetFlaggedAppointments())
+            {
+                cbFlaggedForRecall.Items.Add(a);
             }
         }
 
@@ -120,6 +127,11 @@ namespace EMS_ClientUI_V2
                 Frame f = new Frame() { Content = new EditPatient(demographics,selectedPatient, refreshTable) };
                 dialogHost.ShowDialog(f);
             }
+        }
+
+        private void BtnFlagged_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

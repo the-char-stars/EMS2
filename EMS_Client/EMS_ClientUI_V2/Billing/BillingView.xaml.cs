@@ -77,7 +77,8 @@ namespace EMS_ClientUI_V2
             // format the name of the text file
             string date = string.Format(@"Reports/{0}{1}govFile.txt", dt.Year, dt.Month);
             // check if the report generation was successful
-            if (billing.ReconcileMonthlyBilling(date).Count != 0)
+            List<string> ls = billing.ReconcileMonthlyBilling(date);
+            if (ls.Count != 0)
             {
                 snackBar.MessageQueue.Enqueue("SUCCESSFULLY CREATED");
             }
@@ -85,7 +86,10 @@ namespace EMS_ClientUI_V2
             {
                 snackBar.MessageQueue.Enqueue("DID NOT GENERATE");
             }
-
+            foreach (string s in ls)
+            {
+                tbReportDisplay.Text += s + '\n';
+            }
             UpdateReportTree();
 
         }

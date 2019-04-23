@@ -40,7 +40,7 @@ namespace EMS_ClientUI_V2
             ContentFrame = content;
             ExtraOptionMenuFrame = extraMenu;
 
-            patientView = new PatientView(demographics, dialogHost);
+            patientView = new PatientView(demographics, dialogHost, scheduling);
             schedulingView = new SchedulingView(scheduling, demographics, billing, dialogHost);
             billingView = new BillingView(scheduling, demographics, dialogHost, billing, snackBar);
         }

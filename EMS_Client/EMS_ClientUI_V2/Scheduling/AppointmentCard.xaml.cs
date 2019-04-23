@@ -87,7 +87,9 @@ namespace EMS_ClientUI_V2
 
                 if (DateTime.Compare(selectedDate.Date, DateTime.Now.Date) < 0 || appointment.IsCheckedIn == 1)
                 {
-                    btnCheckIn.Visibility = Visibility.Hidden;
+                    btnCheckIn.Content = "Flag For Recall";
+                    btnCheckIn.Click += btnFlagForRecall_Click;
+                    tbDays.Visibility = Visibility.Visible;
                     cardBackground.Background = Brushes.LightGray;
                     czState.Mode = ColorZoneMode.PrimaryDark;
                     btnEditAppointment.Visibility = Visibility.Hidden;
@@ -100,6 +102,19 @@ namespace EMS_ClientUI_V2
                     btnCancelAppointment.Click += CancelAppointment;
                 }
             }
+        }
+
+        private void btnFlagForRecall_Click(object sender, RoutedEventArgs e)
+        {
+            if (Int32.TryParse(tbDays.Text, out int days))
+            {
+                FlagForDate(days);
+            }
+        }
+
+        private void FlagForDate(int days)
+        {
+            scheduling.UpdateAppointmentInfo(appointment.AppointmentID, days);
         }
 
         void ScheduleAppointment(object sender, EventArgs e)

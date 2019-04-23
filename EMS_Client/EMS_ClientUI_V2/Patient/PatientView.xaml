@@ -61,24 +61,50 @@
                     </StackPanel>
                 </materialDesign:Card>
             </StackPanel>
-            <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 16, 0, 24" Grid.Row="1" VerticalAlignment="Stretch">
-                <Grid>
-                    <StackPanel Name="spSelectedPatient">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:Card Margin="24, 8, 8, 8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <StackPanel>
                         <materialDesign:ColorZone Mode="PrimaryMid">
-                            <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="FirstName"/>
-                                        <Binding Path="LastName"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
+                            <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
+                                Flagged For Recall
                             </TextBlock>
                         </materialDesign:ColorZone>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="8, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="cbFlaggedForRecall" HorizontalAlignment="Stretch" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                            <Button Name="btnFlagged" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth2" Click="BtnFlagged_Click">
+                                <materialDesign:PackIcon Kind="Add" />
+                            </Button>
+                        </Grid>
                     </StackPanel>
-                    <Button Name="btnEdit" Margin="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="BtnEdit_Click">Edit</Button>
+                </materialDesign:Card>
+                <materialDesign:Card Background="White" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}" Width="auto" Margin="24, 16, 0, 24" Grid.Row="1" VerticalAlignment="Stretch">
+                    <Grid>
+                        <StackPanel Name="spSelectedPatient">
+                            <materialDesign:ColorZone Mode="PrimaryMid">
+                                <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap" Margin="12" TextAlignment="Center">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="FirstName"/>
+                                            <Binding Path="LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </materialDesign:ColorZone>
+                        </StackPanel>
+                        <Button Name="btnEdit" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="BtnEdit_Click">Edit</Button>
 
-                </Grid>
-            </materialDesign:Card>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
         </Grid>
 
         <materialDesign:Card Foreground="White" Grid.Column="1" Width="auto" Padding="8" Margin="16,24,24,24" VerticalAlignment="Stretch">
@@ -90,18 +116,17 @@
                 <ListView Name="lvPatients" Grid.RowSpan="2" SelectionChanged="LvPatients_SelectionChanged">
                     <ListView.View>
                         <GridView >
-                            <GridViewColumn DisplayMemberBinding="{Binding PatientID}" Header="PatinetID" />
                             <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="First Name" />
                             <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Last Name" />
                             <GridViewColumn DisplayMemberBinding="{Binding MInitial}" Header="M Initial" />
                             <GridViewColumn DisplayMemberBinding="{Binding DOBString}" Header="Date Of Birth" />
                             <GridViewColumn DisplayMemberBinding="{Binding Sex}" Header="Gender" />
                             <GridViewColumn DisplayMemberBinding="{Binding AddressLine1}" Header="Address" />
-                            <GridViewColumn DisplayMemberBinding="{Binding AddressLine2}" Header="" />
                             <GridViewColumn DisplayMemberBinding="{Binding PostalCode}" Header="Postal Code" />
                             <GridViewColumn DisplayMemberBinding="{Binding City}" Header="City" />
                             <GridViewColumn DisplayMemberBinding="{Binding Province}" Header="Province" />
                             <GridViewColumn DisplayMemberBinding="{Binding PhoneNumber}" Header="PhoneNumber" />
+                            <GridViewColumn DisplayMemberBinding="{Binding ResponseCode}" Header="Response Code" />
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -89,6 +89,11 @@ namespace EMS_Library
             IsCheckedIn = 0;
         }
 
+        public override string ToString()
+        {
+            return string.Format("Appointment {0}: Recall in {1} days", AppointmentID, RecallFlag);
+        }
+
         /**
         * \brief <b>Brief Description</b> - Program <b><i>Constructor</i></b> - constructs empty
         * \details <b>Details</b>
